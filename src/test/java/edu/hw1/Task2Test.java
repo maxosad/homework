@@ -17,7 +17,7 @@ class Task2Test {
         assertEquals(Task2.countDigits(1), 1);
     }
 
-    
+
     @Test
     void countDigitsTenShouldReturnTwo() {
         assertEquals(Task2.countDigits(10), 2);
