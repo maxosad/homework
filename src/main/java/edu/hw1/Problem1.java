@@ -5,7 +5,7 @@ public class Problem1 {
         return switch(word) {
             case "hello" -> "world";
             case "ping" -> "pong";
-            default -> "don't know";
+            default -> throw new IllegalArgumentException();
         };
     }
 }
