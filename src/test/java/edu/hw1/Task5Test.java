@@ -28,14 +28,6 @@ class Task5Test {
         assertFalse(Task5.isPalendrom(new ArrayList<>(List.of(new Integer[]{1,2,1,4}))));
     }
 
-
-
-    @Test
-    void integerToArrayList() {
-        assertEquals(Task5.integerToArrayList(12345),
-                new ArrayList<>(List.of(new Integer[]{1, 2, 3, 4, 5})));
-    }
-
     @Test
     void addNumberByDigits() {
         ArrayList<Integer> origArray = new ArrayList<>(List.of(new Integer[] {1,2,3,4,5}));
@@ -71,10 +63,6 @@ class Task5Test {
 
         assertEquals(Task5.sumArray(origArray), targetArray);
     }
-//    isPalindromeDescendant(11211230) -> true // 11211230 -> 2333 -> 56 -> 11
-//    isPalindromeDescendant(13001120) -> true // 13001120 -> 4022 ➞ 44
-//    isPalindromeDescendant(23336014) -> true // 23336014 -> 5665
-//    isPalindromeDescendant(11) -> true
 
     @Test
     @DisplayName("11211230 -> true")

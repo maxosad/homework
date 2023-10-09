@@ -3,6 +3,8 @@ package edu.hw1;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import static edu.hw1.Util.integerToArrayList;
+
 public class Task5 {
     public static Boolean isPalendrom(ArrayList<Integer> arrToCheckOnPalindrome) {
         int size = arrToCheckOnPalindrome.size();
@@ -12,19 +14,6 @@ public class Task5 {
                 return false;
         }
         return true;
-    }
-
-    public static ArrayList<Integer> integerToArrayList(Integer numberToArr) {
-        ArrayList<Integer> ansArr = new ArrayList<>();
-
-        do {
-            ansArr.add(numberToArr%10);
-            numberToArr /= 10;
-        } while(numberToArr != 0);
-
-        Collections.reverse(ansArr);
-
-        return ansArr;
     }
 
     public static void addNumberByDigits(Integer number, ArrayList<Integer> arr) {
