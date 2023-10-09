@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 // then press Enter. You can now see whitespace characters in your code.
 public final class Main {
     private final static Logger LOGGER = LogManager.getLogger();
-
+//    mvn checkstyle:check для проверки код стайла из idea
     private Main() {
     }
 
