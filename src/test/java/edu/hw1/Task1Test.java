@@ -1,15 +1,15 @@
 package edu.hw1;
 
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class Task1Test {
 
     @Test
     void takeZeroShouldReturnZero() {
-        assertEquals(Task1.minutesToSeconds("00:00"),
-                0
-        );
+        assertThat(Task1.minutesToSeconds("00:00")).isZero();
     }
 
     @Test
@@ -28,9 +28,7 @@ class Task1Test {
 
     @Test
     void takeSixtySecondsShouldReturnMinusOne() {
-        assertEquals(Task1.minutesToSeconds("10:60"),
-                -1
-        );
+        assertThat(-Task1.minutesToSeconds("10:60")).isOne();
     }
 
 }

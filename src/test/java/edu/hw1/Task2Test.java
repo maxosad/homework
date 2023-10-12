@@ -2,19 +2,20 @@ package edu.hw1;
 
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class Task2Test {
 
     @Test
     void countDigitsZero() {
-        assertEquals(Task2.countDigits(0), 1);
+        assertThat(Task2.countDigits(0)).isOne();
     }
 
 
     @Test
     void countDigitsOneShouldReturnOne() {
-        assertEquals(Task2.countDigits(1), 1);
+        assertThat(Task2.countDigits(1)).isOne();
     }
 
 
