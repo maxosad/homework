@@ -44,6 +44,9 @@ public class Task3 {
     }
 
     public static Boolean isNestable(Integer[] arr1, Integer[] arr2) {
+        if (arr1.length == 0 || arr2.length == 0) {
+            return false;
+        }
         Pair minMaxArr1 = minMax(arr1);
         Pair minMaxArr2 = minMax(arr2);
 
