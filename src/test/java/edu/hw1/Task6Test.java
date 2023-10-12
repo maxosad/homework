@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class Task6Test {
@@ -61,7 +62,7 @@ class Task6Test {
     @Test
     @DisplayName("6174 -> 0")
     void countK6174() {
-        assertEquals(Task6.countK(Task6.KAPREKAR), 0);
+        assertThat(Task6.countK(Task6.KAPREKAR)).isZero();
     }
 
 }

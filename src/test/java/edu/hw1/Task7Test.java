@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class Task7Test {
@@ -33,13 +34,13 @@ class Task7Test {
     @Test
     @DisplayName("0 -> 0")
     void bitsInInteger1() {
-        assertEquals(Task7.bitsInInteger(new ArrayList<>(List.of(new Integer[] {0}))), 0);
+        assertThat(Task7.bitsInInteger(new ArrayList<>(List.of(new Integer[] {0})))).isZero();
     }
 
     @Test
     @DisplayName("1 -> 1")
     void bitsInInteger2() {
-        assertEquals(Task7.bitsInInteger(new ArrayList<>(List.of(new Integer[] {1}))), 1);
+        assertThat(Task7.bitsInInteger(new ArrayList<>(List.of(new Integer[] {1})))).isOne();
     }
 
     @Test
@@ -70,6 +71,6 @@ class Task7Test {
     @Test
     @DisplayName("16, 1 -> 1")
     void rotateLeft2() {
-        assertEquals(Task7.rotateLeft(16, 1), 1);
+        assertThat(Task7.rotateLeft(16, 1)).isOne();
     }
 }
