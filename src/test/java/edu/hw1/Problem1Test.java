@@ -45,6 +45,6 @@ class Problem1Test {
     @Test
     void sayOtherShouldThrowException2() {
         String word = "other";
-        assertThrows(IllegalArgumentException.class, () -> problem1.say(word)); 
+        assertThrows(IllegalArgumentException.class, () -> problem1.say(word));
     }
 }
