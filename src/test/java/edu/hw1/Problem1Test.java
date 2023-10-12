@@ -42,9 +42,9 @@ class Problem1Test {
         Assertions.assertThatThrownBy(() -> problem1.say(word)).isInstanceOf(IllegalArgumentException.class);
     }
 
-//    @Test
-//    void sayOtherShouldThrowException2() {
-//        String word = "other";
-//        assertThrows(IllegalArgumentException.class, problem1.say(word)); // reason: String is not compatible with Executable
-//    }
+    @Test
+    void sayOtherShouldThrowException2() {
+        String word = "other";
+        assertThrows(IllegalArgumentException.class, () -> problem1.say(word)); 
+    }
 }
