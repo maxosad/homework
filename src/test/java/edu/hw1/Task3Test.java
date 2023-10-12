@@ -37,5 +37,10 @@ class Task3Test {
         assertEquals(Task3.isNestable(new Integer[] {1, 2, 3, 4}, new Integer[] {2, 3}), false);
     }
 
+    @Test
+    void isNestableEmptyArr() {
+        assertEquals(Task3.isNestable(new Integer[] {}, new Integer[] {}), false);
+    }
+
 
 }
