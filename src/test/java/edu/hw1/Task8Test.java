@@ -82,7 +82,7 @@ class Task8Test {
 
     @Test
     void checkKnight1() {
-        Task8.theBoard = firstBoard;
+        Task8.setTheBoard(firstBoard);
         assertTrue(Task8.checkKnight(0, 3));
     }
 }

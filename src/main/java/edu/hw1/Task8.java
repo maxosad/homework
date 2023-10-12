@@ -1,7 +1,7 @@
 package edu.hw1;
 
 public class Task8 {
-    public static int[][] theBoard;
+    private static int[][] theBoard;
 
     public static Boolean knightBoardCapture(int[][] board) {
         theBoard = board;
@@ -12,6 +12,10 @@ public class Task8 {
             }
         }
         return true;
+    }
+
+    public static void setTheBoard(int[][] theBoard) {
+        Task8.theBoard = theBoard;
     }
 
     public static boolean checkRange(int x, int y) {
