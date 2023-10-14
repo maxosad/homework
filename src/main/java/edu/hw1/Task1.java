@@ -1,7 +1,7 @@
 package edu.hw1;
 
 public class Task1 {
-    public static Integer minutesToSeconds(String minutesSeconds) throws IllegalArgumentException{
+    public static Integer minutesToSeconds(String minutesSeconds) throws IllegalArgumentException {
         final int SIXTY = 60;
         String[] minSec =  minutesSeconds.split(":");
         int minutes = Integer.parseInt(minSec[0]);

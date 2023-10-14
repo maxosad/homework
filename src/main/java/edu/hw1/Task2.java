@@ -3,11 +3,12 @@ package edu.hw1;
 public class Task2 {
     public static Integer countDigits(Integer numberToCountDigits) {
         Integer countDigits = 0;
+        Integer localNumberToCountDigits = numberToCountDigits;
         final int TEN = 10;
         do {
             countDigits++;
-            numberToCountDigits /= TEN;
-        } while (numberToCountDigits > 0);
+            localNumberToCountDigits /= TEN;
+        } while (localNumberToCountDigits > 0);
 
         return countDigits;
     }

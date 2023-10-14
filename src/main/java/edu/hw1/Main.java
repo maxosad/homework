@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 public final class Main {
     private final static Logger LOGGER = LogManager.getLogger();
 //    mvn checkstyle:check для проверки код стайла из idea
+
     private Main() {
     }
 
