@@ -1,16 +1,19 @@
 package edu.hw1;
 
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.Comparator;
 import static edu.hw1.Util.integerToArrayList;
 
 public class Task6 {
     public static final Integer KAPREKAR = 6174;
+
+    private Task6() {}
+
     public static Integer arrayListToInteger(ArrayList<Integer> arrToInteger) {
         Integer ansNumber = 0;
 
         for (Integer el : arrToInteger) {
-            ansNumber *= 10;
+            ansNumber *= Util.TEN;
             ansNumber += el;
         }
         return ansNumber;
@@ -32,16 +35,15 @@ public class Task6 {
         biggerNumber = arrayListToInteger(sortedLess);
         smallerNumber = arrayListToInteger(sortedMore);
 
-        number = biggerNumber - smallerNumber;
-        return number;
+        return biggerNumber - smallerNumber;
     }
 
     public static Integer countK(Integer number) {
         Integer stepsTo6174 = 0;
-
-        while (!number.equals(KAPREKAR)) {
+        Integer localNumber = number;
+        while (!localNumber.equals(KAPREKAR)) {
             stepsTo6174++;
-            number = k(number);
+            localNumber = k(localNumber);
         }
 
         return stepsTo6174;

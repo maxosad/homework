@@ -4,6 +4,8 @@ public class Task8 {
     private static int[][] theBoard;
     public static final int EIGHT = 8;
 
+    private Task8() {}
+
     public static Boolean knightBoardCapture(int[][] board) {
         theBoard = board;
         for (int i = 0; i < EIGHT; i++) {
@@ -34,12 +36,13 @@ public class Task8 {
         {Util.MINUS_TWO, Util.ONE},
         {Util.MINUS_TWO, Util.MINUS_ONE}
     };
+
     public static boolean checkKnight(int x, int y) {
         int newX;
         int newY;
-        for (int i = 0; i < 8; i++) {
-            newX = x+sdvig[i][0];
-            newY = y+sdvig[i][1];
+        for (int i = 0; i < EIGHT; i++) {
+            newX = x + sdvig[i][0];
+            newY = y + sdvig[i][1];
             if (checkRange(newX, newY) && theBoard[newX][newY] == 1) {
                 return false;
             }

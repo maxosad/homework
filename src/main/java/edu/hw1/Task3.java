@@ -2,6 +2,8 @@ package edu.hw1;
 
 public class Task3 {
 
+    private Task3() {}
+
     public static Pair minMax(Integer[] arr) {
         Integer min = null;
         Integer max = null;

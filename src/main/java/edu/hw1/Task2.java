@@ -1,6 +1,9 @@
 package edu.hw1;
 
 public class Task2 {
+
+    private Task2() {}
+
     public static Integer countDigits(Integer numberToCountDigits) {
         Integer countDigits = 0;
         Integer localNumberToCountDigits = numberToCountDigits;

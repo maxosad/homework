@@ -11,6 +11,7 @@ public class Util {
     public static final int TWO = 2;
     public static final int MINUS_TWO = -2;
 
+    private Util() {}
 
     public static ArrayList<Integer> integerToArrayList(Integer numberToArr) {
         ArrayList<Integer> ansArr = new ArrayList<>();
