@@ -6,12 +6,15 @@ public class Game {
     private Session session;
     private final AbstractDictionary dictionary;
     private final Integer maxAttempts;
+    private static final String MORE_ZERO = "Word should have length > 0";
 
     public Game(Integer maxAttempts, AbstractDictionary dictionary) {
         this.maxAttempts = maxAttempts;
         this.dictionary = dictionary;
         String word =  dictionary.getWord();
-        if (word.equals("")) throw new IllegalArgumentException("Word should have length > 0");
+        if (word.equals("")) {
+            throw new IllegalArgumentException(MORE_ZERO);
+        }
         session = new Session(maxAttempts, word);
     }
 
@@ -25,7 +28,9 @@ public class Game {
 
     public void newSession() {
         String word =  dictionary.getWord();
-        if (word.equals("")) throw new IllegalArgumentException("Word should have length > 0");
+        if (word.equals("")) {
+            throw new IllegalArgumentException(MORE_ZERO);
+        }
         session = new Session(maxAttempts, word);
     }
 
@@ -59,7 +64,7 @@ public class Game {
             System.out.println("> " + session.getStatus().getMessage());
         }
 
-            
+
     }
 
 

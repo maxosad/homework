@@ -1,7 +1,5 @@
 package edu.project1;
 
-import org.jetbrains.annotations.NotNull;
-
 public class FixedDictionary extends AbstractDictionary {
 
 
