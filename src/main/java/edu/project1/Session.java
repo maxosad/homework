@@ -2,6 +2,7 @@ package edu.project1;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import static edu.project1.Conf.LOGGER;
 
 public class Session {
     public static final String GIVE_UP_PHRASE = "give up";
@@ -90,11 +91,15 @@ public class Session {
     }
 
     public void printCurrentWord() {
-        Conf.LOGGER.info("> The word: ");
-        for (var c : currentWord) {
-            System.out.print(c);
+        LOGGER.info("> The word: ");
+        StringBuilder sb = new StringBuilder();
+
+        for (Character ch : currentWord) {
+            sb.append(ch);
         }
-        System.out.println();
+
+        String string = sb.toString();
+        LOGGER.info(string);
     }
 
 }
