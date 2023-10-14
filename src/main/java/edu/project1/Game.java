@@ -1,5 +1,7 @@
 package edu.project1;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import java.util.Scanner;
 
 public class Game {
@@ -7,6 +9,7 @@ public class Game {
     private final AbstractDictionary dictionary;
     private final Integer maxAttempts;
     private static final String MORE_ZERO = "Word should have length > 0";
+    private static final Logger logger = LogManager.getLogger();
 
     public Game(Integer maxAttempts, AbstractDictionary dictionary) {
         this.maxAttempts = maxAttempts;
@@ -37,31 +40,32 @@ public class Game {
     public void run() {
         if (session.getStatus().equals(GameStatus.IN_PROGRESS)) {
             System.out.println("current session should be in progress");
-            return;
-        }
-        System.out.println("Session started\n");
-        String line;
-        AnswerStatus answerStatus;
-        try (Scanner scanner = new Scanner(System.in)) {
-            while (session.getStatus().equals(GameStatus.IN_PROGRESS)) {
-                System.out.println("> Guess a letter:");
-                line = scanner.nextLine();
-                echo(line);
-                answerStatus = session.checkAnswer(line);
-                switch (answerStatus) {
-                    case CORRECT -> System.out.println("> Hit!");
-                    case WRONG -> System.out.printf("> Missed, mistake %d out of %d.%n",
-                            session.getCurrentAttempt(), maxAttempts);
-                    case GIVE_UP -> {
-                        return;
+        } else {
+            System.out.println("Session started\n");
+            String line;
+            AnswerStatus answerStatus;
+            try (Scanner scanner = new Scanner(System.in)) {
+                while (session.getStatus().equals(GameStatus.IN_PROGRESS)) {
+                    System.out.println("> Guess a letter:");
+                    line = scanner.nextLine();
+                    echo(line);
+                    answerStatus = session.checkAnswer(line);
+                    switch (answerStatus) {
+                        case CORRECT -> System.out.println("> Hit!");
+                        case WRONG -> System.out.printf("> Missed, mistake %d out of %d.%n",
+                            session.getCurrentAttempt(), maxAttempts
+                        );
+                        case GIVE_UP -> {
+                            return;
+                        }
                     }
+                    String more = ">";
+                    System.out.println(more);
+                    session.printCurrentWord();
+                    System.out.println(more);
                 }
-                String more = ">";
-                System.out.println(more);
-                session.printCurrentWord();
-                System.out.println(more);
+                System.out.println("> " + session.getStatus().getMessage());
             }
-            System.out.println("> " + session.getStatus().getMessage());
         }
 
 
