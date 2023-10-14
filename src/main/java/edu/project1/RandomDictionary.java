@@ -1,7 +1,5 @@
 package edu.project1;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Random;
 
 public class RandomDictionary extends AbstractDictionary {
@@ -14,6 +12,6 @@ public class RandomDictionary extends AbstractDictionary {
 
     @Override
     public String getWord() {
-        return dict[random.nextInt(dict.length+1)];
+        return dict[random.nextInt(dict.length + 1)];
     }
 }

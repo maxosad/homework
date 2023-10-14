@@ -14,6 +14,7 @@ public enum GameStatus {
     GameStatus(String message) {
         this.message = message;
     }
+
     GameStatus() {}
 
 }

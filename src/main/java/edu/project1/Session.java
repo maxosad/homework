@@ -46,7 +46,9 @@ public class Session {
     }
 
     public AnswerStatus checkAnswer(String line) {
-        if (!status.equals(GameStatus.IN_PROGRESS)) return AnswerStatus.SESSION_ENDED;
+        if (!status.equals(GameStatus.IN_PROGRESS)) {
+            return AnswerStatus.SESSION_ENDED;
+        }
         AnswerStatus answerStatus;
         if (line.length() > 1) {
             answerStatus = line.equals(GIVE_UP_PHRASE) ? giveUp() : AnswerStatus.INCORRECT_INPUT;
@@ -68,15 +70,17 @@ public class Session {
     }
 
     private AnswerStatus correctAnswer() {
-        if (positionsToGuess.equals(0))
+        if (positionsToGuess.equals(0)) {
             status = GameStatus.WIN;
+        }
         return AnswerStatus.CORRECT;
     }
 
     private AnswerStatus wrongAnswer() {
         currentAttempt++;
-        if (currentAttempt >= maxAttempts)
+        if (currentAttempt >= maxAttempts) {
             status = GameStatus.LOST;
+        }
         return AnswerStatus.WRONG;
     }
 
@@ -86,7 +90,7 @@ public class Session {
     }
 
     public void printCurrentWord() {
-        System.out.print("> The word: ");
+        Conf.LOGGER.info("> The word: ");
         for (var c : currentWord) {
             System.out.print(c);
         }
