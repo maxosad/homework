@@ -6,7 +6,5 @@ public class ConnectionException extends RuntimeException {
         super(cause);
     }
 
-    public ConnectionException() {
-        super();
-    }
+    public ConnectionException() { }
 }

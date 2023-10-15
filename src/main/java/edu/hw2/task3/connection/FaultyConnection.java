@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class FaultyConnection extends BasicConnection {
     private final Random random = new Random(1);
+
     @Override
     public void execute(String command) {
         if (random.nextInt(2) == 0) {

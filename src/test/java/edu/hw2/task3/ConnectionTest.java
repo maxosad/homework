@@ -7,6 +7,7 @@ import edu.hw2.task3.connection.FaultyConnection;
 import edu.hw2.task3.connection.FullFaultyConnection;
 import edu.hw2.task3.connection.StableConnection;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -33,12 +34,20 @@ class ConnectionTest {
         connections.add(new FullFaultyConnection());
         connections.add(new StableConnection());
     }
+    void closeConnections() {
+        for (var connection : connections) {
+            try {
+                connection.close();
+            } catch (Exception ignore) {}
+        }
+    }
 
     @Test
     void initTest() {
         for (var connection : connections) {
             assertTrue(isOpened(connection));
         }
+        closeConnections();
     }
 
     @Test
@@ -54,6 +63,7 @@ class ConnectionTest {
     }
 
     @Test
+    @DisplayName("Should throw ConnectionException")
     void doubleСloseTest() {
         try {
             for (var connection : connections) {
@@ -69,6 +79,20 @@ class ConnectionTest {
     }
 
     @Test
-    void execute() {
+    @DisplayName("Should throw ConnectionException")
+    void fullFaulty() {
+        try (FullFaultyConnection fullFaultyConnection = new FullFaultyConnection()) {
+        String testMessage = "testMessage";
+        assertThrows(ConnectionException.class, () -> fullFaultyConnection.execute(testMessage));
+        } catch (Exception ignored) { }
+    }
+
+    @Test
+    @DisplayName("Should not throw ConnectionException")
+    void stable() {
+        try (StableConnection stableConnection = new StableConnection()) {
+            String testMessage = "testMessage";
+            assertDoesNotThrow(() -> stableConnection.execute(testMessage));
+        } catch (Exception ignored) { }
     }
 }

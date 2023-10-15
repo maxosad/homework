@@ -1,10 +1,9 @@
 package edu.hw2.task4;
 
-import java.util.Arrays;
-
 public class CallingInfoFunction {
 
     private CallingInfoFunction() { }
+
     public static CallingInfo callingInfo() {
         Throwable thr = new Throwable();
         StackTraceElement[] stackTrace = thr.getStackTrace();

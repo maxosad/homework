@@ -4,9 +4,11 @@ import edu.hw2.task3.connectionManagers.ConnectionManager;
 import edu.hw2.task3.connectionManagers.DefaultConnectionManager;
 import edu.hw2.task3.connectionManagers.FaultyConnectionManager;
 import edu.hw2.task3.connectionManagers.FullFaultyManager;
-import java.util.Random;
 
 public class Main {
+
+    private Main() { }
+
     public static void main(String[] args) {
         ConnectionManager faulty = new FaultyConnectionManager();
         ConnectionManager fullFaulty = new FullFaultyManager();
