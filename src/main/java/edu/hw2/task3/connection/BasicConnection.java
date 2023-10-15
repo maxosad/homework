@@ -12,8 +12,12 @@ public class BasicConnection implements Connection {
         connectionStatus = ConnectionStatus.OPEND;
     }
 
+    public ConnectionStatus getConnectionStatus() {
+        return connectionStatus;
+    }
+
     @Override
-    public void execute(String command) {
+    public void execute(String command)  {
         if (connectionStatus.equals(ConnectionStatus.OPEND)) {
             LOGGER.info(command);
         } else {
@@ -23,6 +27,10 @@ public class BasicConnection implements Connection {
 
     @Override
     public void close() throws Exception {
-        connectionStatus = ConnectionStatus.CLOSED;
+        if (connectionStatus.equals(ConnectionStatus.OPEND)) {
+            connectionStatus = ConnectionStatus.CLOSED;
+        } else {
+            throw new ConnectionException();
+        }
     }
 }

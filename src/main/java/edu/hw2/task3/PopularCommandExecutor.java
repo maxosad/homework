@@ -24,12 +24,12 @@ public final class PopularCommandExecutor {
         Throwable cause = null;
 
         while (currentAttempt <= maxAttempts) {
-            try {
+            try (connection) {
                 currentAttempt++;
                 connection.execute(command);
                 executed = true;
                 break;
-            } catch (ConnectionException e) {
+            } catch (Exception e) {
                 cause = e;
             }
         }
