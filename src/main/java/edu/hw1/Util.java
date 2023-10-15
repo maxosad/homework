@@ -17,7 +17,7 @@ public class Util {
         ArrayList<Integer> ansArr = new ArrayList<>();
         Integer localNumberToArr = numberToArr;
         do {
-            ansArr.add(numberToArr % TEN);
+            ansArr.add(localNumberToArr % TEN);
             localNumberToArr /= TEN;
         } while (!localNumberToArr.equals(ZERO));
 

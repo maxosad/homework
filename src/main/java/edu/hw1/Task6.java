@@ -48,4 +48,5 @@ public class Task6 {
 
         return stepsTo6174;
     }
+
 }
