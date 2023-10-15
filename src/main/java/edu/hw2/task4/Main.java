@@ -6,6 +6,14 @@ import org.apache.logging.log4j.Logger;
 public class Main {
     private final static Logger LOGGER = LogManager.getLogger();
     public static void callCollingInfo() {
-        LOGGER.info(CollingInfoFunction.callingInfo());
+        LOGGER.info(CallingInfoFunction.callingInfo());
+    }
+
+    private static void foo() {
+        LOGGER.info(() -> CallingInfoFunction.callingInfo());
+    }
+
+    public static void main(String[] args) {
+        foo();
     }
 }
