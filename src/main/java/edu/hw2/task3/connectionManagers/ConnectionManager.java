@@ -1,4 +1,4 @@
-package edu.hw2.task3;
+package edu.hw2.task3.connectionManagers;
 
 import edu.hw2.task3.connection.Connection;
 
