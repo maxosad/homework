@@ -1,5 +1,5 @@
 package edu.hw2.task1;
 
-public interface Expr {
+public sealed  interface Expr permits Constant, Negate, Addition, Multiplication, Exponent  {
     double evaluate();
 }
