@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import static edu.hw2.task3.connection.BasicConnection.closeClosedMessage;
+import static edu.hw2.task3.connection.BasicConnection.executeClosedMessage;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ConnectionTest {
@@ -36,6 +38,7 @@ class ConnectionTest {
         connections.add(new FullFaultyConnection());
         connections.add(new StableConnection());
     }
+
     void closeConnections() {
         for (var connection : connections) {
             try {
@@ -75,8 +78,40 @@ class ConnectionTest {
         } catch (Exception e) {
             fail(doubleCloseMessage);
         }
+
         for (var connection : connections) {
-            assertThrows(ConnectionException.class, connection::close);
+            try {
+                connection.close();
+            } catch (Exception e) {
+                assertEquals(closeClosedMessage, e.getMessage());
+                assertTrue(e instanceof ConnectionException);
+                return;
+            }
+            fail("test should end in catch block");
+        }
+    }
+
+    @Test
+    @DisplayName("Should throw ConnectionException with message")
+    void executeOnClosedTest() {
+        try {
+            for (var connection : connections) {
+                connection.close();
+                assertTrue(isClosed(connection));
+            }
+        } catch (Exception e) {
+            fail(doubleCloseMessage);
+        }
+
+        for (var connection : connections) {
+            try {
+                connection.execute("testMessage");
+            } catch (Exception e) {
+                assertEquals(executeClosedMessage, e.getMessage());
+                assertTrue(e instanceof ConnectionException);
+                return;
+            }
+            fail("test should end in catch block");
         }
     }
 
