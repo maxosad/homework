@@ -12,13 +12,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import static edu.hw2.task3.connection.BasicConnection.closeClosedMessage;
-import static edu.hw2.task3.connection.BasicConnection.executeClosedMessage;
+import static edu.hw2.task3.connection.BasicConnection.CLOSE_CLOSED_MESSAGE;
+import static edu.hw2.task3.connection.BasicConnection.EXECUTE_CLOSED_MESSAGE;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ConnectionTest {
 
-    private static final String doubleCloseMessage = "Connection was already closed, but we tried to close it again";
+    private static final String DOUBLE_CLOSE_MESSAGE = "Connection was already closed, but we tried to close it again";
 
     private static List<BasicConnection> connections;
 
@@ -63,7 +63,7 @@ class ConnectionTest {
                 assertTrue(isClosed(connection));
             }
         } catch (Exception e) {
-            fail(doubleCloseMessage);
+            fail(DOUBLE_CLOSE_MESSAGE);
         }
     }
 
@@ -76,14 +76,14 @@ class ConnectionTest {
                 assertTrue(isClosed(connection));
             }
         } catch (Exception e) {
-            fail(doubleCloseMessage);
+            fail(DOUBLE_CLOSE_MESSAGE);
         }
 
         for (var connection : connections) {
             try {
                 connection.close();
             } catch (Exception e) {
-                assertEquals(closeClosedMessage, e.getMessage());
+                assertEquals(CLOSE_CLOSED_MESSAGE, e.getMessage());
                 assertTrue(e instanceof ConnectionException);
                 return;
             }
@@ -100,14 +100,14 @@ class ConnectionTest {
                 assertTrue(isClosed(connection));
             }
         } catch (Exception e) {
-            fail(doubleCloseMessage);
+            fail(DOUBLE_CLOSE_MESSAGE);
         }
 
         for (var connection : connections) {
             try {
                 connection.execute("testMessage");
             } catch (Exception e) {
-                assertEquals(executeClosedMessage, e.getMessage());
+                assertEquals(EXECUTE_CLOSED_MESSAGE, e.getMessage());
                 assertTrue(e instanceof ConnectionException);
                 return;
             }

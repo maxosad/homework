@@ -5,8 +5,8 @@ import org.apache.logging.log4j.Logger;
 
 public class BasicConnection implements Connection {
 
-    public static final String executeClosedMessage = "closed, but execute() was called";
-    public static final String closeClosedMessage = "closed, but close() was called";
+    public static final String EXECUTE_CLOSED_MESSAGE = "closed, but execute() was called";
+    public static final String CLOSE_CLOSED_MESSAGE = "closed, but close() was called";
 
 
     private final static Logger LOGGER = LogManager.getLogger();
@@ -25,7 +25,7 @@ public class BasicConnection implements Connection {
         if (connectionStatus.equals(ConnectionStatus.OPEND)) {
             LOGGER.info(command);
         } else {
-            throw new ConnectionException(executeClosedMessage);
+            throw new ConnectionException(EXECUTE_CLOSED_MESSAGE);
         }
     }
 
@@ -34,7 +34,7 @@ public class BasicConnection implements Connection {
         if (connectionStatus.equals(ConnectionStatus.OPEND)) {
             connectionStatus = ConnectionStatus.CLOSED;
         } else {
-            throw new ConnectionException(closeClosedMessage);
+            throw new ConnectionException(CLOSE_CLOSED_MESSAGE);
         }
     }
 }
