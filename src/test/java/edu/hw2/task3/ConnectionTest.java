@@ -16,6 +16,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ConnectionTest {
 
+    private static final String doubleCloseMessage = "Connection was already closed, but we tried to close it again";
+
     private static List<BasicConnection> connections;
 
     private boolean isOpened(BasicConnection basicConnection) {
@@ -58,7 +60,7 @@ class ConnectionTest {
                 assertTrue(isClosed(connection));
             }
         } catch (Exception e) {
-            fail("Connection was already closed, but we tried to close it again");
+            fail(doubleCloseMessage);
         }
     }
 
@@ -71,7 +73,7 @@ class ConnectionTest {
                 assertTrue(isClosed(connection));
             }
         } catch (Exception e) {
-            fail("Connection was already closed, but we tried to close it again");
+            fail(doubleCloseMessage);
         }
         for (var connection : connections) {
             assertThrows(ConnectionException.class, connection::close);

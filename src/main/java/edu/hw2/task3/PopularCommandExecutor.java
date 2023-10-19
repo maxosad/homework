@@ -18,12 +18,11 @@ public final class PopularCommandExecutor {
     }
 
     void tryExecute(String command) {
-        Connection connection = manager.getConnection();
         int currentAttempt = 0;
         Throwable cause = null;
 
         while (currentAttempt <= maxAttempts) {
-            try (connection) {
+            try (Connection connection = manager.getConnection();) {
                 currentAttempt++;
                 connection.execute(command);
                 return;
