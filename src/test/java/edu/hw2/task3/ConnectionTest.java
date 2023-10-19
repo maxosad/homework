@@ -58,7 +58,7 @@ class ConnectionTest {
                 assertTrue(isClosed(connection));
             }
         } catch (Exception e) {
-            fail();
+            fail("Connection was already closed, but we tried to close it again");
         }
     }
 
@@ -71,7 +71,7 @@ class ConnectionTest {
                 assertTrue(isClosed(connection));
             }
         } catch (Exception e) {
-            fail();
+            fail("Connection was already closed, but we tried to close it again");
         }
         for (var connection : connections) {
             assertThrows(ConnectionException.class, connection::close);
