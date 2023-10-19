@@ -25,7 +25,7 @@ public class Rectangle {
         return new Rectangle(width, height);
     }
 
-    double area() {
+    int area() {
         return width * height;
     }
 }
