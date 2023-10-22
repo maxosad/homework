@@ -26,7 +26,4 @@ public class StockMarketImpl implements StockMarket {
         return priorityQueue.peek();
     }
 
-    public static void main(String[] args) {
-        System.out.println(new Stock("1", 1).equals(new Stock("1", 1)));
-    }
 }
