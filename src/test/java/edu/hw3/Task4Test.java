@@ -15,11 +15,13 @@ class Task4Test {
     void convertToRoman1() {
         assertEquals("II", Task4.convertToRoman(2));
     }
+
     @Test
     @DisplayName("example test1")
     void convertToRoman2() {
         assertEquals("XII", Task4.convertToRoman(12));
     }
+
     @Test
     @DisplayName("example test1")
     void convertToRoman3() {

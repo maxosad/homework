@@ -31,6 +31,7 @@ class Task3Test {
 
         assertEquals(testMap, Task3.freqDict(new String[] {"this", "and", "that", "and"}));
     }
+
     @Test
     @DisplayName("example test3")
     void freqDict3() {
@@ -40,6 +41,7 @@ class Task3Test {
 
         assertEquals(testMap, Task3.freqDict(new String[] {"код", "код", "код", "bug"}));
     }
+
     @Test
     @DisplayName("example test4")
     void freqDict4() {
