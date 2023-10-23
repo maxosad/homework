@@ -13,10 +13,7 @@ public class Game {
         this.maxAttempts = maxAttempts;
         this.dictionary = dictionary;
         String word =  dictionary.getWord();
-        if (word.equals("")) {
-            throw new IllegalArgumentException(MORE_ZERO);
-        }
-        session = new Session(maxAttempts, word);
+        newSession();
     }
 
     private void echo(String line) {
