@@ -1,7 +1,6 @@
 package edu.project1;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 import static edu.project1.Conf.LOGGER;
 
 public class Session {

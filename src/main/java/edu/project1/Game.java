@@ -37,7 +37,7 @@ public class Game {
             LOGGER.info("current session should be in progress");
         } else {
             LOGGER.info("Session started\n");
-            LOGGER.info("Type: \"" + Session.GIVE_UP_PHRASE+"\" to give up\n");
+            LOGGER.info("Type: \"" + Session.GIVE_UP_PHRASE + "\" to give up\n");
             String line;
             AnswerStatus answerStatus;
             try (Scanner scanner = new Scanner(System.in)) {
