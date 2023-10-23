@@ -7,6 +7,10 @@ public class FixedDictionary extends AbstractDictionary {
         super(dict);
     }
 
+    public FixedDictionary(String dict) {
+        super(new String[]{dict});
+    }
+
     @Override
     public String getWord() {
         return dict[0];
