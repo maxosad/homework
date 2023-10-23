@@ -24,10 +24,11 @@ public class Session {
         wordToGuessLength = wordToGuess.length();
         positionsToGuess = wordToGuessLength;
         currentWord = new ArrayList<>(wordToGuessLength);
+        status = GameStatus.IN_PROGRESS;
         for (int i = 0; i < wordToGuessLength; i++) {
             currentWord.add('*');
         }
-        status = GameStatus.IN_PROGRESS;
+
     }
 
     public Integer getCurrentAttempt() {
