@@ -10,18 +10,15 @@ public class Session {
     private Integer currentAttempt;
     private final Integer maxAttempts;
     private final String wordToGuess;
-    private final Integer wordToGuessLength;
     private Integer positionsToGuess;
 
     private final ArrayList<Character> currentWord;
-
-    private final Scanner scanner = new Scanner(System.in);
 
     public Session(Integer maxAttempts, String wordToGuess) {
         this.maxAttempts = maxAttempts;
         currentAttempt = 0;
         this.wordToGuess = wordToGuess;
-        wordToGuessLength = wordToGuess.length();
+        int wordToGuessLength = wordToGuess.length();
         positionsToGuess = wordToGuessLength;
         currentWord = new ArrayList<>(wordToGuessLength);
         status = GameStatus.IN_PROGRESS;
@@ -57,7 +54,7 @@ public class Session {
         } else {
             Character c = line.charAt(0);
             boolean wasGuessed = false;
-            for (int i = 0; i < wordToGuessLength; i++) {
+            for (int i = 0; i < currentWord.size(); i++) {
                 if (c.equals(wordToGuess.charAt(i))) {
                     wasGuessed = true;
                     if (currentWord.get(i).equals('*')) {
