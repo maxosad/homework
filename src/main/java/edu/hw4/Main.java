@@ -1,9 +1,6 @@
 package edu.hw4;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import static edu.hw4.Animal.Type.*;
 import static edu.hw4.Animal.Type;
@@ -38,10 +35,11 @@ public class Main {
 //            .max((a1, a2) -> a1.name().length() - a2.name().length()).get();
 //    }
 
-//    public static Animal task6(List<Animal> animals) {
-//        return animals.stream()
-//            .collect(Collectors.groupingBy(Animal::))
-//    }
+    public static Map<Type, Optional<Animal>> task6(List<Animal> animals) {
+        return animals.stream()
+            .collect(Collectors.groupingBy(Animal::type, Collectors.maxBy(Comparator.comparingInt(Animal::weight))));
+
+    }
 
     public static Animal task7(List<Animal> animals, int k) {
         return animals.stream()
@@ -53,20 +51,122 @@ public class Main {
     public static Animal task8(List<Animal> animals, int k) {
         return animals.stream()
             .filter(a1 -> a1.height() < k)
-            .max((a1, a2) -> a1.weight() - a2.weight()).get();
+            .max(Comparator.comparingInt(Animal::weight)).get();
     }
 
+    public static int task9(List<Animal> animals) {
+        return animals.stream()
+            .map(Animal::paws)
+            .reduce(0, Integer::sum);
+    }
+
+    public static List<Animal> task10(List<Animal> animals) {
+        return animals.stream()
+            .filter(a -> a.paws() != a.age())
+            .toList();
+    }
+
+    public static List<Animal> task11(List<Animal> animals) {
+        return animals.stream()
+            .filter(a -> a.bites() && a.height() > 100)
+            .toList();
+    }
+
+    public static int task12(List<Animal> animals) {
+        return animals.stream()
+            .map(a -> {
+                if (a.weight() > a.height()) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            })
+            .reduce(0, Integer::sum);
+    }
+
+    public static List<Animal> task13(List<Animal> animals) {
+        return animals.stream()
+            .filter(a -> {
+                String[] animalName = a.name().split(" ");
+                return animalName.length == 2;
+            })
+            .toList();
+    }
+
+    public static boolean task14(List<Animal> animals, int k) {
+        return animals.stream()
+            .anyMatch(a -> a.height() > k);
+    }
+
+    public static Integer task15(List<Animal> animals, int k, int l) {
+        return animals.stream()
+            .filter(a -> a.age() >= k && a.age() <= l)
+            .map(Animal::weight)
+            .reduce(0, Integer::sum);
+    }
+
+    public static List<Animal> task16(List<Animal> animals, int k, int l) {
+        return animals.stream()
+            .sorted((a1, a2) -> {
+                if (!a1.type().equals(a2.type())) {
+                    return a1.type().compareTo(a2.type());
+                } else if (!a1.sex().equals(a2.sex())) {
+                    return a1.sex().compareTo(a2.sex());
+                } else {
+                    return a1.name().compareTo(a2.name());
+                }
+            })
+            .toList();
+    }
+
+    public static boolean task17(List<Animal> animals, int k, int l) {
+        return animals.stream()
+            .map(a -> {
+                if (a.type().equals(SPIDER) && a.bites()) {
+                    return 1;
+                } else if (a.type().equals(DOG) && a.bites()){
+                    return -1;
+                } else {
+                    return 0;
+                }
+            })
+            .reduce(0, Integer::sum) > 0;
+    }
+
+    public static Animal task18(List<List<Animal>> animals) {
+        return animals.stream()
+            .flatMap(List::stream)
+            .filter(a -> a.type().equals(FISH))
+            .max(Comparator.comparingInt(Animal::weight)).get();
+    }
+
+//    public static Animal task19(List<List<Animal>> animals) {
+//        return animals.stream()
+//            .flatMap(List::stream)
+//            .filter(a -> a.type().equals(FISH))
+//            .max(Comparator.comparingInt(Animal::weight)).get();
+//    }
 
     public static void main(String[] args) {
         List<Animal> animals = new ArrayList<>();
         animals.add(new Animal("1", BIRD, Animal.Sex.M, 1,1, 3,false));
-        animals.add(new Animal("12", BIRD, Animal.Sex.M, 5,4, 5,false));
+        animals.add(new Animal("12", BIRD, Animal.Sex.M, 2,4, 5,false));
         animals.add(new Animal("123", FISH, Animal.Sex.M, 3,3, 8,false));
-        animals.add(new Animal("1234", FISH, Animal.Sex.M, 9,2, 9,false));
+        animals.add(new Animal("1234", FISH, Animal.Sex.M, 0,2, 9,false));
+        List<Animal> animals1 = new ArrayList<>();
+        animals1.add(new Animal("1", BIRD, Animal.Sex.M, 1,1, 3,false));
+        animals1.add(new Animal("12", BIRD, Animal.Sex.M, 2,4, 5,false));
+        animals1.add(new Animal("123", FISH, Animal.Sex.M, 3,3, 20,false));
+        animals1.add(new Animal("1234", FISH, Animal.Sex.M, 0,2, 9,false));
+        List<List<Animal>> list = new ArrayList<>();
+        list.add(animals);
+        list.add(animals1);
 //        System.out.println(task1(animals).toString());
 //        System.out.println(task2(animals, 2).toString());
 //        System.out.println(task4(animals).toString());
 //        System.out.println(task4(animals).toString());
-        System.out.println(task7(animals, 1).toString());
+//        System.out.println(task7(animals, 1).toString());
+//        System.out.println(task9(animals));
+        System.out.println(task18(list));
     }
 }
