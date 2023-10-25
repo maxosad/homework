@@ -9,11 +9,11 @@ public record Animal(
     int weight,
     boolean bites
 ) {
-    private enum Type {
+    enum Type {
         CAT, DOG, BIRD, FISH, SPIDER
     }
 
-    private enum Sex {
+    enum Sex {
         M, F
     }
 
