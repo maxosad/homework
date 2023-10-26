@@ -16,6 +16,7 @@ public class DFSGenerator implements Generator {
     @Override
     public Maze generate(int height, int width, int seed) {
         random = new Random(seed);
+        int direction = random.nextInt(4);
         used = new boolean[height][width];
         grid = new Cell[height][width];
         dfs(1, 1);
