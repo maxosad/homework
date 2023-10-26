@@ -167,6 +167,6 @@ public class Main {
 //        System.out.println(task4(animals).toString());
 //        System.out.println(task7(animals, 1).toString());
 //        System.out.println(task9(animals));
-        System.out.println(task18(list));
+        System.out.println(task6(animals));
     }
 }
