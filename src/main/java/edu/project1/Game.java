@@ -53,7 +53,7 @@ public class Game {
                         case GIVE_UP -> {
                             return;
                         }
-                        default -> { }
+                        default -> LOGGER.info("> You only need to enter one letter, you have entered several");
                     }
                     String more = ">";
                     LOGGER.info(more);

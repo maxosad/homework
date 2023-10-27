@@ -3,10 +3,6 @@ package edu.project1;
 public class FixedDictionary extends AbstractDictionary {
 
 
-    public FixedDictionary(String[] dict) {
-        super(dict);
-    }
-
     public FixedDictionary(String dict) {
         super(new String[]{dict});
     }

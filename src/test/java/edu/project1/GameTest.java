@@ -18,7 +18,7 @@ class GameTest {
 
     @BeforeEach
     void setUp() {
-        AbstractDictionary dictionary = new FixedDictionary(new String[]{ANACONDA});
+        AbstractDictionary dictionary = new FixedDictionary(ANACONDA);
         positionsToGuess = dictionary.getWord().length();
         Game game = new Game(5, dictionary);
         session = game.getSession();
@@ -27,7 +27,7 @@ class GameTest {
     @Test
     @DisplayName("incorrect word")
     void shouldThrowIllegalArgumentException() {
-        AbstractDictionary dictionary = new FixedDictionary(new String[]{""});
+        AbstractDictionary dictionary = new FixedDictionary("");
         positionsToGuess = dictionary.getWord().length();
         assertThrows(IllegalArgumentException.class, () -> new Game(5, dictionary));
     }
