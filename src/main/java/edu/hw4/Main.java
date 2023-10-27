@@ -9,7 +9,7 @@ public class Main {
 
     public static List<Animal> task1(List<Animal> animals) {
         return animals.stream()
-            .sorted((Animal a1, Animal a2) -> a1.height() - a2.height())
+            .sorted(Comparator.comparingInt(Animal::height))
             .toList();
     }
 
@@ -27,13 +27,14 @@ public class Main {
 
     public static Animal task4(List<Animal> animals) {
         return animals.stream()
-            .max((a1, a2) -> a1.name().length() - a2.name().length()).get();
+            .max(Comparator.comparingInt(a -> a.name().length())).orElse(null);
     }
 
-//    public static Animal task5(List<Animal> animals) {
-//        return animals.stream()
-//            .max((a1, a2) -> a1.name().length() - a2.name().length()).get();
-//    }
+    public static Animal.Sex task5(List<Animal> animals) {
+        Map<Animal.Sex, Long> m = animals.stream()
+            .collect(Collectors.groupingBy(Animal::sex, Collectors.counting()));
+        return m.get(Animal.Sex.M).compareTo(m.get(Animal.Sex.F)) > 0 ? Animal.Sex.M : Animal.Sex.F;
+    }
 
     public static Map<Type, Optional<Animal>> task6(List<Animal> animals) {
         return animals.stream()
@@ -45,13 +46,13 @@ public class Main {
         return animals.stream()
             .sorted((Animal a1, Animal a2) -> a2.age() - a1.age())
             .skip(k-1)
-            .findFirst().get();
+            .findFirst().orElse(null);
     }
 
-    public static Animal task8(List<Animal> animals, int k) {
+    public static Optional<Animal> task8(List<Animal> animals, int k) {
         return animals.stream()
             .filter(a1 -> a1.height() < k)
-            .max(Comparator.comparingInt(Animal::weight)).get();
+            .max(Comparator.comparingInt(Animal::weight));
     }
 
     public static int task9(List<Animal> animals) {
@@ -88,7 +89,7 @@ public class Main {
         return animals.stream()
             .filter(a -> {
                 String[] animalName = a.name().split(" ");
-                return animalName.length == 2;
+                return animalName.length > 2;
             })
             .toList();
     }
@@ -98,14 +99,13 @@ public class Main {
             .anyMatch(a -> a.height() > k);
     }
 
-    public static Integer task15(List<Animal> animals, int k, int l) {
+    public static Map<Animal.Type, Integer> task15(List<Animal> animals, int k, int l) {
         return animals.stream()
             .filter(a -> a.age() >= k && a.age() <= l)
-            .map(Animal::weight)
-            .reduce(0, Integer::sum);
+            .collect(Collectors.groupingBy(Animal::type, Collectors.summingInt(Animal::weight)));
     }
 
-    public static List<Animal> task16(List<Animal> animals, int k, int l) {
+    public static List<Animal> task16(List<Animal> animals) {
         return animals.stream()
             .sorted((a1, a2) -> {
                 if (!a1.type().equals(a2.type())) {
@@ -119,7 +119,7 @@ public class Main {
             .toList();
     }
 
-    public static boolean task17(List<Animal> animals, int k, int l) {
+    public static boolean task17(List<Animal> animals) {
         return animals.stream()
             .map(a -> {
                 if (a.type().equals(SPIDER) && a.bites()) {
@@ -137,22 +137,30 @@ public class Main {
         return animals.stream()
             .flatMap(List::stream)
             .filter(a -> a.type().equals(FISH))
-            .max(Comparator.comparingInt(Animal::weight)).get();
+            .max(Comparator.comparingInt(Animal::weight)).orElse(null);
     }
 
-//    public static Animal task19(List<List<Animal>> animals) {
+//    public static Animal task19(List<Animal> animals) {
+//        return animals.stream()
+//            .collect(Collectors.groupingBy())
+//
+//    }
+//
+//    public static Animal task20(List<List<Animal>> animals) {
 //        return animals.stream()
 //            .flatMap(List::stream)
 //            .filter(a -> a.type().equals(FISH))
 //            .max(Comparator.comparingInt(Animal::weight)).get();
 //    }
 
+
+
     public static void main(String[] args) {
         List<Animal> animals = new ArrayList<>();
         animals.add(new Animal("1", BIRD, Animal.Sex.M, 1,1, 3,false));
-        animals.add(new Animal("12", BIRD, Animal.Sex.M, 2,4, 5,false));
-        animals.add(new Animal("123", FISH, Animal.Sex.M, 3,3, 8,false));
-        animals.add(new Animal("1234", FISH, Animal.Sex.M, 0,2, 9,false));
+        animals.add(new Animal("12", BIRD, Animal.Sex.F, 2,4, 5,false));
+        animals.add(new Animal("123", FISH, Animal.Sex.F, 3,3, 8,false));
+        animals.add(new Animal("1234", FISH, Animal.Sex.F, 0,2, 9,false));
         List<Animal> animals1 = new ArrayList<>();
         animals1.add(new Animal("1", BIRD, Animal.Sex.M, 1,1, 3,false));
         animals1.add(new Animal("12", BIRD, Animal.Sex.M, 2,4, 5,false));
@@ -167,6 +175,7 @@ public class Main {
 //        System.out.println(task4(animals).toString());
 //        System.out.println(task7(animals, 1).toString());
 //        System.out.println(task9(animals));
-        System.out.println(task6(animals));
+//        System.out.println(task6(animals));
+        System.out.println(task5(animals));
     }
 }
