@@ -10,7 +10,6 @@ public class Session {
     private final Integer maxAttempts;
     private final String wordToGuess;
     private Integer positionsToGuess;
-
     private final ArrayList<Character> currentWord;
 
     public Session(Integer maxAttempts, String wordToGuess) {
