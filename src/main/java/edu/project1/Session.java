@@ -88,6 +88,7 @@ public class Session {
         currentAttempt++;
         if (currentAttempt >= maxAttempts) {
             status = GameStatus.LOST;
+            LOGGER.info("the encrypted word was" + wordToGuess);
         }
         return AnswerStatus.WRONG;
     }
