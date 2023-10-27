@@ -1,6 +1,8 @@
 package edu.project1;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import static edu.project1.Conf.LOGGER;
 
 public class Session {
@@ -11,6 +13,8 @@ public class Session {
     private final String wordToGuess;
     private int positionsToGuess;
     private final ArrayList<Character> currentWord;
+
+    private final Map<Character, Boolean> usedWrongLetters;
 
     public Session(int maxAttempts, String wordToGuess) {
         this.maxAttempts = maxAttempts;
@@ -23,7 +27,7 @@ public class Session {
         for (int i = 0; i < wordToGuessLength; i++) {
             currentWord.add('*');
         }
-
+        usedWrongLetters = new HashMap<>();
     }
 
     public int getCurrentAttempt() {
@@ -51,6 +55,10 @@ public class Session {
             answerStatus = line.equals(GIVE_UP_PHRASE) ? giveUp() : AnswerStatus.INCORRECT_INPUT;
         } else {
             Character c = line.charAt(0);
+            if (usedWrongLetters.getOrDefault(c, false)) {
+                return AnswerStatus.REPEATED_WRONG_LETTER;
+            }
+
             boolean wasGuessed = false;
             for (int i = 0; i < currentWord.size(); i++) {
                 if (c.equals(wordToGuess.charAt(i))) {
@@ -60,6 +68,9 @@ public class Session {
                         positionsToGuess--;
                     }
                 }
+            }
+            if (!wasGuessed) {
+                usedWrongLetters.put(c, true);
             }
             answerStatus = wasGuessed ? correctAnswer() : wrongAnswer();
         }

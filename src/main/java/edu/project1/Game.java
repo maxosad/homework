@@ -54,6 +54,8 @@ public class Game {
                         case GIVE_UP -> {
                             return;
                         }
+                        case REPEATED_WRONG_LETTER ->
+                            LOGGER.info("> You have re-entered the wrong letter, please try another one");
                         default -> LOGGER.info("> You only need to enter one letter, you have entered several");
                     }
                     String more = ">";

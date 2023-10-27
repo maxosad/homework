@@ -5,5 +5,6 @@ public enum AnswerStatus {
     WRONG,
     GIVE_UP,
     SESSION_ENDED,
-    INCORRECT_INPUT
+    INCORRECT_INPUT,
+    REPEATED_WRONG_LETTER
 }
