@@ -90,10 +90,25 @@ class GameTest {
     }
 
     int currentAttempt = 0;
-    private void guessWrongLetter() {
+    private void guessSameWrongLetter(int att) {
         assertEquals(GameStatus.IN_PROGRESS, session.getStatus());
         ArrayList<Character> currentWord = session.getCurrentWord();
         AnswerStatus answerStatus = session.checkAnswer("q");
+        if (att == 0) {
+            assertEquals(AnswerStatus.WRONG, answerStatus);
+            currentAttempt++;
+        } else {
+            assertEquals(AnswerStatus.REPEATED_WRONG_LETTER, answerStatus);
+        }
+        assertEquals(currentAttempt, session.getCurrentAttempt());
+        assertEquals(currentWord, session.getCurrentWord());
+    }
+
+    private void guessDiffWrongLetter(int id) {
+        String[] cs = new String[]{"q", "w", "e", "r", "t", "y", "u"};
+        assertEquals(GameStatus.IN_PROGRESS, session.getStatus());
+        ArrayList<Character> currentWord = session.getCurrentWord();
+        AnswerStatus answerStatus = session.checkAnswer(cs[id]);
         assertEquals(AnswerStatus.WRONG, answerStatus);
         currentAttempt++;
         assertEquals(currentAttempt, session.getCurrentAttempt());
@@ -104,9 +119,18 @@ class GameTest {
     @DisplayName("losing scenario")
     void runOutOfAttempts() {
         for (int i = 0; i < 5; i++) {
-            guessWrongLetter();
+            guessDiffWrongLetter(i);
         }
         assertEquals(GameStatus.LOST, session.getStatus());
+    }
+
+    @Test
+    @DisplayName("re_enter wrong letter scenario")
+    void gameShouldBeInProgress() {
+        for (int i = 0; i < 5; i++) {
+            guessSameWrongLetter(i);
+        }
+        assertEquals(GameStatus.IN_PROGRESS, session.getStatus());
     }
 
     @Test
