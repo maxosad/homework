@@ -137,7 +137,7 @@ class GameTest {
     @DisplayName("winning scenario")
     void winningScenario() {
         AnswerStatus answerStatus;
-        for (int i=0; i<ANACONDA.length()-1; i++) {
+        for (int i = 0; i < ANACONDA.length() - 1; i++) {
             answerStatus = session.checkAnswer(String.valueOf(ANACONDA.charAt(i)));
             assertEquals(AnswerStatus.CORRECT, answerStatus);
             assertThat(session.getCurrentAttempt()).isZero();
