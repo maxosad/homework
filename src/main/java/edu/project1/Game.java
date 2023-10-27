@@ -6,10 +6,10 @@ import static edu.project1.Conf.LOGGER;
 public class Game {
     private Session session;
     private final AbstractDictionary dictionary;
-    private final Integer maxAttempts;
+    private final int maxAttempts;
     private static final String MORE_ZERO = "Word should have length > 0";
 
-    public Game(Integer maxAttempts, AbstractDictionary dictionary) {
+    public Game(int maxAttempts, AbstractDictionary dictionary) {
         this.maxAttempts = maxAttempts;
         this.dictionary = dictionary;
         String word =  dictionary.getWord();

@@ -6,13 +6,13 @@ import static edu.project1.Conf.LOGGER;
 public class Session {
     public static final String GIVE_UP_PHRASE = "give up";
     private GameStatus status;
-    private Integer currentAttempt;
-    private final Integer maxAttempts;
+    private int currentAttempt;
+    private final int maxAttempts;
     private final String wordToGuess;
-    private Integer positionsToGuess;
+    private int positionsToGuess;
     private final ArrayList<Character> currentWord;
 
-    public Session(Integer maxAttempts, String wordToGuess) {
+    public Session(int maxAttempts, String wordToGuess) {
         this.maxAttempts = maxAttempts;
         currentAttempt = 0;
         this.wordToGuess = wordToGuess;
@@ -26,11 +26,11 @@ public class Session {
 
     }
 
-    public Integer getCurrentAttempt() {
+    public int getCurrentAttempt() {
         return currentAttempt;
     }
 
-    public Integer getPositionsToGuess() {
+    public int getPositionsToGuess() {
         return positionsToGuess;
     }
 
@@ -67,7 +67,7 @@ public class Session {
     }
 
     private AnswerStatus correctAnswer() {
-        if (positionsToGuess.equals(0)) {
+        if (positionsToGuess == 0) {
             status = GameStatus.WIN;
         }
         return AnswerStatus.CORRECT;
