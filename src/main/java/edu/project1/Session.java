@@ -99,7 +99,7 @@ public class Session {
 
     public void printCurrentWord() {
         LOGGER.info("> The word: ");
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder(currentWord.size());
 
         for (Character ch : currentWord) {
             sb.append(ch);
