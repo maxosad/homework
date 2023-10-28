@@ -154,7 +154,6 @@ class MainTest {
 
     @Test
     void task8() {
-        List<Animal> targetAnimals = new ArrayList<>(animals);
         Animal heavyLessKHeight = null;
         int k = 99;
         for (var an : animals) {
