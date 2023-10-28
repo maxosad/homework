@@ -8,6 +8,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import static edu.hw4.Animal.Type.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -125,11 +127,15 @@ class MainTest {
 
     @Test
     void task6() {
-        Map<Animal.Type, Animal> mostHeavyAnimal = new HashMap<>();
+        Map<Animal.Type, Optional<Animal>> mostHeavyAnimal = new HashMap<>();
         for (var an : animals) {
-            Animal heavyAnimal = mostHeavyAnimal.get(an.type());
-            if (heavyAnimal == null || an.weight() > heavyAnimal.weight()) {
-                mostHeavyAnimal.put(an.type(), an);
+            Optional<Animal> heavyAnimal = mostHeavyAnimal.get(an.type());
+            if (heavyAnimal == null) {
+                mostHeavyAnimal.put(an.type(), Optional.of(an));
+                continue;
+            }
+            if (heavyAnimal.isPresent() && heavyAnimal.get().weight() < an.weight()) {
+                mostHeavyAnimal.put(an.type(), Optional.of(an));
             }
         }
 
@@ -302,9 +308,31 @@ class MainTest {
 
     @Test
     void task19() {
+        List<Animal> errorData = new ArrayList<>();
+        errorData.add(new Animal("1", null, null, 1,2, 3,false));
+        errorData.add(new Animal("2", FISH, Animal.Sex.M, 0,-4, -9,false));
+
+        Map<String, Set<ValidationError>> targetMap = new HashMap<>();
+        targetMap.put("1", Set.of(
+            new ValidationError("1", "type"),
+            new ValidationError("1", "sex")));
+        targetMap.put("2", Set.of(
+            new ValidationError("2", "age"),
+            new ValidationError("2", "height"),
+            new ValidationError("2", "weight")));
+        assertEquals(targetMap, Main.task19(errorData));
+
     }
 
     @Test
     void task20() {
+        List<Animal> errorData = new ArrayList<>();
+        errorData.add(new Animal("1", null, null, 1,2, 3,false));
+        errorData.add(new Animal("2", FISH, Animal.Sex.M, 0,-4, -9,false));
+
+        Map<String, String> targetMap = new HashMap<>();
+        targetMap.put("1", "type sex");
+        targetMap.put("2", "age height weight");
+        assertEquals(targetMap, Main.task20(errorData));
     }
 }

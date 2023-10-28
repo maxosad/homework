@@ -1,4 +1,3 @@
 package edu.hw4;
 
-public class ValidationError {
-}
+public record ValidationError(String name, String mistakeField) { }

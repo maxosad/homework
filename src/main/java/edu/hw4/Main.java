@@ -1,11 +1,21 @@
 package edu.hw4;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
-import static edu.hw4.Animal.Type.*;
 import static edu.hw4.Animal.Type;
+import static edu.hw4.Animal.Type.DOG;
+import static edu.hw4.Animal.Type.FISH;
+import static edu.hw4.Animal.Type.SPIDER;
 
 public class Main {
+
+    public static final int TASK_REQUIRE_HEIGHT = 100;
+
+    private Main() { }
 
     public static List<Animal> task1(List<Animal> animals) {
         return animals.stream()
@@ -39,13 +49,12 @@ public class Main {
     public static Map<Type, Optional<Animal>> task6(List<Animal> animals) {
         return animals.stream()
             .collect(Collectors.groupingBy(Animal::type, Collectors.maxBy(Comparator.comparingInt(Animal::weight))));
-
     }
 
     public static Animal task7(List<Animal> animals, int k) {
         return animals.stream()
             .sorted((Animal a1, Animal a2) -> a2.age() - a1.age())
-            .skip(k-1)
+            .skip(k - 1)
             .findFirst().orElse(null);
     }
 
@@ -69,7 +78,7 @@ public class Main {
 
     public static List<Animal> task11(List<Animal> animals) {
         return animals.stream()
-            .filter(a -> a.bites() && a.height() > 100)
+            .filter(a -> a.bites() && a.height() > TASK_REQUIRE_HEIGHT)
             .toList();
     }
 
@@ -124,7 +133,7 @@ public class Main {
             .map(a -> {
                 if (a.type().equals(SPIDER) && a.bites()) {
                     return 1;
-                } else if (a.type().equals(DOG) && a.bites()){
+                } else if (a.type().equals(DOG) && a.bites()) {
                     return -1;
                 } else {
                     return 0;
@@ -140,42 +149,21 @@ public class Main {
             .max(Comparator.comparingInt(Animal::weight)).orElse(null);
     }
 
-//    public static Animal task19(List<Animal> animals) {
-//        return animals.stream()
-//            .collect(Collectors.groupingBy())
-//
-//    }
-//
-//    public static Animal task20(List<List<Animal>> animals) {
-//        return animals.stream()
-//            .flatMap(List::stream)
-//            .filter(a -> a.type().equals(FISH))
-//            .max(Comparator.comparingInt(Animal::weight)).get();
-//    }
+    public static Map<String, Set<ValidationError>> task19(List<Animal> animals) {
+        return animals.stream()
+            .flatMap(Validator::validate)
+            .collect(Collectors.groupingBy(ValidationError::name, Collectors.toSet()));
 
-
-
-    public static void main(String[] args) {
-        List<Animal> animals = new ArrayList<>();
-        animals.add(new Animal("1", BIRD, Animal.Sex.M, 1,1, 3,false));
-        animals.add(new Animal("12", BIRD, Animal.Sex.F, 2,4, 5,false));
-        animals.add(new Animal("123", FISH, Animal.Sex.F, 3,3, 8,false));
-        animals.add(new Animal("1234", FISH, Animal.Sex.F, 0,2, 9,false));
-        List<Animal> animals1 = new ArrayList<>();
-        animals1.add(new Animal("1", BIRD, Animal.Sex.M, 1,1, 3,false));
-        animals1.add(new Animal("12", BIRD, Animal.Sex.M, 2,4, 5,false));
-        animals1.add(new Animal("123", FISH, Animal.Sex.M, 3,3, 20,false));
-        animals1.add(new Animal("1234", FISH, Animal.Sex.M, 0,2, 9,false));
-        List<List<Animal>> list = new ArrayList<>();
-        list.add(animals);
-        list.add(animals1);
-//        System.out.println(task1(animals).toString());
-//        System.out.println(task2(animals, 2).toString());
-//        System.out.println(task4(animals).toString());
-//        System.out.println(task4(animals).toString());
-//        System.out.println(task7(animals, 1).toString());
-//        System.out.println(task9(animals));
-//        System.out.println(task6(animals));
-        System.out.println(task5(animals));
     }
+
+    public static Map<String, String> task20(List<Animal> animals) {
+        return animals.stream()
+            .flatMap(Validator::validate)
+            .collect(Collectors.groupingBy(ValidationError::name,
+                Collectors.mapping(ValidationError::mistakeField, Collectors.joining(" "))));
+    }
+
+
+
+
 }
