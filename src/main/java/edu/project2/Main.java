@@ -1,19 +1,22 @@
 package edu.project2;
 
+import edu.project2.Generators.Generator;
+import edu.project2.Generators.PrimsGenerator;
+import edu.project2.Renderers.Renderer;
+import edu.project2.Renderers.SimpleRenderer;
+import edu.project2.model.Maze;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import java.util.Arrays;
 import java.util.Map;
 
 public class Main {
-    private final static Logger LOGGER = LogManager.getLogger();
+    private Main() { }
+    public final static Logger LOGGER = LogManager.getLogger();
     public static void main(String[] args) {
-//        LOGGER.info(" — —");
-//        LOGGER.info("|   |");
-//        LOGGER.info(" —  ");
-        Cell cell = new Cell(2, 2);
-        Map<Cell.Side, Boolean> m = cell.getWalls();
-        m.put(Cell.Side.TOP, true);
-        var m1 = cell.getWalls();
-        LOGGER.info(m1.get(Cell.Side.TOP));
+        Generator primsGenerator = new PrimsGenerator();
+        Maze maze = primsGenerator.generate(4, 6, 0);
+        Renderer simpleRenderer = new SimpleRenderer();
+        LOGGER.info(simpleRenderer.render(maze));
     }
 }
