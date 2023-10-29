@@ -15,7 +15,7 @@ public class Main {
     public final static Logger LOGGER = LogManager.getLogger();
     public static void main(String[] args) {
         Generator primsGenerator = new PrimsGenerator();
-        Maze maze = primsGenerator.generate(4, 6, 0);
+        Maze maze = primsGenerator.generate(7, 11, 0);
         Renderer simpleRenderer = new SimpleRenderer();
         LOGGER.info(simpleRenderer.render(maze));
     }
