@@ -7,7 +7,7 @@ import edu.project2.model.RenderCell;
 import java.util.Arrays;
 import java.util.List;
 
-public class SimpleRenderer extends AbstractRenderer implements Renderer {
+public class SimpleRenderer implements Renderer {
     @Override
     public String render(Maze maze) {
         Cell[][] grid = maze.getGrid();
@@ -29,10 +29,15 @@ public class SimpleRenderer extends AbstractRenderer implements Renderer {
             }
         }
 
-        markPath(path, grid);
+        for (var coord : path) {
+            if (!grid[coord.row()][coord.col()].getType().equals(RenderCell.Type.PASSAGE)) {
+                throw new RuntimeException("Path goes through the wall");
+            }
+            grid[coord.row()][coord.col()].setType(RenderCell.Type.PATH);
+        }
+
         StringBuilder sb = new StringBuilder();
         sb.append("\n");
-
         for (var el : grid) {
             sb.append(Arrays.toString(el)).append("\n");
         }

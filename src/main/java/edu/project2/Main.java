@@ -27,6 +27,8 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        boolean f = false;
+
         LOGGER.info("Which generator do you want to choose?");
         for (var type : GeneratorType.values()) {
             LOGGER.info(type.toString());
@@ -34,38 +36,45 @@ public class Main {
         String generatorType = scanner.nextLine();
         Generator generator =
             new GeneratorBridge(generatorType.equals(BFS) ? GeneratorType.BFS : GeneratorType.PRIM);
+
         LOGGER.info("enter initial height >= 3");
         int initHeight = scanner.nextInt();
+
         LOGGER.info("enter initial width >= 3");
         int initWidth = scanner.nextInt();
+
         LOGGER.info("enter seed");
         int seed = scanner.nextInt();
+
+        Maze maze = generator.generate(initHeight, initWidth, seed);
+
         LOGGER.info("Which renderer do you want to choose?");
         for (var type : RendererType.values()) {
             LOGGER.info(type.toString());
         }
+        scanner.nextLine();
         String rendererType = scanner.nextLine();
-        Maze maze = generator.generate(initHeight, initWidth, seed);
         Renderer renderer = rendererType.equals("SIMPLE") ? new SimpleRenderer() : new PrettyRenderer();
         LOGGER.info(renderer.render(maze));
+
         LOGGER.info("Which solver do you want to choose?");
         for (var type : SolverType.values()) {
             LOGGER.info(type.toString());
         }
         String solverType = scanner.nextLine();
-
-
-
         Solver solver = solverType.equals(BFS) ? new BFSSolver() : new DFSSolver();
-
 
         LOGGER.info("enter start row");
         int startRow = scanner.nextInt();
+
         LOGGER.info("enter start col");
         int startCol = scanner.nextInt();
+
         Coordinate start = new Coordinate(startRow, startCol);
+
         LOGGER.info("enter end row");
         int endRow = scanner.nextInt();
+
         LOGGER.info("enter end col");
         int endCol = scanner.nextInt();
         Coordinate end = new Coordinate(endRow, endCol);

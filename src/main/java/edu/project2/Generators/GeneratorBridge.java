@@ -36,6 +36,9 @@ public class GeneratorBridge implements Generator {
 
     @Override
     public Maze generate(int height, int width, int seed) {
+        if (height < 3 || width < 3) {
+            throw new IllegalArgumentException("height and width should be >= 3");
+        }
         boolean hEven = height % 2 == 0;
         boolean wEven = width % 2 == 0;
         Maze maze = generator.generate(hEven ? height + 1 : height, wEven ? width + 1 : width, seed);

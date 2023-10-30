@@ -32,7 +32,6 @@ class MainTest {
         Coordinate end = new Coordinate(5,9);
         Solver solver = new BFSSolver();
         List<Coordinate> answer = solver.solve(maze, start, end);
-
         assertEquals("\n" +
             "▉▉▉▉▉▉▉▉▉▉▉▉\n" +
             "▉......... ▉\n" +
@@ -58,5 +57,33 @@ class MainTest {
         assertEquals("No path", thr.getMessage());
         thr = assertThrows(RuntimeException.class, () -> dfsSolver.solve(maze, start, end));
         assertEquals("No path", thr.getMessage());
+    }
+
+    @Test
+    @DisplayName("renderer should throw exception height and width should be >= 3")
+    void tryingGenerateTooSmallArray() {
+        Generator bfsGenerator = new GeneratorBridge(GeneratorType.BFS);
+        Generator primeGenerator = new GeneratorBridge(GeneratorType.PRIM);
+
+        var thr = assertThrows(RuntimeException.class, () -> bfsGenerator.generate(1, 7, 0));
+        assertEquals("height and width should be >= 3", thr.getMessage());
+        thr = assertThrows(RuntimeException.class, () -> primeGenerator.generate(7, 1, 0));
+        assertEquals("height and width should be >= 3", thr.getMessage());
+    }
+
+    @Test
+    @DisplayName("generator should throw exception Path goes through the wall")
+    void pathThroughtWall() {
+        Generator bfsGenerator = new GeneratorBridge(GeneratorType.BFS);
+        Maze maze = bfsGenerator.generate(7, 12, 0);
+        Renderer prettyRenderer = new PrettyRenderer();
+        Renderer simpleRenderer = new SimpleRenderer();
+        List<Coordinate> path = List.of(new Coordinate(0, 0),
+            new Coordinate(1, 1));
+
+        var thr = assertThrows(RuntimeException.class, () -> prettyRenderer.render(maze, path));
+        assertEquals("Path goes through the wall", thr.getMessage());
+        thr = assertThrows(RuntimeException.class, () -> simpleRenderer.render(maze, path));
+        assertEquals("Path goes through the wall", thr.getMessage());
     }
 }

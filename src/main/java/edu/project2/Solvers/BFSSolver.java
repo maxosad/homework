@@ -25,7 +25,7 @@ public class BFSSolver implements Solver {
         Coordinate newC = new Coordinate(c.row(), c.col());
         do {
             answer.addFirst(newC);
-            newC = prevs.get(c);
+            newC = prevs.get(newC);
         } while (newC != null);
     }
 
