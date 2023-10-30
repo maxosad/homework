@@ -7,7 +7,7 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
+import static edu.project2.Config.DIRECTIONS_LIST;
 
 public class BFSGenerator extends AbstractGenerator implements Generator {
     @Override
@@ -24,7 +24,7 @@ public class BFSGenerator extends AbstractGenerator implements Generator {
             int col = c.col();
             grid[row][col].setType(Cell.Type.PASSAGE);
 
-            List<Integer> sdvig = new ArrayList<>(List.of(0, 1, 2, 3));
+            List<Integer> sdvig = new ArrayList<>(DIRECTIONS_LIST);
             Collections.shuffle(sdvig, random);
 
             for (var sdvigIndex : sdvig) {

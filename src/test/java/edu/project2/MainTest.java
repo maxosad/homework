@@ -11,6 +11,7 @@ import edu.project2.Solvers.BFSSolver;
 import edu.project2.Solvers.DFSSolver;
 import edu.project2.Solvers.Solver;
 import edu.project2.model.Coordinate;
+import edu.project2.model.GeneratorType;
 import edu.project2.model.Maze;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,7 @@ class MainTest {
     @Test
     @DisplayName("should find precounted path")
     void findPath() {
-        Generator bfsGenerator = new GeneratorBridge(AbstractGenerator.GeneratorType.BFS);
+        Generator bfsGenerator = new GeneratorBridge(GeneratorType.BFS);
         Maze maze = bfsGenerator.generate(7, 12, 0);
         Renderer prettyRenderer = new PrettyRenderer();
         Coordinate start = new Coordinate(1,1);
@@ -45,7 +46,7 @@ class MainTest {
     @Test
     @DisplayName("solvers should throw exception No path")
     void throwExc() {
-        Generator bfsGenerator = new GeneratorBridge(AbstractGenerator.GeneratorType.BFS);
+        Generator bfsGenerator = new GeneratorBridge(GeneratorType.BFS);
         Maze maze = bfsGenerator.generate(7, 12, 0);
         Renderer prettyRenderer = new PrettyRenderer();
         Coordinate start = new Coordinate(0,0);

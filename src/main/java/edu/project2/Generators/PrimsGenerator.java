@@ -1,17 +1,18 @@
 package edu.project2.Generators;
 
-import edu.project2.model.Maze;
 import edu.project2.model.Cell;
 import edu.project2.model.Coordinate;
 import edu.project2.model.Direction;
+import edu.project2.model.Maze;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import static edu.project2.Config.DIRECTIONS_COUNT;
 
 public class PrimsGenerator extends AbstractGenerator implements Generator {
     private void addPretendCoord(List<Coordinate> list, Coordinate c) {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < DIRECTIONS_COUNT; i++) {
             int newCol = c.col() + SDVIG[i][1];
             int newRow = c.row() + SDVIG[i][0];
             if (0 <= newCol && newCol < width
@@ -43,7 +44,7 @@ public class PrimsGenerator extends AbstractGenerator implements Generator {
             int col = c.col();
             grid[row][col].setType(Cell.Type.PASSAGE);
 
-            List<Direction> dirs = Direction.getDirectionSetup;
+            List<Direction> dirs = Direction.DIRECTION_SETUP;
             Collections.shuffle(dirs, random);
 
             boolean f = false;
@@ -54,32 +55,33 @@ public class PrimsGenerator extends AbstractGenerator implements Generator {
                 switch (direction) {
                     case TOP -> {
                         int newRow = row - 2;
-                        if (newRow >= 0 && grid[newRow][col].getType().equals(Cell.Type.PASSAGE) ) {
+                        if (newRow >= 0 && grid[newRow][col].getType().equals(Cell.Type.PASSAGE)) {
                             grid[row - 1][col].setType(Cell.Type.PASSAGE);
                             f = true;
                         }
                     }
                     case RIGHT -> {
                         int newCol = col + 2;
-                        if (newCol < width && grid[row][newCol].getType().equals(Cell.Type.PASSAGE) ) {
+                        if (newCol < width && grid[row][newCol].getType().equals(Cell.Type.PASSAGE)) {
                             grid[row][col + 1].setType(Cell.Type.PASSAGE);
                             f = true;
                         }
                     }
                     case DOWN -> {
                         int newRow = row + 2;
-                        if (newRow < height && grid[newRow][col].getType().equals(Cell.Type.PASSAGE) ) {
+                        if (newRow < height && grid[newRow][col].getType().equals(Cell.Type.PASSAGE)) {
                             grid[row + 1][col].setType(Cell.Type.PASSAGE);
                             f = true;
                         }
                     }
                     case LEFT -> {
                         int newCol = col - 2;
-                        if (newCol >= 0 && grid[row][newCol].getType().equals(Cell.Type.PASSAGE) ) {
-                            grid[row][col-1].setType(Cell.Type.PASSAGE);
+                        if (newCol >= 0 && grid[row][newCol].getType().equals(Cell.Type.PASSAGE)) {
+                            grid[row][col - 1].setType(Cell.Type.PASSAGE);
                             f = true;
                         }
                     }
+                    default -> { }
                 }
             }
             addPretendCoord(pretendent, c);

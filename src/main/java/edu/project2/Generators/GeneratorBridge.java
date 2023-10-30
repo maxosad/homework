@@ -1,16 +1,17 @@
 package edu.project2.Generators;
 
 import edu.project2.model.Cell;
+import edu.project2.model.GeneratorType;
 import edu.project2.model.Maze;
 
 public class GeneratorBridge implements Generator {
     private Generator generator;
 
-    public GeneratorBridge(AbstractGenerator.GeneratorType type) {
-        switch (type) {
-            case BFS -> generator = new BFSGenerator();
-            case PRIM -> generator = new PrimsGenerator();
-        }
+    public GeneratorBridge(GeneratorType type) {
+        generator = switch (type) {
+            case BFS -> new BFSGenerator();
+            case PRIM -> new PrimsGenerator();
+        };
     }
 
     private Maze wrapMazeWithWall(Maze maze, boolean hEven, boolean wEven) {

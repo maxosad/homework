@@ -6,10 +6,9 @@ import edu.project2.model.Maze;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Objects;
 import java.util.Queue;
+import static edu.project2.Config.DIRECTIONS_COUNT;
 
 public class BFSSolver implements Solver {
     private static final int[][] SDVIG = new int[][] {{0, -1}, {0, 1}, {1, 0}, {-1, 0}};
@@ -20,16 +19,18 @@ public class BFSSolver implements Solver {
     private HashMap<Coordinate, Coordinate> prevs;
     private Deque<Coordinate> answer;
     private Cell[][] grid;
+
     private void restorePath(Coordinate c) {
         answer = new ArrayDeque<>();
+        Coordinate newC = new Coordinate(c.row(), c.col());
         do {
-            answer.addFirst(c);
-            c = prevs.get(c);
-        } while (c != null);
+            answer.addFirst(newC);
+            newC = prevs.get(c);
+        } while (newC != null);
     }
 
     private void addCoordinates(Coordinate c) {
-        for (int sdvid = 0; sdvid < 4; sdvid++) {
+        for (int sdvid = 0; sdvid < DIRECTIONS_COUNT; sdvid++) {
             Coordinate newC = new Coordinate(c.row() + SDVIG[sdvid][0], c.col() + SDVIG[sdvid][1]);
             if (0 <= newC.col() && newC.col() < width
                 && 0 <= newC.row() && newC.row() < height
@@ -40,6 +41,7 @@ public class BFSSolver implements Solver {
             }
         }
     }
+
     @Override
     public List<Coordinate> solve(Maze maze, Coordinate start, Coordinate end) {
         height = maze.getHeight();

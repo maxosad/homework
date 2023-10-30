@@ -6,8 +6,7 @@ import edu.project2.model.Maze;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
-import java.util.Queue;
-import java.util.Stack;
+import static edu.project2.Config.DIRECTIONS_COUNT;
 
 public class DFSSolver implements Solver {
     private static final int[][] SDVIG = new int[][] {{0, -1}, {0, 1}, {1, 0}, {-1, 0}};
@@ -24,7 +23,7 @@ public class DFSSolver implements Solver {
             path.addFirst(c);
             return true;
         }
-        for (int sdvid = 0; sdvid < 4; sdvid++) {
+        for (int sdvid = 0; sdvid < DIRECTIONS_COUNT; sdvid++) {
             Coordinate newC = new Coordinate(c.row() + SDVIG[sdvid][0], c.col() + SDVIG[sdvid][1]);
             if (0 <= newC.col() && newC.col() < width
                 && 0 <= newC.row() && newC.row() < height

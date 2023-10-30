@@ -1,8 +1,8 @@
 package edu.project2.Renderers;
 
 import edu.project2.model.Cell;
-import edu.project2.model.Maze;
 import edu.project2.model.Coordinate;
+import edu.project2.model.Maze;
 import edu.project2.model.RenderCell;
 import java.util.Arrays;
 import java.util.List;

@@ -2,6 +2,7 @@ package edu.project2.model;
 
 public class RenderCell {
     public enum Type { WALL, PASSAGE, PATH }
+
     private final int row;
     private final int col;
     private Type type;
