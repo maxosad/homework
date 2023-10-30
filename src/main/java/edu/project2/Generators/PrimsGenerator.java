@@ -8,14 +8,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
-public class PrimsGenerator implements Generator {
-    private HashMap<Coordinate, Boolean> usedPretend;
-    private int width;
-    private int height;
-    private Cell[][] grid;
-    private void addPreCord(List<Coordinate> list, int row, int col) {
+public class PrimsGenerator extends AbstractGenerator implements Generator {
+    private void addPretendCoord(List<Coordinate> list, int row, int col) {
         int[][] sdvig = new int[][] {{0, -2}, {0, 2}, {2, 0}, {-2, 0}};
         for (int i = 0; i < 4; i++) {
             int newCol = col + sdvig[i][1];
@@ -35,35 +30,21 @@ public class PrimsGenerator implements Generator {
 
     @Override
     public Maze generate(int height, int width, int seed) {
-        this.height = height;
-        this.width = width;
-        Random random = new Random(seed);
-        grid = new Cell[height][width];
         usedPretend = new HashMap<>();
-
-        for (int row = 0; row < height; row++) {
-            for (int col = 0; col < width; col++) {
-                grid[row][col] = new Cell(row, col, Cell.Type.WALL);
-            }
-        }
+        prepare(height, width, seed);
 
         int startCoordinateRow = random.nextInt(height / 2) * 2 + 1;
         int startCoordinateCol = random.nextInt(width / 2) * 2 + 1;
 
-        System.out.println(startCoordinateRow + " " + startCoordinateCol);
-
         grid[startCoordinateRow][startCoordinateCol].setType(Cell.Type.PASSAGE);
 
-        List<Coordinate> pretendCoordinate = new ArrayList<>();
-
+        List<Coordinate> pretendent = new ArrayList<>();
         usedPretend.put(new Coordinate(startCoordinateRow, startCoordinateCol), true);
-        addPreCord(pretendCoordinate, startCoordinateRow, startCoordinateCol);
+        addPretendCoord(pretendent, startCoordinateRow, startCoordinateCol);
 
-        while (!pretendCoordinate.isEmpty()) {
-//            System.out.println(pretendCoordinate);
-//            System.out.println();
-            int chosenIndex = random.nextInt(pretendCoordinate.size());
-            Coordinate c = pretendCoordinate.remove(chosenIndex);
+        while (!pretendent.isEmpty()) {
+            int chosenIndex = random.nextInt(pretendent.size());
+            Coordinate c = pretendent.remove(chosenIndex);
             int row = c.row();
             int col = c.col();
             grid[row][col].setType(Cell.Type.PASSAGE);
@@ -108,17 +89,9 @@ public class PrimsGenerator implements Generator {
                 }
             }
 
-            addPreCord(pretendCoordinate, row, col);
+            addPretendCoord(pretendent, row, col);
 
         }
         return new Maze(height, width, grid);
-    }
-    private static void check(List<Integer> l) {
-        l.add(1);
-    }
-    public static void main(String[] args) {
-        ArrayList<Integer> l = new ArrayList<>();
-        check(l);
-        System.out.println(l);
     }
 }

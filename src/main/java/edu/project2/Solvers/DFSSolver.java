@@ -48,7 +48,10 @@ public class DFSSolver implements Solver {
         usedGrid = new boolean[height][width];
         path = new ArrayDeque<>();
 
-        dfs(start);
+        boolean solutionFound = dfs(start);
+        if (!solutionFound) {
+            throw new RuntimeException("No path");
+        }
         return path.stream().toList();
     }
 }
