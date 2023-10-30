@@ -7,8 +7,8 @@ public class Task4 {
     private Task4() { }
 
     public static String convertToRoman(int intToConvert) {
-        if (Util.MIN_ROMAN <= intToConvert && intToConvert <= Util.MAX_ROMAN) {
-            throw new IllegalArgumentException("number should be");
+        if (!(Util.MIN_ROMAN <= intToConvert && intToConvert <= Util.MAX_ROMAN)) {
+            throw new IllegalArgumentException("number should be more zero and less four thousands");
         }
         return List.of("", "M", "MM", "MMM").get(intToConvert / Util.THOUSAND)
             + List.of("", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM")

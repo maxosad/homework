@@ -21,8 +21,12 @@ public class NameSurname {
     }
 
     @Override public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         NameSurname that = (NameSurname) o;
         return Objects.equals(name, that.name) && Objects.equals(surname, that.surname);
     }
