@@ -40,22 +40,24 @@ public class Main {
         int initWidth = scanner.nextInt();
         LOGGER.info("enter seed");
         int seed = scanner.nextInt();
-        LOGGER.info("Which solver do you want to choose?");
-        for (var type : SolverType.values()) {
-            LOGGER.info(type.toString());
-        }
-        String solverType = scanner.nextLine();
         LOGGER.info("Which renderer do you want to choose?");
         for (var type : RendererType.values()) {
             LOGGER.info(type.toString());
         }
         String rendererType = scanner.nextLine();
-
         Maze maze = generator.generate(initHeight, initWidth, seed);
-        Solver solver = solverType.equals(BFS) ? new BFSSolver() : new DFSSolver();
         Renderer renderer = rendererType.equals("SIMPLE") ? new SimpleRenderer() : new PrettyRenderer();
-
         LOGGER.info(renderer.render(maze));
+        LOGGER.info("Which solver do you want to choose?");
+        for (var type : SolverType.values()) {
+            LOGGER.info(type.toString());
+        }
+        String solverType = scanner.nextLine();
+
+
+
+        Solver solver = solverType.equals(BFS) ? new BFSSolver() : new DFSSolver();
+
 
         LOGGER.info("enter start row");
         int startRow = scanner.nextInt();

@@ -6,7 +6,7 @@ import edu.project2.model.Maze;
 import edu.project2.model.RenderCell;
 import java.util.List;
 
-public class PrettyRenderer implements Renderer {
+public class PrettyRenderer extends AbstractRenderer implements Renderer {
     @Override
     public String render(Maze maze) {
         StringBuilder sb = new StringBuilder();
@@ -31,11 +31,10 @@ public class PrettyRenderer implements Renderer {
             }
         }
 
-        for (var coord : path) {
-            grid[coord.row()][coord.col()].setType(RenderCell.Type.PATH);
-        }
+        markPath(path, grid);
         StringBuilder sb = new StringBuilder();
         sb.append("\n");
+
         for (int row = 0; row < maze.getHeight(); row++) {
             for (int col = 0; col < maze.getWidth(); col++) {
                 String toAppend = switch (grid[row][col].getType()) {
