@@ -23,7 +23,6 @@ import static edu.project2.Config.HEIGHT_WIDTH_LIMIT;
 public class Main {
 
     public final static Logger LOGGER = LogManager.getLogger();
-    public static final String BFS = "BFS";
     public static final String SHOULD_BE_PASSAGE = "should be passage";
     public static final String SHOULD_BE_MORE_3 = "should be >= 3";
     private static Scanner scanner;
