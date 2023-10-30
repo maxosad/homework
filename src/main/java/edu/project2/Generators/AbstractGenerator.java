@@ -8,10 +8,12 @@ import java.util.HashMap;
 import java.util.Random;
 
 public abstract class AbstractGenerator implements Generator {
+    public enum GeneratorType {BFS, PRIM}
     protected static final int[][] SDVIG = new int[][] {{0, -2}, {0, 2}, {2, 0}, {-2, 0}};
     protected int width;
     protected int height;
     Random random;
+    protected Coordinate startCoordinate;
     protected Cell[][] grid;
     protected HashMap<Coordinate, Boolean> usedPretend;
 
@@ -34,6 +36,12 @@ public abstract class AbstractGenerator implements Generator {
         grid = new Cell[height][width];
         usedPretend = new HashMap<>();
         fillGridWithWalls();
+
+        int startCoordinateRow = random.nextInt(height / 2) * 2 + 1;
+        int startCoordinateCol = random.nextInt(width / 2) * 2 + 1;
+
+        startCoordinate = new Coordinate(startCoordinateRow, startCoordinateCol);
+        usedPretend.put(startCoordinate, true);
     }
 
 }

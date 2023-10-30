@@ -61,6 +61,6 @@ public class BFSSolver implements Solver {
             addCoordinates(c);
         }
 
-        throw new RuntimeException("No Path");
+        throw new RuntimeException("No path");
     }
 }

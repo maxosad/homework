@@ -14,16 +14,12 @@ public class BFSGenerator extends AbstractGenerator implements Generator {
     public Maze generate(int height, int width, int seed) {
         prepare(height, width, seed);
 
-        int startCoordinateRow = random.nextInt(height / 2) * 2 + 1;
-        int startCoordinateCol = random.nextInt(width / 2) * 2 + 1;
-
         ArrayDeque<Coordinate> pretendent = new ArrayDeque<>();
-        Coordinate startCoordinate = new Coordinate(startCoordinateRow, startCoordinateCol);
         pretendent.add(startCoordinate);
 
         while (!pretendent.isEmpty()) {
             Coordinate c = pretendent.pollFirst();
-            usedPretend.put(c, true);
+
             int row = c.row();
             int col = c.col();
             grid[row][col].setType(Cell.Type.PASSAGE);
