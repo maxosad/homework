@@ -40,5 +40,12 @@ class Task5Test {
             () -> Task5.parseContacts(null, "DESC"));
     }
 
+    @Test
+    @DisplayName("Some words hav only Name")
+    void nameCompTest() {
+        assertArrayEquals(new String[]{"Carl Gauss", "Leonhard Euler", "Paul Erdos", "A"},
+            Task5.parseContacts(new String[]{"Paul Erdos", "A", "Leonhard Euler", "Carl Gauss"}, "DESC"));
+    }
+
 
 }

@@ -14,9 +14,25 @@ public class WrappedComparator implements Comparator<String> {
     public int compare(String o1, String o2) {
         String[] nameSurename1 = o1.split(" ");
         String[] nameSurename2 = o2.split(" ");
-        if (nameSurename1.length != 2 || nameSurename2.length != 2) {
-            throw new IllegalArgumentException("String should have two words");
+        int nameSurename1Length = nameSurename1.length;
+        int nameSurename2Length = nameSurename2.length;
+
+        if (nameSurename1Length < 1
+            || nameSurename2Length < 1
+            || nameSurename2Length > 2
+            || nameSurename1Length > 2) {
+            throw new IllegalArgumentException("wrong input");
         }
-        return baseComparator.compare(nameSurename1[1], nameSurename2[1]);
+
+        String wordToCompare1;
+        String wordToCompare2;
+        if (nameSurename1Length == 1 || nameSurename2Length == 1) {
+            wordToCompare1 = nameSurename1[0];
+            wordToCompare2 = nameSurename2[0];
+        } else {
+            wordToCompare1 = nameSurename1[1];
+            wordToCompare2 = nameSurename2[1];
+        }
+        return baseComparator.compare(wordToCompare1, wordToCompare2);
     }
 }
