@@ -2,6 +2,7 @@ package edu.hw3.Task8;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class BackwardIterator<T> implements Iterator<T> {
 
@@ -22,7 +23,11 @@ public class BackwardIterator<T> implements Iterator<T> {
 
     @Override
     public T next() {
-        return collectionArray[position--];
+        if (hasNext()) {
+            return collectionArray[position--];
+        } else {
+            throw new NoSuchElementException();
+        }
 
     }
 

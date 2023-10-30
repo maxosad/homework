@@ -7,6 +7,7 @@ import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.Deque;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.Set;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -37,5 +38,13 @@ class BackwardIteratorTest {
         Deque<Integer> deque = new ArrayDeque<>(List.of(new Integer[]{1,2,3}));
         BackwardIterator<Integer> bi = new BackwardIterator<>(deque);
         commonPart(bi);
+    }
+
+    @Test
+    @DisplayName("Should throw NoSuchElementException")
+    void nextTest() {
+        Deque<Integer> deque = new ArrayDeque<>(List.of(new Integer[]{}));
+        BackwardIterator<Integer> bi = new BackwardIterator<>(deque);
+        assertThrows(NoSuchElementException.class, bi::next);
     }
 }
