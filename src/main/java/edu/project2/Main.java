@@ -18,6 +18,7 @@ import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import static edu.project2.Config.HEIGHT_WIDTH_LIMIT;
 
 public class Main {
 
@@ -26,11 +27,14 @@ public class Main {
     public static final String SHOULD_BE_PASSAGE = "should be passage";
     public static final String SHOULD_BE_MORE_3 = "should be >= 3";
     private static Scanner scanner;
-    private static Maze maze;
+//    private static Maze maze;
 
     private Main() { }
 
-    private static Coordinate biConditionInputInts(String coordName, BiPredicate<Integer, Integer> biPredicate, String message) {
+    private static Coordinate biConditionInputInts(
+        String coordName,
+        BiPredicate<Integer, Integer> biPredicate,
+        String message) {
         int col;
         int row;
         while (true) {
@@ -79,13 +83,12 @@ public class Main {
         scanner = new Scanner(System.in);
         Generator generator = new GeneratorBridge(chooseFromValues(GeneratorType.class, "generator"));
 
-        int initHeight = conditionInputInt("height", x -> x >= 3, SHOULD_BE_MORE_3);
-        int initWidth = conditionInputInt("width", x -> x >= 3, SHOULD_BE_MORE_3);
-
+        int initHeight = conditionInputInt("height", x -> x >= HEIGHT_WIDTH_LIMIT, SHOULD_BE_MORE_3);
+        int initWidth = conditionInputInt("width", x -> x >= HEIGHT_WIDTH_LIMIT, SHOULD_BE_MORE_3);
         int seed = conditionInputInt("seed", x -> true, "");
 
         scanner.nextLine();
-        maze = generator.generate(initHeight, initWidth, seed);
+        Maze maze = generator.generate(initHeight, initWidth, seed);
         Renderer renderer = new RendererBridge(chooseFromValues(RendererType.class, "renderer"));
         LOGGER.info(renderer.render(maze));
 

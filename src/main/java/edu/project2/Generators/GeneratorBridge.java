@@ -3,6 +3,7 @@ package edu.project2.Generators;
 import edu.project2.model.Cell;
 import edu.project2.model.GeneratorType;
 import edu.project2.model.Maze;
+import static edu.project2.Config.HEIGHT_WIDTH_LIMIT;
 
 public class GeneratorBridge implements Generator {
     private Generator generator;
@@ -27,16 +28,15 @@ public class GeneratorBridge implements Generator {
         for (int i = 0; i < newHeight; i++) {
             newGrid[i][newWidth - 1] = new Cell(i, newWidth - 1, Cell.Type.WALL);
         }
-
         for (int j = 0; j < newWidth; j++) {
-            newGrid[newHeight - 1][j] = mazeGrid[newHeight - 1][j];
+            newGrid[newHeight - 1][j] = new Cell(newHeight - 1, j, Cell.Type.WALL);
         }
         return new Maze(newHeight, newWidth, newGrid);
     }
 
     @Override
     public Maze generate(int height, int width, int seed) {
-        if (height < 3 || width < 3) {
+        if (height < HEIGHT_WIDTH_LIMIT || width < HEIGHT_WIDTH_LIMIT) {
             throw new IllegalArgumentException("height and width should be >= 3");
         }
         boolean hEven = height % 2 == 0;
