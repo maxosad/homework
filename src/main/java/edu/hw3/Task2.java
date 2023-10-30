@@ -8,7 +8,7 @@ public class Task2 {
 
     public static List<String> clusterize(String parenthesesString) {
         List<String> ansList = new ArrayList<>();
-        StringBuilder temporaryParentheses = new StringBuilder();
+        StringBuilder temporaryParentheses = new StringBuilder(parenthesesString.length());
         int balance = 0;
 
         int parenthesesStringSize = parenthesesString.length();
@@ -28,7 +28,7 @@ public class Task2 {
             }
             if (balance == 0) {
                 ansList.add(temporaryParentheses.toString());
-                temporaryParentheses.setLength(0);
+                temporaryParentheses = new StringBuilder(parenthesesString.length());
             }
         }
         if (balance != 0) {
