@@ -62,8 +62,11 @@ public class Game {
                     session.printCurrentWord();
                     LOGGER.info(more);
                 }
-                LOGGER.info("> " + session.getStatus().getMessage());
-                LOGGER.info(WORD_TO_GUESS_IS + session.getWordToGuess());
+                GameStatus status = session.getStatus();
+                LOGGER.info("> " + status.getMessage());
+                if (status.equals(GameStatus.LOST)) {
+                    LOGGER.info(WORD_TO_GUESS_IS + session.getWordToGuess());
+                }
             }
         }
 
