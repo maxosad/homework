@@ -12,11 +12,11 @@ public class Validator {
         return name == null;
     }
 
-    private static boolean validateType(Animal.Type type) {
+    private static boolean validateType(Type type) {
         return type == null;
     }
 
-    private static boolean validateSex(Animal.Sex sex) {
+    private static boolean validateSex(Sex sex) {
         return sex == null;
     }
 

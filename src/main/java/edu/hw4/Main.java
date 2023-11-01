@@ -6,10 +6,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import static edu.hw4.Animal.Type;
-import static edu.hw4.Animal.Type.DOG;
-import static edu.hw4.Animal.Type.FISH;
-import static edu.hw4.Animal.Type.SPIDER;
+import static edu.hw4.Type.DOG;
+import static edu.hw4.Type.FISH;
+import static edu.hw4.Type.SPIDER;
 
 public class Main {
 
@@ -40,10 +39,10 @@ public class Main {
             .max(Comparator.comparingInt(a -> a.name().length())).orElse(null);
     }
 
-    public static Animal.Sex task5(List<Animal> animals) {
-        Map<Animal.Sex, Long> m = animals.stream()
+    public static Sex task5(List<Animal> animals) {
+        Map<Sex, Long> m = animals.stream()
             .collect(Collectors.groupingBy(Animal::sex, Collectors.counting()));
-        return m.get(Animal.Sex.M).compareTo(m.get(Animal.Sex.F)) > 0 ? Animal.Sex.M : Animal.Sex.F;
+        return m.get(Sex.M).compareTo(m.get(Sex.F)) > 0 ? Sex.M : Sex.F;
     }
 
     public static Map<Type, Optional<Animal>> task6(List<Animal> animals) {
@@ -108,7 +107,7 @@ public class Main {
             .anyMatch(a -> a.height() > k);
     }
 
-    public static Map<Animal.Type, Integer> task15(List<Animal> animals, int k, int l) {
+    public static Map<Type, Integer> task15(List<Animal> animals, int k, int l) {
         return animals.stream()
             .filter(a -> a.age() >= k && a.age() <= l)
             .collect(Collectors.groupingBy(Animal::type, Collectors.summingInt(Animal::weight)));

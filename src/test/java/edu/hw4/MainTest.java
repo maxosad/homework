@@ -10,44 +10,44 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import static edu.hw4.Animal.Type.*;
+import static edu.hw4.Type.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MainTest {
     private static List<Animal> animals = null;
     @BeforeAll
     static void setUp() {
-        Animal a1  = new Animal("BIRD 1", BIRD, Animal.Sex.M, 9,1, 3,false);
-        Animal a2  = new Animal("BIRD12", BIRD, Animal.Sex.M, 1,4, 5,true);
-        Animal a3  = new Animal("BIRD123", BIRD, Animal.Sex.F, 12,3, 8,true);
-        Animal a4  = new Animal("BIRD1234", BIRD, Animal.Sex.M, 64,100, 45,false);
-        Animal a5  = new Animal("BIRD12345", BIRD, Animal.Sex.F, 7,123, 243,false);
-        Animal a6  = new Animal("BIRD123456", BIRD, Animal.Sex.M, 1,2, 72,true);
-        Animal a7  = new Animal("BIRD1234567", BIRD, Animal.Sex.F, 2,2, 64,false);
-        Animal a8  = new Animal("BIRD12345678", BIRD, Animal.Sex.M, 5,23, 26,true);
-        Animal a9  = new Animal("CAT1", CAT, Animal.Sex.F, 3,2, 14,false);
-        Animal a10 = new Animal("CAT12", CAT, Animal.Sex.F, 12,200, 9,true);
-        Animal a11 = new Animal("CAT123", CAT, Animal.Sex.F, 6,2, 63,true);
-        Animal a12 = new Animal("CAT1234", CAT, Animal.Sex.M, 7,5, 9,false);
-        Animal a13 = new Animal("CAT12345", CAT, Animal.Sex.M, 4,2, 9,false);
-        Animal a14 = new Animal("CAT123456", CAT, Animal.Sex.F, 6,253, 31,false);
-        Animal a15 = new Animal("CAT1234567", CAT, Animal.Sex.M, 8,56, 9,false);
-        Animal a16 = new Animal("CAT12345678", CAT, Animal.Sex.M, 3,29, 9,false);
-        Animal a17 = new Animal("D OG 1", DOG, Animal.Sex.F, 9,35, 9,false);
-        Animal a18 = new Animal("DOG12", DOG, Animal.Sex.M, 10,75, 1,true);
-        Animal a19 = new Animal("DOG123", DOG, Animal.Sex.M, 12,888, 1,false);
-        Animal a20 = new Animal("DOG1234", DOG, Animal.Sex.M, 1,456, 1,true);
-        Animal a21 = new Animal("DOG12345", DOG, Animal.Sex.F, 23,147, 57,true);
-        Animal a22 = new Animal("DOG123456", DOG, Animal.Sex.M, 5,390, 9,false);
-        Animal a23 = new Animal("DOG1234567", DOG, Animal.Sex.M, 19,347, 9,true);
-        Animal a24 = new Animal("DOG12345678", DOG, Animal.Sex.M, 4,245, 9,false);
-        Animal a25 = new Animal("FISH 1", FISH, Animal.Sex.F, 8,643, 43,false);
-        Animal a26 = new Animal("FISH 12", FISH, Animal.Sex.F, 51,731, 9,true);
-        Animal a27 = new Animal("FISH123", FISH, Animal.Sex.M, 81,537, 9,false);
-        Animal a28 = new Animal("SPIDER1", SPIDER, Animal.Sex.M, 3,326, 14,true);
-        Animal a29 = new Animal("SPIDER12", SPIDER, Animal.Sex.M, 9,34, 9,false);
-        Animal a30 = new Animal("SPIDER123", SPIDER, Animal.Sex.F, 7,6, 9,false);
-        Animal a31 = new Animal("SPIDER1234", SPIDER, Animal.Sex.M, 8,49, 9,false);
+        Animal a1  = new Animal("BIRD 1", BIRD, Sex.M, 9,1, 3,false);
+        Animal a2  = new Animal("BIRD12", BIRD, Sex.M, 1,4, 5,true);
+        Animal a3  = new Animal("BIRD123", BIRD, Sex.F, 12,3, 8,true);
+        Animal a4  = new Animal("BIRD1234", BIRD, Sex.M, 64,100, 45,false);
+        Animal a5  = new Animal("BIRD12345", BIRD, Sex.F, 7,123, 243,false);
+        Animal a6  = new Animal("BIRD123456", BIRD, Sex.M, 1,2, 72,true);
+        Animal a7  = new Animal("BIRD1234567", BIRD, Sex.F, 2,2, 64,false);
+        Animal a8  = new Animal("BIRD12345678", BIRD, Sex.M, 5,23, 26,true);
+        Animal a9  = new Animal("CAT1", CAT, Sex.F, 3,2, 14,false);
+        Animal a10 = new Animal("CAT12", CAT, Sex.F, 12,200, 9,true);
+        Animal a11 = new Animal("CAT123", CAT, Sex.F, 6,2, 63,true);
+        Animal a12 = new Animal("CAT1234", CAT, Sex.M, 7,5, 9,false);
+        Animal a13 = new Animal("CAT12345", CAT, Sex.M, 4,2, 9,false);
+        Animal a14 = new Animal("CAT123456", CAT, Sex.F, 6,253, 31,false);
+        Animal a15 = new Animal("CAT1234567", CAT, Sex.M, 8,56, 9,false);
+        Animal a16 = new Animal("CAT12345678", CAT, Sex.M, 3,29, 9,false);
+        Animal a17 = new Animal("D OG 1", DOG, Sex.F, 9,35, 9,false);
+        Animal a18 = new Animal("DOG12", DOG, Sex.M, 10,75, 1,true);
+        Animal a19 = new Animal("DOG123", DOG, Sex.M, 12,888, 1,false);
+        Animal a20 = new Animal("DOG1234", DOG, Sex.M, 1,456, 1,true);
+        Animal a21 = new Animal("DOG12345", DOG, Sex.F, 23,147, 57,true);
+        Animal a22 = new Animal("DOG123456", DOG, Sex.M, 5,390, 9,false);
+        Animal a23 = new Animal("DOG1234567", DOG, Sex.M, 19,347, 9,true);
+        Animal a24 = new Animal("DOG12345678", DOG, Sex.M, 4,245, 9,false);
+        Animal a25 = new Animal("FISH 1", FISH, Sex.F, 8,643, 43,false);
+        Animal a26 = new Animal("FISH 12", FISH, Sex.F, 51,731, 9,true);
+        Animal a27 = new Animal("FISH123", FISH, Sex.M, 81,537, 9,false);
+        Animal a28 = new Animal("SPIDER1", SPIDER, Sex.M, 3,326, 14,true);
+        Animal a29 = new Animal("SPIDER12", SPIDER, Sex.M, 9,34, 9,false);
+        Animal a30 = new Animal("SPIDER123", SPIDER, Sex.F, 7,6, 9,false);
+        Animal a31 = new Animal("SPIDER1234", SPIDER, Sex.M, 8,49, 9,false);
         animals = new ArrayList<>(List.of(a1,
                 a2,
                 a3,
@@ -100,7 +100,7 @@ class MainTest {
 
     @Test
     void task3() {
-        Map<Animal.Type, Long> targetMap = new HashMap<>();
+        Map<Type, Long> targetMap = new HashMap<>();
         for (Animal an : animals) {
             targetMap.put(an.type(), targetMap.getOrDefault(an.type(), 0L) + 1);
         }
@@ -110,24 +110,24 @@ class MainTest {
 
     @Test
     void task4() {
-        Animal a8  = new Animal("BIRD12345678", BIRD, Animal.Sex.M, 5,23, 26,true);
+        Animal a8  = new Animal("BIRD12345678", BIRD, Sex.M, 5,23, 26,true);
 
         assertEquals(a8, Main.task4(animals));
     }
 
     @Test
     void task5() {
-        Map<Animal.Sex, Long> sexCounterMap = new HashMap<>();
+        Map<Sex, Long> sexCounterMap = new HashMap<>();
         for (Animal an : animals) {
             sexCounterMap.put(an.sex(), sexCounterMap.getOrDefault(an.sex(), 0L) + 1);
         }
-        Animal.Sex target = sexCounterMap.get(Animal.Sex.M).compareTo(sexCounterMap.get(Animal.Sex.F)) > 0 ? Animal.Sex.M : Animal.Sex.F;
+        Sex target = sexCounterMap.get(Sex.M).compareTo(sexCounterMap.get(Sex.F)) > 0 ? Sex.M : Sex.F;
         assertEquals(target, Main.task5(animals));
     }
 
     @Test
     void task6() {
-        Map<Animal.Type, Optional<Animal>> mostHeavyAnimal = new HashMap<>();
+        Map<Type, Optional<Animal>> mostHeavyAnimal = new HashMap<>();
         for (var an : animals) {
             Optional<Animal> heavyAnimal = mostHeavyAnimal.get(an.type());
             if (heavyAnimal == null) {
@@ -239,7 +239,7 @@ class MainTest {
 
     @Test
     void task15() {
-        Map<Animal.Type, Integer> summingWeightMapByType = new HashMap<>();
+        Map<Type, Integer> summingWeightMapByType = new HashMap<>();
         int k = 11;
         int l = 101;
 
@@ -290,16 +290,16 @@ class MainTest {
     @Test
     void task18() {
         List<Animal> animals1 = new ArrayList<>();
-        animals1.add(new Animal("1", BIRD, Animal.Sex.M, 1,1, 3,false));
-        animals1.add(new Animal("12", BIRD, Animal.Sex.M, 2,4, 5,false));
-        animals1.add(new Animal("123", FISH, Animal.Sex.M, 3,3, 8,false));
-        animals1.add(new Animal("1234", FISH, Animal.Sex.M, 0,2, 9,false));
+        animals1.add(new Animal("1", BIRD, Sex.M, 1,1, 3,false));
+        animals1.add(new Animal("12", BIRD, Sex.M, 2,4, 5,false));
+        animals1.add(new Animal("123", FISH, Sex.M, 3,3, 8,false));
+        animals1.add(new Animal("1234", FISH, Sex.M, 0,2, 9,false));
         List<Animal> animals2 = new ArrayList<>();
-        Animal heavyFish = new Animal("123", FISH, Animal.Sex.M, 3,3, 20,false);
-        animals2.add(new Animal("1", BIRD, Animal.Sex.M, 1,1, 3,false));
-        animals2.add(new Animal("12", BIRD, Animal.Sex.M, 2,4, 5,false));
+        Animal heavyFish = new Animal("123", FISH, Sex.M, 3,3, 20,false);
+        animals2.add(new Animal("1", BIRD, Sex.M, 1,1, 3,false));
+        animals2.add(new Animal("12", BIRD, Sex.M, 2,4, 5,false));
         animals2.add(heavyFish);
-        animals2.add(new Animal("1234", FISH, Animal.Sex.M, 0,2, 9,false));
+        animals2.add(new Animal("1234", FISH, Sex.M, 0,2, 9,false));
         List<List<Animal>> list = new ArrayList<>(List.of(animals1, animals2));
 
        assertEquals(heavyFish, Main.task18(list));
@@ -309,7 +309,7 @@ class MainTest {
     void task19() {
         List<Animal> errorData = new ArrayList<>();
         errorData.add(new Animal("1", null, null, 1,2, 3,false));
-        errorData.add(new Animal("2", FISH, Animal.Sex.M, 0,-4, -9,false));
+        errorData.add(new Animal("2", FISH, Sex.M, 0,-4, -9,false));
 
         Map<String, Set<ValidationError>> targetMap = new HashMap<>();
         targetMap.put("1", Set.of(
@@ -327,7 +327,7 @@ class MainTest {
     void task20() {
         List<Animal> errorData = new ArrayList<>();
         errorData.add(new Animal("1", null, null, 1,2, 3,false));
-        errorData.add(new Animal("2", FISH, Animal.Sex.M, 0,-4, -9,false));
+        errorData.add(new Animal("2", FISH, Sex.M, 0,-4, -9,false));
 
         Map<String, String> targetMap = new HashMap<>();
         targetMap.put("1", "type sex");

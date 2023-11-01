@@ -15,14 +15,6 @@ public record Animal(
     public static final int FISH_PAWS = 0;
     public static final int SPIDER_PAWS = 8;
 
-    enum Type {
-        CAT, DOG, BIRD, FISH, SPIDER
-    }
-
-    enum Sex {
-        M, F
-    }
-
     public int paws() {
         return switch (type) {
             case CAT, DOG -> CAT_DOGS_PAWS;
