@@ -4,6 +4,7 @@ import java.util.Scanner;
 import static edu.project1.Conf.LOGGER;
 
 public class Game {
+    public static final String WORD_TO_GUESS_IS = "> word to guess is ";
     private Session session;
     private final AbstractDictionary dictionary;
     private final int maxAttempts;
@@ -51,9 +52,7 @@ public class Game {
                         case CORRECT -> LOGGER.info("> Hit!");
                         case WRONG -> LOGGER.info("> Missed, mistake %d out of %d.%n"
                             .formatted(session.getCurrentAttempt(), maxAttempts));
-                        case GIVE_UP -> {
-                            return;
-                        }
+                        case GIVE_UP -> { }
                         case REPEATED_WRONG_LETTER ->
                             LOGGER.info("> You have re-entered the wrong letter, please try another one");
                         default -> LOGGER.info("> You only need to enter one letter, you have entered several");
@@ -64,6 +63,7 @@ public class Game {
                     LOGGER.info(more);
                 }
                 LOGGER.info("> " + session.getStatus().getMessage());
+                LOGGER.info(WORD_TO_GUESS_IS + session.getWordToGuess());
             }
         }
 
