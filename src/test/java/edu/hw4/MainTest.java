@@ -83,50 +83,63 @@ class MainTest {
     }
 
     @Test
-    void task1() {
+    void shortToTallSort() {
         List<Animal> targetAnimals = new ArrayList<>(animals);
         targetAnimals.sort(Comparator.comparingInt(Animal::height));
-        assertEquals(targetAnimals, Main.task1(animals));
+
+        var result = Main.task1(animals);
+
+        assertEquals(targetAnimals, result);
     }
 
     @Test
-    void task2() {
+    void HeavyToLightSortFirstK() {
+        int k = 2;
         List<Animal> targetAnimals = new ArrayList<>(animals);
         targetAnimals.sort((a1, a2) -> a2.weight() - a1.weight());
-        int k = 2;
         targetAnimals = targetAnimals.subList(0, k);
-        assertEquals(targetAnimals, Main.task2(animals, k));
+
+        var result = Main.task2(animals, k);
+
+        assertEquals(targetAnimals, result);
     }
 
     @Test
-    void task3() {
+    void EachTypeCount() {
         Map<Type, Long> targetMap = new HashMap<>();
         for (Animal an : animals) {
             targetMap.put(an.type(), targetMap.getOrDefault(an.type(), 0L) + 1);
         }
 
-        assertEquals(targetMap, Main.task3(animals));
+        var result = Main.task3(animals);
+
+        assertEquals(targetMap, result);
     }
 
     @Test
-    void task4() {
+    void animalWithLongestName() {
         Animal a8  = new Animal("BIRD12345678", BIRD, Sex.M, 5,23, 26,true);
 
-        assertEquals(a8, Main.task4(animals));
+        var result = Main.task4(animals);
+
+        assertEquals(a8, result);
     }
 
     @Test
-    void task5() {
+    void  moreMalesOrFemales() {
         Map<Sex, Long> sexCounterMap = new HashMap<>();
         for (Animal an : animals) {
             sexCounterMap.put(an.sex(), sexCounterMap.getOrDefault(an.sex(), 0L) + 1);
         }
         Sex target = sexCounterMap.get(Sex.M).compareTo(sexCounterMap.get(Sex.F)) > 0 ? Sex.M : Sex.F;
-        assertEquals(target, Main.task5(animals));
+
+        var result = Main.task5(animals);
+
+        assertEquals(target, result);
     }
 
     @Test
-    void task6() {
+    void heaviestEachType() {
         Map<Type, Optional<Animal>> mostHeavyAnimal = new HashMap<>();
         for (var an : animals) {
             Optional<Animal> heavyAnimal = mostHeavyAnimal.get(an.type());
@@ -139,23 +152,27 @@ class MainTest {
             }
         }
 
-        assertEquals(mostHeavyAnimal, Main.task6(animals));
+        var result = Main.task6(animals);
+
+        assertEquals(mostHeavyAnimal, result);
     }
 
 
     @Test
-    void task7() {
+    void kthOldest() {
+        int k = 1;
         List<Animal> targetAnimals = new ArrayList<>(animals);
         targetAnimals.sort((a1, a2) -> a2.age() - a1.age());
-        int k = 1;
 
-        assertEquals(targetAnimals.get(k - 1), Main.task7(animals, k));
+        var result = Main.task7(animals, k);
+
+        assertEquals(targetAnimals.get(k - 1), result);
     }
 
     @Test
-    void task8() {
-        Animal heavyLessKHeight = null;
+    void heaviestShorterThanK() {
         int k = 99;
+        Animal heavyLessKHeight = null;
         for (var an : animals) {
             if (an.height() < k) {
                 if (heavyLessKHeight == null || heavyLessKHeight.weight() < an.weight()) {
@@ -164,68 +181,80 @@ class MainTest {
             }
         }
 
-        assertEquals(heavyLessKHeight, Main.task8(animals, k).orElse(null));
+        var result = Main.task8(animals, k).orElse(null);
+
+        assertEquals(heavyLessKHeight, result);
     }
 
     @Test
-    void task9() {
+    void pawsSum() {
         Long pawsSum = 0L;
         for (var an : animals) {
             pawsSum += an.paws();
         }
-        assertEquals(pawsSum, Main.task9(animals));
+
+        var result = Main.task9(animals);
+
+        assertEquals(pawsSum, result);
     }
 
     @Test
-    void task10() {
+    void ageNotEqualPaws() {
         List<Animal> ageNotEqPaws = new ArrayList<>();
-
         for (var an : animals) {
             if (an.age() != an.paws()) {
                 ageNotEqPaws.add(an);
             }
         }
-        assertEquals(ageNotEqPaws, Main.task10(animals));
+
+        var result = Main.task10(animals);
+
+        assertEquals(ageNotEqPaws, result);
     }
 
     @Test
-    void task11() {
+    void higher100CanBite() {
         List<Animal> ageNotEqPaws = new ArrayList<>();
-
         for (var an : animals) {
             if (an.height() > 100 && an.bites()) {
                 ageNotEqPaws.add(an);
             }
         }
-        assertEquals(ageNotEqPaws, Main.task11(animals));
+        var result = Main.task11(animals);
+
+        assertEquals(ageNotEqPaws, result);
     }
 
     @Test
-    void task12() {
+    void weightMoreHeight() {
         int countWeightMoreHeight = 0;
-
         for (var an : animals) {
             if (an.weight() > an.height()) {
                 countWeightMoreHeight++;
             }
         }
-        assertEquals(countWeightMoreHeight, Main.task12(animals));
+
+        var result = Main.task12(animals);
+
+        assertEquals(countWeightMoreHeight, result);
     }
 
     @Test
-    void task13() {
+    void namesContainsMoreTwoWords() {
         List<Animal> nameMoreTwoWords = new ArrayList<>();
-
         for (var an : animals) {
             if (an.name().split(" ").length > 2) {
                 nameMoreTwoWords.add(an);
             }
         }
-        assertEquals(nameMoreTwoWords, Main.task13(animals));
+
+        var result = Main.task13(animals);
+
+        assertEquals(nameMoreTwoWords, result);
     }
 
     @Test
-    void task14() {
+    void isDogHigherK() {
         boolean isDogeHeightMoreK = false;
         int k = 100;
         for (var an : animals) {
@@ -234,28 +263,31 @@ class MainTest {
                 break;
             }
         }
-        assertEquals(isDogeHeightMoreK, Main.task14(animals, k));
+
+        var result = Main.task14(animals, k);
+
+        assertEquals(isDogeHeightMoreK, result);
     }
 
     @Test
-    void task15() {
+    void eachTypeWeight() {
         Map<Type, Integer> summingWeightMapByType = new HashMap<>();
         int k = 11;
         int l = 101;
-
         for (var an : animals) {
             if (k <= an.age() && an.age() <= l) {
                 summingWeightMapByType.put(an.type(), summingWeightMapByType.getOrDefault(an.type(), 0) + an.weight());
             }
         }
 
-        assertEquals(summingWeightMapByType, Main.task15(animals, k, l));
+        var result = Main.task15(animals, k, l);
+
+        assertEquals(summingWeightMapByType, result);
     }
 
     @Test
-    void task16() {
+    void typeSexNameSort() {
         List<Animal> targetList = new ArrayList<>(animals);
-
         targetList.sort((a1, a2) -> {
             if (!a1.type().equals(a2.type())) {
                 return a1.type().compareTo(a2.type());
@@ -266,14 +298,15 @@ class MainTest {
             }
         });
 
-        assertEquals(targetList, Main.task16(animals));
+        var result = Main.task16(animals);
+
+        assertEquals(targetList, result);
     }
 
     @Test
-    void task17() {
+    void eachTypeWeightWhichFromKtoLAge() {
         int dogBites = 0;
         int spidersBites = 0;
-
         for (var an : animals) {
             if (an.type().equals(DOG) && an.bites()) {
                 dogBites++;
@@ -283,12 +316,14 @@ class MainTest {
             }
         }
         boolean spiderMoreDogs = spidersBites > dogBites;
-        assertEquals(spiderMoreDogs, Main.task17(animals));
 
+        var result = Main.task17(animals);
+
+        assertEquals(spiderMoreDogs, result);
     }
 
     @Test
-    void task18() {
+    void heaviestFishMoreTwoLists() {
         List<Animal> animals1 = new ArrayList<>();
         animals1.add(new Animal("1", BIRD, Sex.M, 1,1, 3,false));
         animals1.add(new Animal("12", BIRD, Sex.M, 2,4, 5,false));
@@ -302,15 +337,16 @@ class MainTest {
         animals2.add(new Animal("1234", FISH, Sex.M, 0,2, 9,false));
         List<List<Animal>> list = new ArrayList<>(List.of(animals1, animals2));
 
-       assertEquals(heavyFish, Main.task18(list));
+        var result = Main.task18(list);
+
+        assertEquals(heavyFish, result);
     }
 
     @Test
-    void task19() {
+    void animalsWithErrors() {
         List<Animal> errorData = new ArrayList<>();
         errorData.add(new Animal("1", null, null, 1,2, 3,false));
         errorData.add(new Animal("2", FISH, Sex.M, 0,-4, -9,false));
-
         Map<String, Set<ValidationError>> targetMap = new HashMap<>();
         targetMap.put("1", Set.of(
             new ValidationError("1", "type"),
@@ -319,19 +355,24 @@ class MainTest {
             new ValidationError("2", "age"),
             new ValidationError("2", "height"),
             new ValidationError("2", "weight")));
-        assertEquals(targetMap, Main.task19(errorData));
+
+        var result = Main.task19(errorData);
+
+        assertEquals(targetMap, result);
 
     }
 
     @Test
-    void task20() {
+    void animalsWithErrorsShouldReturnString() {
         List<Animal> errorData = new ArrayList<>();
         errorData.add(new Animal("1", null, null, 1,2, 3,false));
         errorData.add(new Animal("2", FISH, Sex.M, 0,-4, -9,false));
-
         Map<String, String> targetMap = new HashMap<>();
         targetMap.put("1", "type sex");
         targetMap.put("2", "age height weight");
-        assertEquals(targetMap, Main.task20(errorData));
+
+        var result = Main.task20(errorData);
+
+        assertEquals(targetMap, result);
     }
 }
