@@ -26,7 +26,7 @@ public class Task2 {
     }
 
     public static void main(String[] args) {
-        var arr = findFridayThirteenth(2024);
+        var arr = findFridayThirteenth(1925);
         String str = Arrays.toString(arr);
         System.out.println(str);
     }
