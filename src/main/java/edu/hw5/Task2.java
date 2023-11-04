@@ -2,6 +2,8 @@ package edu.hw5;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +25,14 @@ public class Task2 {
 
         var answer = list.toArray(new LocalDate[]{});
         return answer;
+    }
+
+    public static LocalDate nextFriday(LocalDate localDate) {
+        LocalDate localDateCopy = localDate.with(TemporalAdjusters.next(DayOfWeek.FRIDAY));
+        while (localDateCopy.getDayOfMonth() != THIRTEENTH) {
+            localDateCopy = localDateCopy.with(TemporalAdjusters.next(DayOfWeek.FRIDAY));
+        }
+        return localDateCopy;
     }
 
     public static void main(String[] args) {

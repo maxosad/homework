@@ -24,10 +24,32 @@ class Task2Test {
                 LocalDate.of(1925, 11, 13)}, 1925)
         );
     }
+
+
     @ParameterizedTest
     @DisplayName("example tests")
     @MethodSource("provideYearToCountFriday")
     void findFridayThirteenth(LocalDate[] expected, int year) {
         assertArrayEquals(expected, Task2.findFridayThirteenth(year));
+    }
+
+    private static Stream<Arguments> provideLocalDateToFindNextFridayThirteenth() {
+        return Stream.of(
+            Arguments.of(
+                LocalDate.of(2024, 9, 13),
+                LocalDate.of(2024, 12, 13)),
+            Arguments.of(
+                LocalDate.of(1925, 2, 13),
+                LocalDate.of(1925, 3, 13))
+        );
+    }
+
+    @ParameterizedTest
+    @DisplayName("example tests")
+    @MethodSource("provideLocalDateToFindNextFridayThirteenth")
+    void nextFriday(LocalDate input, LocalDate expected) {
+        var result = Task2.nextFriday(input);
+
+        assertEquals(expected, result);
     }
 }
