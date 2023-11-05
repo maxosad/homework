@@ -6,6 +6,7 @@ import java.util.Optional;
 
 public class DateLikePatternHandler extends AbstractHandler {
     private String format;
+
     public DateLikePatternHandler(String pattern, String format) {
         this.pattern = pattern;
         this.format = format;
