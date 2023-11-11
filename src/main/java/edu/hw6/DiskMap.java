@@ -29,35 +29,19 @@ public class DiskMap extends AbstractMap<String, String> implements Map<String, 
         }
         DiskMap m = new DiskMap();
         System.out.println(m.entrySet());
-
-
-//        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(PATH)))
-//        {
-//            AbstractMap.SimpleEntry<String, String> p = (AbstractMap.SimpleEntry<String, String>)ois.readObject();
-//            AbstractMap.SimpleEntry<String, String> p1 = (AbstractMap.SimpleEntry<String, String>)ois.readObject();
-//            System.out.println(p.toString());
-//            System.out.println(p1.toString());
-//            System.out.println(ois.readObject()==EOF);
-////            System.out.println(p2.toString());
-//        } catch (FileNotFoundException e) {
-//            throw new RuntimeException(e);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        } catch (ClassNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
     }
     @Override
     public Set<Entry<String, String>> entrySet() {
         Set<Entry<String, String>> diskSet = new HashSet<>();
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(PATH))) {
-            while (true) {
+            boolean f = true;
+            while (f) {
                 try {
                     var o = ois.readObject();
                     AbstractMap.SimpleEntry<String, String> p =
                         (AbstractMap.SimpleEntry<String, String>) o;
                     diskSet.add(p);
-                }catch (EOFException ignore) { }
+                }catch (EOFException ignore) {f = false; }
 
             }
 //            System.out.println(p.toString());
