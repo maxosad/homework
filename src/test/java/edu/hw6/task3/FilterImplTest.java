@@ -1,0 +1,73 @@
+package edu.hw6.task3;
+
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import static org.junit.jupiter.api.Assertions.*;
+
+class FilterImplTest {
+    public static final Path dir = Path.of("src/main/java/edu/hw6/task3/files");
+    public static final Path ff = Path.of("src/main/java/edu/hw6/task3/files/qwer.txt");
+    public static final Path pp = Path.of("src/main/java/edu/hw6/task3/files/1.php");
+
+    @Test
+    void largerThan() {
+        List<Path> list = new ArrayList<>();
+        List<Path> expected = List.of(
+            Path.of("src/main/java/edu/hw6/task3/files/qwer.txt")
+        );
+
+        DirectoryStream.Filter<Path> filter = FilterImpl.largerThan(10);
+        try (DirectoryStream<Path> entries = Files.newDirectoryStream(dir, filter)) {
+            for (var entry : entries) {
+                list.add(entry);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        assertEquals(expected, list);
+    }
+
+
+    @Test
+    void magicNumber() {
+        List<Path> list = new ArrayList<>();
+        List<Path> expected = List.of(
+            Path.of("src/main/java/edu/hw6/task3/files/qwer.txt")
+        );
+
+        DirectoryStream.Filter<Path> filter = FilterImpl.magicNumber( 'P', 'N', 'G');
+        try (DirectoryStream<Path> entries = Files.newDirectoryStream(dir, filter)) {
+            for (var entry : entries) {
+                list.add(entry);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    void regexContains() {
+        List<Path> list = new ArrayList<>();
+        List<Path> expected = List.of(
+            Path.of("src/main/java/edu/hw6/task3/files/1.php")
+        );
+
+        DirectoryStream.Filter<Path> filter = FilterImpl.regexContains("[3]");
+        try (DirectoryStream<Path> entries = Files.newDirectoryStream(dir, filter)) {
+            for (var entry : entries) {
+                list.add(entry);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        assertEquals(expected, list);
+    }
+}
