@@ -1,4 +1,4 @@
-package edu.hw6;
+package edu.hw6.task1;
 
 import java.io.*;
 import java.util.AbstractMap;
@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class DiskMap extends AbstractMap<String, String> implements Map<String, String> {
-    private final static String PATH = "src/main/java/edu/hw6/Disk.txt";
+    private final static String PATH = "src/main/java/edu/hw6/task1/Disk.txt";
     public DiskMap() {
         this.clear();
     }
