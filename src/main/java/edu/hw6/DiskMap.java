@@ -1,33 +1,35 @@
 package edu.hw6;
 
-import java.io.EOFException;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.AbstractMap;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 public class DiskMap extends AbstractMap<String, String> implements Map<String, String> {
     private final static String PATH = "src/main/java/edu/hw6/Disk.txt";
+    public DiskMap() {
+        this.clear();
+    }
 
     public static void main(String[] args) {
-        HashMap<String, String> m = new HashMap<>();
+        DiskMap m = new DiskMap();
+        m.put("2", "2");
+        m.put("2", "q");
+        System.out.println(m.entrySet());
+        System.out.println(m.size());
+    }
+
+    private void writeSet(Set<Entry<String, String>> entrySet) {
         try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(PATH))) {
-            AbstractMap.SimpleEntry<String, String> entry = new SimpleEntry<>("maxim", "osadchiy");
-            oos.writeObject(entry);
-            AbstractMap.SimpleEntry<String, String> entry1 = new SimpleEntry<>("maxim1", "osadchiy2");
-            oos.writeObject(entry1);
+            for (var entry : entrySet) {
+                oos.writeObject(entry);
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        DiskMap mm = new DiskMap();
-        System.out.println(mm.entrySet());
     }
+
     @Override
     public Set<Entry<String, String>> entrySet() {
         Set<Entry<String, String>> diskSet = new HashSet<>();
@@ -36,42 +38,100 @@ public class DiskMap extends AbstractMap<String, String> implements Map<String, 
             boolean f = true;
             while (f) {
                 try {
+                    var o = ois.readObject();
                     AbstractMap.SimpleEntry<String, String> p =
-                        (AbstractMap.SimpleEntry<String, String>) ois.readObject();
+                        (AbstractMap.SimpleEntry<String, String>) o;
                     diskSet.add(p);
-                } catch (EOFException ignore) {
+                } catch (EOFException | ClassNotFoundException e) {
                     f = false;
                 }
-
             }
 //            System.out.println(p.toString());
-        } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (FileNotFoundException ignore) {
+//            throw new RuntimeException(e);
+        } catch (IOException ignore) {
+//            throw new RuntimeException(e);
         }
         return diskSet;
     }
 
+//    @Override
+//    public int size() {
+//        return entrySet().size();
+//    }
+//
+//    @Override
+//    public boolean isEmpty() {
+//        return size() == 0;
+//    }
+//
+//    @Override
+//    public boolean containsKey(Object key) {
+//        return false;
+//    }
+//
+//    @Override
+//    public boolean containsValue(Object value) {
+//        return false;
+//    }
+//
+//    @Override
+//    public String get(Object key) {
+//        return null;
+//    }
+
     @Override
     public String put(String key, String value) {
-        var entrySet = this.entrySet();
+        var entrySet = entrySet();
         AbstractMap.SimpleEntry<String, String> newEntry = new AbstractMap.SimpleEntry<>(key, value);
-        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(PATH))) {
-            boolean existedKey = true;
-            for (var entry : entrySet) {
-                if (entry.getKey().equals(key)) {
-                    oos.writeObject(newEntry);
-                    existedKey = false;
-                } else {
-                    oos.writeObject(entry);
-                }
+        Entry<String, String> oldEntry = null;
+        for (var entry : entrySet) {
+            if (entry.getKey().equals(key)) {
+                oldEntry = entry;
             }
-            if (existedKey) {
-                oos.writeObject(newEntry);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
+        if (oldEntry != null) {
+            entrySet.remove(oldEntry);
+        }
+        entrySet.add(newEntry);
+        writeSet(entrySet);
         return value;
     }
+
+    @Override
+    public String remove(Object key) {
+        String ansString = null;
+        var entrySet = entrySet();
+        for (var entry : entrySet) {
+            if (entry.getKey().equals(key)) {
+                ansString = entry.getValue();
+            }
+        }
+        if (ansString != null) {
+            entrySet.remove(new SimpleEntry<>((String) key, ansString));
+            writeSet(entrySet);
+        }
+        return ansString;
+    }
+
+//    @Override
+//    public void putAll(Map<? extends String, ? extends String> m) {
+//
+//    }
+
+    @Override
+    public void clear() {
+        writeSet(new HashSet<>());
+    }
+
+//    @Override
+//    public Set<String> keySet() {
+//        return null;
+//    }
+
+//    @Override
+//    public Collection<String> values() {
+//        return null;
+//    }
 }
 
