@@ -1,5 +1,6 @@
 package edu.hw6.task6;
 
+import edu.hw6.Main;
 import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.ServerSocket;
@@ -10,7 +11,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings({"MagicNumber", "UncommentedMain"})
 public class Task6 {
+    private Task6() { }
 
     public static final Map<Integer, String> PORTS = new HashMap<>(){};
 
@@ -53,9 +56,9 @@ public class Task6 {
                 usedConnectionsInformation.add(new Connection(Protocol.UDP, port, PORTS.getOrDefault(port, "")));
             }
         }
-        System.out.println(" Протокол  Порт   Сервис\n");
+        Main.LOGGER.info(" Протокол  Порт   Сервис\n");
         for (var conInf : usedConnectionsInformation) {
-            System.out.printf("%s       %d    %s%n", conInf.protocol(), conInf.port(), conInf.service());
+            Main.LOGGER.info("%s       %d    %s%n".formatted(conInf.protocol(), conInf.port(), conInf.service()));
         }
     }
 

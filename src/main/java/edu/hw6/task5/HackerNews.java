@@ -5,18 +5,19 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class HackerNews {
+    private HackerNews() { }
+
     public static final String ALL_JSON_URI = "https://hacker-news.firebaseio.com/v0/topstories.json";
     public static final int TITLE_BEGIN_INDEX = 9;
     public static final int PARENT_BEGIN_INDEX = 9;
 
     public static long[] hackerNewsTopStories() {
         long[] ans = new long[0];
-        try(HttpClient client = HttpClient.newHttpClient()) {
+        try (HttpClient client = HttpClient.newHttpClient()) {
             HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(ALL_JSON_URI))
                 .build();
@@ -39,7 +40,7 @@ public class HackerNews {
 
     public static String news(long id) {
         String uri = "https://hacker-news.firebaseio.com/v0/item/%d.json".formatted(id);
-        try(HttpClient client = HttpClient.newHttpClient()) {
+        try (HttpClient client = HttpClient.newHttpClient()) {
             HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(uri))
                 .build();
@@ -54,21 +55,15 @@ public class HackerNews {
                 Matcher parentMatcher = Pattern.compile("\"parent\":\\d+").matcher(responseBody);
                 parentMatcher.find();
                 String parentJSONFormat = parentMatcher.group();
-//                System.out.println(parentJSONFormat);
                 long parent = Long.parseLong(parentJSONFormat.substring(PARENT_BEGIN_INDEX));
 
                 return news(parent);
             }
             String titleJSONFormat = titleMatcher.group();
 
-//            System.out.println(s1);
             return titleJSONFormat.substring(TITLE_BEGIN_INDEX, titleJSONFormat.length() - 2);
         } catch (IOException | InterruptedException ignore) {
             return "";
         }
-//        System.out.println(Arrays.toString(hackerNewsTopStories()));
-//        String newsTitle = news(37570037);
-//        System.out.println(newsTitle);
     }
-
 }

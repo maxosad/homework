@@ -10,12 +10,15 @@ import java.nio.file.Path;
 import java.util.zip.Adler32;
 import java.util.zip.CheckedOutputStream;
 
-public class task4 {
+@SuppressWarnings({"uncommentedmain", "NestedTryDepth"})
+public class Task4 {
+    private Task4() { }
+
     public static void main(String[] args) {
 //        PrintWriter -> OutputStreamWriter -> BufferedOutputStream
 //            -> CheckedOutputStream -> file OutputStream.
         Path file = Path.of("src/main/java/edu/hw6/task4/files/input.txt");
-        try (var oos = Files.newOutputStream(file)){
+        try (var oos = Files.newOutputStream(file)) {
             try (CheckedOutputStream cos = new CheckedOutputStream(oos, new Adler32())) {
                 try (BufferedOutputStream bos = new BufferedOutputStream(cos)) {
                     try (OutputStreamWriter osw = new OutputStreamWriter(bos, StandardCharsets.UTF_8)) {

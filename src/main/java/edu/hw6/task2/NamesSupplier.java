@@ -9,7 +9,6 @@ public class NamesSupplier implements Supplier<Path> {
     private final String initialName;
     private final String nameStart;
     private final String nameEnd;
-    public final static String COPY = "Копия";
 
     public NamesSupplier(Path initialPath) {
         this.initialName = initialPath.getFileName().toString();

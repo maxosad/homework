@@ -1,6 +1,12 @@
 package edu.hw6.task1;
 
-import java.io.*;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.AbstractMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -8,20 +14,21 @@ import java.util.Set;
 
 public class DiskMap extends AbstractMap<String, String> implements Map<String, String> {
     private final static String PATH = "src/main/java/edu/hw6/task1/Disk.txt";
+
     public DiskMap() {
         this.clear();
     }
 
-    public static void main(String[] args) {
-        DiskMap m = new DiskMap();
-        m.put("2", "2");
-        m.put("2", "q");
-        System.out.println(m.entrySet());
-        System.out.println(m.size());
-    }
+//    public static void main(String[] args) {
+//        DiskMap m = new DiskMap();
+//        m.put("2", "2");
+//        m.put("2", "q");
+//        System.out.println(m.entrySet());
+//        System.out.println(m.size());
+//    }
 
     private void writeSet(Set<Entry<String, String>> entrySet) {
-        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(PATH))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(PATH))) {
             for (var entry : entrySet) {
                 oos.writeObject(entry);
             }
@@ -34,7 +41,7 @@ public class DiskMap extends AbstractMap<String, String> implements Map<String, 
     public Set<Entry<String, String>> entrySet() {
         Set<Entry<String, String>> diskSet = new HashSet<>();
 //        Set<Entry<String, String>> diskSet = new EntrySet<>();
-        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(PATH))) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(PATH))) {
             boolean f = true;
             while (f) {
                 try {

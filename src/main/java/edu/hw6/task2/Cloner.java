@@ -1,12 +1,15 @@
 package edu.hw6.task2;
 
+import edu.hw6.Main;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.stream.Stream;
 
+
 public class Cloner {
 
+    private Cloner() { }
 
     public static void cloneFile(Path path) {
         NamesSupplier namesSupplier = new NamesSupplier(path);
@@ -19,7 +22,7 @@ public class Cloner {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(path);
+        Main.LOGGER.info(path);
     }
 
 //    public static void main(String[] args) {

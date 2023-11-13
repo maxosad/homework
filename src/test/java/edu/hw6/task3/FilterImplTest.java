@@ -8,6 +8,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FilterImplTest {
@@ -52,6 +54,13 @@ class FilterImplTest {
         }
     }
 
+//    public static void main(String[] args) {
+//        Pattern pattern = Pattern.compile("[3]");
+//        Matcher matcher = pattern.matcher("src/main/java/edu/hw6/task3/files/1.php");
+//        System.out.println(matcher.find());
+////        System.out.println("src/main/java/edu/hw6/task3/files/1.php".find());
+//    }
+
     @Test
     void regexContains() {
         List<Path> list = new ArrayList<>();
@@ -59,7 +68,7 @@ class FilterImplTest {
             Path.of("src/main/java/edu/hw6/task3/files/1.php")
         );
 
-        DirectoryStream.Filter<Path> filter = FilterImpl.regexContains("[3]");
+        DirectoryStream.Filter<Path> filter = FilterImpl.regexContains("[1]");
         try (DirectoryStream<Path> entries = Files.newDirectoryStream(dir, filter)) {
             for (var entry : entries) {
                 list.add(entry);
