@@ -2,10 +2,10 @@ package edu.hw5;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.Month;
 
 public class Task2 {
 
