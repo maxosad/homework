@@ -27,15 +27,7 @@ class Task3Test {
             Arguments.of("2234 days ago", Optional.of(LocalDate.now().minusDays(2234)))
         );
     }
-//2020-10-10
-//    2020-12-2
-//    1/3/1976
-//    1/3/20
-//    tomorrow
-//        today
-//    yesterday
-//1 day ago
-//2234 days ago
+
     @ParameterizedTest
     @DisplayName("example date test")
     @MethodSource("provideDate")

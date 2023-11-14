@@ -15,7 +15,11 @@ class Task6Test {
         return Stream.of(
             Arguments.of(
                 "abc",
-                "achfdbaabgabcaabg", true)
+                "achfdbaabgabcaabg", true),
+            Arguments.of(
+                "a6bc",
+                "achfdbaabgabcaabg", false)
+
         );
     }
 
