@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public record LogRecord(String address,
                         String user,
                         LocalDate date,
-                        Req request,
+                        String request,
                         byte[] bodyBytes,
                         String httpReferer,
                         String httpUserAgent) {

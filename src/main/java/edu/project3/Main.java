@@ -1,11 +1,17 @@
 package edu.project3;
 
+import edu.project3.Parser.Parser;
+import edu.project3.Parser.ParserImpl;
+import edu.project3.Printer.BridgePrinter;
+import edu.project3.Printer.Printer;
+import edu.project3.model.LogRecord;
 import edu.project3.model.OutputFormat;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.nio.file.Path;
 import java.text.Format;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,6 +26,7 @@ public class Main {
 ////[--path, logs/2023*, --from, 2023-08-31, --format, markdown]
 //    }
     public static OutputFormat DEFAULT_FORMAT = OutputFormat.ADOC;
+    public static String DEFAULT_FORMAT_STRING = "adoc";
 
     private Main() { }
     public static Set<String> KEYS = new HashSet<>(List.of("--path", "--from", "--to", "--format"));
@@ -29,25 +36,31 @@ public class Main {
         LOGGER.info(KEYS.contains("--to"));
 
 
-        Path path;
-        LocalDate fromDate ;
-        LocalDate toDate;
-        Format format;
+        Path path = null;
+        LocalDate fromDate = null ;
+        LocalDate toDate = null;
+        String format = DEFAULT_FORMAT_STRING;
+//        Format format;
 
-//        Map<String, String> m = new HashMap<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         int argsLength = args.length;
         for (int i = 0; i < argsLength; i += 2) {
             if (KEYS.contains(args[i])) {
                 switch (args[i]) {
                     case "--path" -> path = Path.of(args[i + 1]);
-                    case "--from" -> fromDate = LocalDate.of(args[i + 1]);
-                    case "--to" -> toDate = LocalDate.of(args[i + 1]);
-                    case "--format" -> format = Format;
+                    case "--from" -> fromDate = LocalDate.parse(args[i + 1], formatter);
+                    case "--to" -> toDate  = LocalDate.parse(args[i + 1], formatter);
+                    case "--format" -> format = args[i + 1];
                 }
             } else {
                 throw new IllegalArgumentException();
             }
         }
+        Parser parser = new ParserImpl();
+        List<LogRecord> logRecords = parser.parse(Path.of(path));
+        Printer printer = new BridgePrinter(format);
+
+
 
     }
 }
