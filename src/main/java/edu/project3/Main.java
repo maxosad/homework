@@ -33,7 +33,7 @@ public class Main {
 ////[--path, logs/2023*, --from, 2023-08-31, --format, markdown]
 //    }
     public static OutputFormat DEFAULT_FORMAT = OutputFormat.ADOC;
-    public static String DEFAULT_FORMAT_STRING = "adoc";
+    public static String DEFAULT_FORMAT_STRING = "markdown";
 
     private Main() { }
     public static Set<String> KEYS = new HashSet<>(List.of("--path", "--from", "--to", "--format"));
@@ -73,11 +73,11 @@ public class Main {
             System.out.println(logRecord);
         }
         var feq = new MostFrequentCode();
-        Map<String, Integer> mm = feq.countStatistic(logRecords);
+        Map<String, Integer> mm = feq.countStatistic(logRecords).statistic();
         System.out.println(mm.toString());
 
         var feq1 = new MostFrequentResource();
-        Map<String, Integer> mm1 = feq1.countStatistic(logRecords);
+        Map<String, Integer> mm1 = feq1.countStatistic(logRecords).statistic();
         System.out.println(mm1.toString());
 
         var feq2 = new AvgBodyBytes();
@@ -87,12 +87,13 @@ public class Main {
         var feq3 = new CountRequests();
         var mm3 = feq3.countStatistic(logRecords);
         System.out.println(mm3.toString());
-//        Printer printer = new BridgePrinter(format);
-//        printer.print(commonStatistic);
 
         var feq4 = new EarlyDate();
         var mm4 = feq4.countStatistic(logRecords);
         System.out.println(mm4.toString());
+
+        Printer printer = new BridgePrinter(format);
+        System.out.println(printer.print(feq4.countStatistic(logRecords)));
 
 
     }

@@ -6,6 +6,10 @@ public class MarkdownPrinter implements Printer {
 
     @Override
     public <T> String print(Statistic<T> statistic) {
-        return null;
+        StringBuilder sb = new StringBuilder();
+        sb.append("#####").append(statistic.title());
+        sb.append(" ");
+        sb.append(statistic.statistic());
+        return sb.toString();
     }
 }
