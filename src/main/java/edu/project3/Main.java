@@ -4,7 +4,10 @@ import edu.project3.Parser.Parser;
 import edu.project3.Parser.ParserImpl;
 import edu.project3.Printer.BridgePrinter;
 import edu.project3.Printer.Printer;
+import edu.project3.StatisticCounter.AvgBodyBytes;
 import edu.project3.StatisticCounter.CommonStatisticCounter;
+import edu.project3.StatisticCounter.CountRequests;
+import edu.project3.StatisticCounter.EarlyDate;
 import edu.project3.StatisticCounter.MostFrequentCode;
 import edu.project3.StatisticCounter.MostFrequentResource;
 import edu.project3.StatisticCounter.StatisticCounter;
@@ -78,9 +81,19 @@ public class Main {
         Map<String, Integer> mm1 = feq1.countStatistic(logRecords);
         System.out.println(mm1.toString());
 
+        var feq2 = new AvgBodyBytes();
+        var mm2 = feq2.countStatistic(logRecords);
+        System.out.println(mm2.toString());
+
+        var feq3 = new CountRequests();
+        var mm3 = feq3.countStatistic(logRecords);
+        System.out.println(mm3.toString());
 //        Printer printer = new BridgePrinter(format);
 //        printer.print(commonStatistic);
 
+        var feq4 = new EarlyDate();
+        var mm4 = feq4.countStatistic(logRecords);
+        System.out.println(mm4.toString());
 
 
     }

@@ -1,14 +1,15 @@
 package edu.project3.model;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 public record LogRecord(String address,
                         String user,
-                        LocalDateTime date,
+                        OffsetDateTime date,
                         String request,
                         String resource,
                         String status,
-                        String bodyBytes,
+                        Integer bodyBytes,
                         String httpReferer,
                         String httpUserAgent) {
 //    LogRecord(String log) {
