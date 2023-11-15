@@ -5,5 +5,5 @@ import java.nio.file.Path;
 import java.util.List;
 
 public interface Parser {
-    List<LogRecord> parse(Path path);
+    List<LogRecord> parse(String regOrURL);
 }

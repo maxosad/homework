@@ -4,8 +4,13 @@ import edu.project3.Parser.Parser;
 import edu.project3.Parser.ParserImpl;
 import edu.project3.Printer.BridgePrinter;
 import edu.project3.Printer.Printer;
+import edu.project3.StatisticCounter.CommonStatisticCounter;
+import edu.project3.StatisticCounter.MostFrequentCode;
+import edu.project3.StatisticCounter.MostFrequentResource;
+import edu.project3.StatisticCounter.StatisticCounter;
 import edu.project3.model.LogRecord;
 import edu.project3.model.OutputFormat;
+import edu.project3.model.statistic.Statistic;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.nio.file.Path;
@@ -33,10 +38,11 @@ public class Main {
     public static final Logger LOGGER = LogManager.getLogger();
 
     public static void main(String[] args) {
-        LOGGER.info(KEYS.contains("--to"));
+//        LOGGER.info(KEYS.contains("--to"));
 
 
-        Path path = null;
+//        Path path = null;
+        String path = null;
         LocalDate fromDate = null ;
         LocalDate toDate = null;
         String format = DEFAULT_FORMAT_STRING;
@@ -47,7 +53,7 @@ public class Main {
         for (int i = 0; i < argsLength; i += 2) {
             if (KEYS.contains(args[i])) {
                 switch (args[i]) {
-                    case "--path" -> path = Path.of(args[i + 1]);
+                    case "--path" -> path = args[i + 1];
                     case "--from" -> fromDate = LocalDate.parse(args[i + 1], formatter);
                     case "--to" -> toDate  = LocalDate.parse(args[i + 1], formatter);
                     case "--format" -> format = args[i + 1];
@@ -57,8 +63,23 @@ public class Main {
             }
         }
         Parser parser = new ParserImpl();
-        List<LogRecord> logRecords = parser.parse(Path.of(path));
-        Printer printer = new BridgePrinter(format);
+        List<LogRecord> logRecords = parser.parse(path);
+
+//        StatisticCounter<Statistic<Map<String, Integer>>> commonStatisticCounter = new CommonStatisticCounter<>();
+//        Statistic<Map<String, Integer>> commonStatistic = commonStatisticCounter.countStatistic(logRecords);
+        for(var logRecord : logRecords) {
+            System.out.println(logRecord);
+        }
+        var feq = new MostFrequentCode();
+        Map<String, Integer> mm = feq.countStatistic(logRecords);
+        System.out.println(mm.toString());
+
+        var feq1 = new MostFrequentResource();
+        Map<String, Integer> mm1 = feq1.countStatistic(logRecords);
+        System.out.println(mm1.toString());
+
+//        Printer printer = new BridgePrinter(format);
+//        printer.print(commonStatistic);
 
 
 

@@ -1,8 +1,6 @@
 package edu.project3.Printer;
 
-import edu.project3.model.LogRecord;
-import edu.project3.model.Statistic;
-import java.util.List;
+import edu.project3.model.statistic.Statistic;
 
 public class BridgePrinter implements Printer {
     private final Printer printer;

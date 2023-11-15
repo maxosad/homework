@@ -1,24 +1,27 @@
 package edu.project3.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public record LogRecord(String address,
                         String user,
-                        LocalDate date,
+                        LocalDateTime date,
                         String request,
-                        byte[] bodyBytes,
+                        String resource,
+                        String status,
+                        String bodyBytes,
                         String httpReferer,
                         String httpUserAgent) {
-    LogRecord(String log) {
-        this(
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
-        );
-    }
+//    LogRecord(String log) {
+//        this(
+//            null,
+//            null,
+//            null,
+//            null,
+//            null,
+//            null,
+//            null,
+//            null
+//        );
+//    }
 }
 
