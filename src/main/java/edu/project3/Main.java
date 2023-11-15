@@ -13,7 +13,6 @@ import edu.project3.StatisticCounter.MostFrequentResource;
 import edu.project3.StatisticCounter.StatisticCounter;
 import edu.project3.model.LogRecord;
 import edu.project3.model.OutputFormat;
-import edu.project3.model.statistic.Statistic;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.nio.file.Path;

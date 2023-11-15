@@ -1,7 +1,7 @@
 package edu.project3.Printer;
 
-import edu.project3.model.statistic.Statistic;
+import edu.project3.model.Statistic;
 
 public interface Printer {
-    String print(Statistic statistic);
+    <T> String print(Statistic<T> statistic);
 }

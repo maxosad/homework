@@ -1,6 +1,6 @@
 package edu.project3.Printer;
 
-import edu.project3.model.statistic.Statistic;
+import edu.project3.model.Statistic;
 
 public class BridgePrinter implements Printer {
     private final Printer printer;
@@ -18,7 +18,7 @@ public class BridgePrinter implements Printer {
     }
 
     @Override
-    public void print(Statistic statistic) {
-
+    public <T> String print(Statistic<T> statistic) {
+        return printer.print(statistic);
     }
 }
