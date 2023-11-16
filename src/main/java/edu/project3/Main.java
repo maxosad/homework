@@ -18,6 +18,7 @@ import org.apache.logging.log4j.Logger;
 import java.nio.file.Path;
 import java.text.Format;
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -51,10 +52,9 @@ public class Main {
 
 //        Path path = null;
         String path = null;
-        LocalDate fromDate = null ;
-        LocalDate toDate = null;
+        OffsetDateTime fromDate = null ;
+        OffsetDateTime toDate = null;
         String format = DEFAULT_FORMAT_STRING;
-//        Format format;
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         int argsLength = args.length;
@@ -62,16 +62,32 @@ public class Main {
             if (KEYS.contains(args[i])) {
                 switch (args[i]) {
                     case "--path" -> path = args[i + 1];
-                    case "--from" -> fromDate = LocalDate.parse(args[i + 1], formatter);
-                    case "--to" -> toDate  = LocalDate.parse(args[i + 1], formatter);
+                    case "--from" -> fromDate = OffsetDateTime.parse(args[i + 1], formatter);
+                    case "--to" -> toDate  = OffsetDateTime.parse(args[i + 1], formatter);
                     case "--format" -> format = args[i + 1];
                 }
             } else {
                 throw new IllegalArgumentException();
             }
         }
+
         Parser parser = new ParserImpl();
         List<LogRecord> logRecords = parser.parse(path);
+        if (fromDate != null) {
+            OffsetDateTime finalFromDate = fromDate;
+            logRecords = logRecords.stream()
+                .filter(x -> x.date().isAfter(finalFromDate))
+                .toList();
+        }
+
+        if (toDate != null) {
+            OffsetDateTime finalToDate = toDate;
+            logRecords = logRecords.stream()
+                .filter(x -> x.date().isBefore(finalToDate))
+                .toList();
+        }
+
+
 
 //        StatisticCounter<Statistic<Map<String, Integer>>> commonStatisticCounter = new CommonStatisticCounter<>();
 //        Statistic<Map<String, Integer>> commonStatistic = commonStatisticCounter.countStatistic(logRecords);
