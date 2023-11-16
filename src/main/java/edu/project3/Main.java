@@ -40,8 +40,13 @@ public class Main {
     public static Set<String> KEYS = new HashSet<>(List.of("--path", "--from", "--to", "--format"));
     public static final Logger LOGGER = LogManager.getLogger();
 
+    /**
+     scenario 1
+     --path https://raw.githubusercontent.com/elastic/examples/master/Common%20Data%20Formats/nginx_logs/nginx_logs
+     scenario 2
+     --path src/main/java/edu/project3/data
+     */
     public static void main(String[] args) {
-//        LOGGER.info(KEYS.contains("--to"));
 
 
 //        Path path = null;
