@@ -33,6 +33,7 @@ public class Main {
 ////[--path, logs/2023*, --from, 2023-08-31, --format, markdown]
 //    }
     public static OutputFormat DEFAULT_FORMAT = OutputFormat.ADOC;
+//    public static String DEFAULT_FORMAT_STRING = "adoc";
     public static String DEFAULT_FORMAT_STRING = "markdown";
 
     private Main() { }
@@ -83,17 +84,17 @@ public class Main {
         var feq2 = new AvgBodyBytes();
         var mm2 = feq2.countStatistic(logRecords);
         System.out.println(mm2.toString());
-
+//
         var feq3 = new CountRequests();
         var mm3 = feq3.countStatistic(logRecords);
         System.out.println(mm3.toString());
-
-        var feq4 = new EarlyDate();
-        var mm4 = feq4.countStatistic(logRecords);
-        System.out.println(mm4.toString());
+//
+//        var feq4 = new EarlyDate();
+//        var mm4 = feq4.countStatistic(logRecords);
+//        System.out.println(mm4.toString());
 
         Printer printer = new BridgePrinter(format);
-        System.out.println(printer.print(feq4.countStatistic(logRecords)));
+        System.out.println(printer.print(feq2.countStatistic(logRecords)));
 
 
     }

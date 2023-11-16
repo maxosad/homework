@@ -8,9 +8,11 @@ import java.util.List;
 
 public class EarlyDate implements StatisticCounter<OffsetDateTime> {
     public static final String title = "EarlyDate";
+    public static final String keyName = "EarlyDate";
+    public static final String valueName = "Quantity";
     @Override
     public Statistic<OffsetDateTime> countStatistic(List<LogRecord> logRecords) {
-        return new Statistic<>(title, logRecords.stream()
+        return new Statistic<>(title, keyName, valueName, logRecords.stream()
             .map(LogRecord::date)
             .min(Comparator.naturalOrder()).orElse(null));
     }

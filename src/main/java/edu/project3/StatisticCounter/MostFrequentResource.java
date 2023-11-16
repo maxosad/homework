@@ -8,6 +8,8 @@ import java.util.Map;
 
 public class MostFrequentResource implements StatisticCounter<Map<String, Integer>>{
     public static final String title = "MostFrequentResource";
+    public static final String keyName = "Resource";
+    public static final String valueName = "Quantity";
 
     @Override
     public Statistic<Map<String, Integer>> countStatistic(List<LogRecord> logRecords) {
@@ -15,6 +17,6 @@ public class MostFrequentResource implements StatisticCounter<Map<String, Intege
         for (var log : logRecords) {
             codeMap.merge(log.resource(), 1, Integer::sum);
         }
-        return new Statistic<>(title, codeMap);
+        return new Statistic<>(title, keyName, valueName, codeMap);
     }
 }
