@@ -3,31 +3,26 @@ package edu.project3.Parser;
 import edu.project3.model.LogRecord;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URI;
-import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-import java.util.StringTokenizer;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ParserImpl implements Parser {
+
+    public static final String FILE_FOR_DOWNLOAD = "src/main/java/edu/project3/download/down.txt";
 
     @Override
     public List<LogRecord> parse(String regOrURL) {
@@ -38,10 +33,11 @@ public class ParserImpl implements Parser {
                     .uri(uri)
                     .build();
 
-
+                try (FileOutputStream fos = new FileOutputStream(FILE_FOR_DOWNLOAD, false)) { }
+                catch (IOException ignore) { }
                 HttpResponse<Path> response =
                     client.send(request,  HttpResponse.BodyHandlers.ofFile(
-                        Path.of("src/main/java/edu/project3/download/down.txt")));
+                        Path.of(FILE_FOR_DOWNLOAD)));
 
                 return parseFile(response.body()).toList();
             }catch (IOException | InterruptedException ignore) {
@@ -55,8 +51,6 @@ public class ParserImpl implements Parser {
         Path dir = Path.of(regOrURL);
         try (var files = Files.list(dir)) {
             return files.flatMap(ParserImpl::parseFile).toList();
-//            System.out.println(Arrays.toString(files.toArray()));
-//            [src\main\java\edu\project3\data\logs.txt, src\main\java\edu\project3\data\secondFile.txt]
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -91,13 +85,12 @@ public class ParserImpl implements Parser {
         Integer bodyBytes = Integer.parseInt(split[9]);
         String httpReferer = split[10];
         split[11] = split[11].substring(1);
-        split[split.length-1] = split[split.length-1].substring(0, split[split.length-1].length()-2);
+        split[split.length-1] = split[split.length-1].substring(0, split[split.length-1].length()-1);
         StringBuilder sb = new StringBuilder();
         for (int i = 11; i < split.length; i++) {
             sb.append(split[i]);
         }
         String httpUserAgent = sb.toString();
-//        String httpUserAgent = split[11].substring(1).concat(" " + split[12] + (split.length == 14 ? " " + split[13].substring(0,split[13].length()-2) : ""));
 
         return new LogRecord(address,
             user,

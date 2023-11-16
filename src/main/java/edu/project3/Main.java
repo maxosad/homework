@@ -4,38 +4,27 @@ import edu.project3.Parser.Parser;
 import edu.project3.Parser.ParserImpl;
 import edu.project3.Printer.BridgePrinter;
 import edu.project3.Printer.Printer;
+import edu.project3.StatisticCounter.AdditionalStat.HttpUserAgentStatisticCounter;
+import edu.project3.StatisticCounter.AdditionalStat.UserStatCounter;
 import edu.project3.StatisticCounter.AvgBodyBytes;
-import edu.project3.StatisticCounter.CommonStatisticCounter;
 import edu.project3.StatisticCounter.CountRequests;
 import edu.project3.StatisticCounter.EarlyDate;
+import edu.project3.StatisticCounter.LateDate;
 import edu.project3.StatisticCounter.MostFrequentCode;
 import edu.project3.StatisticCounter.MostFrequentResource;
-import edu.project3.StatisticCounter.StatisticCounter;
 import edu.project3.model.LogRecord;
-import edu.project3.model.OutputFormat;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import java.nio.file.Path;
-import java.text.Format;
-import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Main {
-//    public static void main(String[] args) {
-//        System.out.println(Arrays.toString(args));
-//        //    java -jar build.jar --path logs/2023* --from 2023-08-31 --format markdown
-////[--path, logs/2023*, --from, 2023-08-31, --format, markdown]
-//    }
-    public static OutputFormat DEFAULT_FORMAT = OutputFormat.ADOC;
-//    public static String DEFAULT_FORMAT_STRING = "adoc";
     public static String DEFAULT_FORMAT_STRING = "markdown";
+//    public static String DEFAULT_FORMAT_STRING = "adoc";
 
     private Main() { }
     public static Set<String> KEYS = new HashSet<>(List.of("--path", "--from", "--to", "--format"));
@@ -47,10 +36,11 @@ public class Main {
      scenario 2
      --path src/main/java/edu/project3/data
      */
+
+    private static void logOutput(String s) {
+        LOGGER.info("\n" + s);
+    }
     public static void main(String[] args) {
-
-
-//        Path path = null;
         String path = null;
         OffsetDateTime fromDate = null ;
         OffsetDateTime toDate = null;
@@ -87,36 +77,29 @@ public class Main {
                 .toList();
         }
 
+//        System.out.println("------------------------");
+//        System.out.println(logRecords.stream()
+//            .map(LogRecord::date)
+//            .max(Comparator.naturalOrder()).orElse(null)
+//        );
 
 
-//        StatisticCounter<Statistic<Map<String, Integer>>> commonStatisticCounter = new CommonStatisticCounter<>();
-//        Statistic<Map<String, Integer>> commonStatistic = commonStatisticCounter.countStatistic(logRecords);
-        for(var logRecord : logRecords) {
-            System.out.println(logRecord);
-        }
-        var feq = new MostFrequentCode();
-        Map<String, Integer> mm = feq.countStatistic(logRecords).statistic();
-        System.out.println(mm.toString());
-
-        var feq1 = new MostFrequentResource();
-        Map<String, Integer> mm1 = feq1.countStatistic(logRecords).statistic();
-        System.out.println(mm1.toString());
-
-        var feq2 = new AvgBodyBytes();
-        var mm2 = feq2.countStatistic(logRecords);
-        System.out.println(mm2.toString());
+        var statsCounters = List.of(
+        new AvgBodyBytes(),
+        new CountRequests(),
+        new EarlyDate(),
+        new LateDate(),
+        new MostFrequentCode(),
+        new MostFrequentResource(),
+        new HttpUserAgentStatisticCounter(),
+        new UserStatCounter()
+        );
+//        System.out.println(new LateDate().countStatistic(logRecords).statistic());
 //
-        var feq3 = new CountRequests();
-        var mm3 = feq3.countStatistic(logRecords);
-        System.out.println(mm3.toString());
-//
-//        var feq4 = new EarlyDate();
-//        var mm4 = feq4.countStatistic(logRecords);
-//        System.out.println(mm4.toString());
-
         Printer printer = new BridgePrinter(format);
-        System.out.println(printer.print(feq2.countStatistic(logRecords)));
+        List<LogRecord> finalLogRecords = logRecords;
 
-
+        statsCounters.forEach(
+            statCounter -> logOutput(printer.print(statCounter.countStatistic(finalLogRecords))));
     }
 }

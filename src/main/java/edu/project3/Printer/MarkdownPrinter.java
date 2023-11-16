@@ -3,6 +3,7 @@ package edu.project3.Printer;
 import edu.project3.model.Statistic;
 import edu.project3.util.Util;
 import java.text.DecimalFormat;
+import java.time.OffsetDateTime;
 import java.util.Map;
 
 public class MarkdownPrinter implements Printer {
@@ -25,7 +26,7 @@ public class MarkdownPrinter implements Printer {
                 }
             }
             sb.append("|").append(Util.middleAlignmentFixSize(statistic.keyName(), " ", maxKeyColLength))
-                .append("|").append(Util.rightAlignmentFixSize(statistic.keyName(), " ", maxValColLength))
+                .append("|").append(Util.rightAlignmentFixSize(statistic.valueName(), " ", maxValColLength))
                 .append("|").append("\n");
             sb.append("|:").append(Util.middleAlignmentFixSize("", "-", maxKeyColLength - 2))
                 .append(":|").append(Util.rightAlignmentFixSize(":","-", maxValColLength))
@@ -37,16 +38,25 @@ public class MarkdownPrinter implements Printer {
                     .append("|").append("\n");
             }
         }
-        if (statistic.statistic() instanceof Double || statistic.statistic() instanceof Integer) {
+        if (statistic.statistic() instanceof Double
+            || statistic.statistic() instanceof Integer
+            || statistic.statistic() instanceof OffsetDateTime) {
             String statisticString = statistic.statistic().toString();
             if (statistic.statistic() instanceof Double) {
                 DecimalFormat df = new DecimalFormat("0.00");
                 statisticString = df.format(statistic.statistic());
             }
             maxValColLength = Math.max(statisticString.length(), maxValColLength);
+            maxKeyColLength = Math.max("Metric".length(), maxKeyColLength);
+
+
             sb.append("|").append(Util.middleAlignmentFixSize("Metric", " ", maxKeyColLength))
                 .append("|").append(Util.rightAlignmentFixSize(statistic.valueName(), " ", maxValColLength))
                 .append("|").append("\n");
+            sb.append("|:").append(Util.middleAlignmentFixSize("", "-", maxKeyColLength - 2))
+                .append(":|").append(Util.rightAlignmentFixSize(":","-", maxValColLength))
+                .append("|").append("\n");
+
             sb.append("|").append(Util.middleAlignmentFixSize(statistic.keyName(), " ", maxKeyColLength))
                 .append("|").append(Util.middleAlignmentFixSize(statisticString, " ", maxValColLength))
                 .append("|").append("\n\n");
