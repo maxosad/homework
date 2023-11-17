@@ -23,8 +23,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Main {
-    public static String DEFAULT_FORMAT_STRING = "markdown";
-//    public static String DEFAULT_FORMAT_STRING = "adoc";
+//    public static String DEFAULT_FORMAT_STRING = "markdown";
+    public static String DEFAULT_FORMAT_STRING = "adoc";
 
     private Main() { }
     public static Set<String> KEYS = new HashSet<>(List.of("--path", "--from", "--to", "--format"));

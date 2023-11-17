@@ -1,6 +1,7 @@
 package edu.project3.Printer;
 
 import edu.project3.model.Statistic;
+import java.time.OffsetDateTime;
 import java.util.Map;
 
 public class AdocPrinter implements Printer {
@@ -18,7 +19,9 @@ public class AdocPrinter implements Printer {
                 sb.append("|").append(ent.getKey()).append("\n").append("|").append(ent.getValue().toString()).append("\n\n");
             }
         }
-        if (statistic.statistic() instanceof Double || statistic.statistic() instanceof Integer) {
+        if (statistic.statistic() instanceof Double
+            || statistic.statistic() instanceof Integer
+            || statistic.statistic() instanceof OffsetDateTime) {
             sb.append("|").append("Metric").append(" |").append(statistic.valueName()).append("\n\n");
             sb.append("|").append(statistic.keyName()).append("\n").append("|").append(statistic.statistic()).append("\n");
         }
