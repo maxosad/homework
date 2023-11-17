@@ -5,5 +5,5 @@ import edu.project3.model.Statistic;
 import java.util.List;
 
 public interface StatisticCounter<T> {
-    Statistic<T> countStatistic (List<LogRecord> logRecords);
+    Statistic<T> countStatistic(List<LogRecord> logRecords);
 }

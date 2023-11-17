@@ -15,7 +15,6 @@ import edu.project3.StatisticCounter.MostFrequentResource;
 import edu.project3.model.LogRecord;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,26 +22,31 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Main {
-//    public static String DEFAULT_FORMAT_STRING = "markdown";
-    public static String DEFAULT_FORMAT_STRING = "adoc";
+//    public static final String DEFAULT_FORMAT_STRING = "markdown";
+    public static final String DEFAULT_FORMAT_STRING = "adoc";
 
     private Main() { }
-    public static Set<String> KEYS = new HashSet<>(List.of("--path", "--from", "--to", "--format"));
+
+    public static final String PATH = "--path";
+    public static final String FROM = "--from";
+    public static final String TO = "--to";
+    public static final String FORMAT = "--format";
+    public static final Set<String> KEYS = new HashSet<>(List.of(PATH, FROM, TO, FORMAT));
     public static final Logger LOGGER = LogManager.getLogger();
 
-    /**
+    private static void logOutput(String s) {
+        LOGGER.info("\n" + s);
+    }
+
+    /*
      scenario 1
      --path https://raw.githubusercontent.com/elastic/examples/master/Common%20Data%20Formats/nginx_logs/nginx_logs
      scenario 2
      --path src/main/java/edu/project3/data
      */
-
-    private static void logOutput(String s) {
-        LOGGER.info("\n" + s);
-    }
     public static void main(String[] args) {
         String path = null;
-        OffsetDateTime fromDate = null ;
+        OffsetDateTime fromDate = null;
         OffsetDateTime toDate = null;
         String format = DEFAULT_FORMAT_STRING;
 
@@ -50,11 +54,14 @@ public class Main {
         int argsLength = args.length;
         for (int i = 0; i < argsLength; i += 2) {
             if (KEYS.contains(args[i])) {
-                switch (args[i]) {
-                    case "--path" -> path = args[i + 1];
-                    case "--from" -> fromDate = OffsetDateTime.parse(args[i + 1], formatter);
-                    case "--to" -> toDate  = OffsetDateTime.parse(args[i + 1], formatter);
-                    case "--format" -> format = args[i + 1];
+                if (args[i].equals(PATH)) {
+                    path = args[i + 1];
+                } else if (args[i].equals(FROM)) {
+                    fromDate = OffsetDateTime.parse(args[i + 1], formatter);
+                } else if (args[i].equals(TO)) {
+                    toDate = OffsetDateTime.parse(args[i + 1], formatter);
+                } else if (args[i].equals(FORMAT)) {
+                    format = args[i + 1];
                 }
             } else {
                 throw new IllegalArgumentException();
@@ -63,7 +70,6 @@ public class Main {
 
         Parser parser = new ParserImpl();
         List<LogRecord> logRecords = parser.parse(path);
-        System.out.println(logRecords);
 
         if (fromDate != null) {
             OffsetDateTime finalFromDate = fromDate;

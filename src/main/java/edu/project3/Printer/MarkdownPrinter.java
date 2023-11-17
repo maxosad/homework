@@ -8,6 +8,8 @@ import java.util.Map;
 
 public class MarkdownPrinter implements Printer {
 
+    public static final String METRIC = "Metric";
+
     @Override
     public <T> String print(Statistic<T> statistic) {
         StringBuilder sb = new StringBuilder();
@@ -29,7 +31,7 @@ public class MarkdownPrinter implements Printer {
                 .append("|").append(Util.rightAlignmentFixSize(statistic.valueName(), " ", maxValColLength))
                 .append("|").append("\n");
             sb.append("|:").append(Util.middleAlignmentFixSize("", "-", maxKeyColLength - 2))
-                .append(":|").append(Util.rightAlignmentFixSize(":","-", maxValColLength))
+                .append(":|").append(Util.rightAlignmentFixSize(":", "-", maxValColLength))
                 .append("|").append("\n");
 
             for (Map.Entry<String, Integer> ent : ((Map<String, Integer>) statistic.statistic()).entrySet()) {
@@ -47,14 +49,14 @@ public class MarkdownPrinter implements Printer {
                 statisticString = df.format(statistic.statistic());
             }
             maxValColLength = Math.max(statisticString.length(), maxValColLength);
-            maxKeyColLength = Math.max("Metric".length(), maxKeyColLength);
+            maxKeyColLength = Math.max(METRIC.length(), maxKeyColLength);
 
 
-            sb.append("|").append(Util.middleAlignmentFixSize("Metric", " ", maxKeyColLength))
+            sb.append("|").append(Util.middleAlignmentFixSize(METRIC, " ", maxKeyColLength))
                 .append("|").append(Util.rightAlignmentFixSize(statistic.valueName(), " ", maxValColLength))
                 .append("|").append("\n");
             sb.append("|:").append(Util.middleAlignmentFixSize("", "-", maxKeyColLength - 2))
-                .append(":|").append(Util.rightAlignmentFixSize(":","-", maxValColLength))
+                .append(":|").append(Util.rightAlignmentFixSize(":", "-", maxValColLength))
                 .append("|").append("\n");
 
             sb.append("|").append(Util.middleAlignmentFixSize(statistic.keyName(), " ", maxKeyColLength))

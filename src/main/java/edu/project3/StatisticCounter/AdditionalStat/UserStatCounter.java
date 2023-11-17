@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 public class UserStatCounter implements StatisticCounter<Map<String, Integer>> {
-    public static final String title = "UserStatCounter";
-    public static final String keyName = "User";
-    public static final String valueName = "Quantity";
+    public static final String TITLE = "UserStatCounter";
+    public static final String KEY_NAME = "User";
+    public static final String VALUE_NAME = "Quantity";
 
     @Override
     public Statistic<Map<String, Integer>> countStatistic(List<LogRecord> logRecords) {
@@ -19,6 +19,6 @@ public class UserStatCounter implements StatisticCounter<Map<String, Integer>> {
             ans.merge(log.user(), 1, Integer::sum);
         }
 
-        return new Statistic<>(title, keyName, valueName, ans);
+        return new Statistic<>(TITLE, KEY_NAME, VALUE_NAME, ans);
     }
 }

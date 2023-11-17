@@ -1,6 +1,5 @@
 package edu.project3.model;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 public record LogRecord(String address,

@@ -7,12 +7,14 @@ import java.util.Comparator;
 import java.util.List;
 
 public class LateDate implements StatisticCounter<OffsetDateTime> {
-    public static final String title = "LateDate";
-    public static final String keyName = "LateDate";
-    public static final String valueName = "Quantity";
+    public static final String LATE_DATE = "LateDate";
+    public static final String TITLE = LATE_DATE;
+    public static final String KEY_NAME = LATE_DATE;
+    public static final String VALUE_NAME = "Quantity";
+
     @Override
     public Statistic<OffsetDateTime> countStatistic(List<LogRecord> logRecords) {
-        return new Statistic<>(title, keyName, valueName, logRecords.stream()
+        return new Statistic<>(TITLE, KEY_NAME, VALUE_NAME, logRecords.stream()
             .map(LogRecord::date)
             .max(Comparator.naturalOrder()).orElse(null));
     }

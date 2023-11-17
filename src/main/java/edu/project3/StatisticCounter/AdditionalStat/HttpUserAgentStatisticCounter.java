@@ -8,15 +8,16 @@ import java.util.List;
 import java.util.Map;
 
 public class HttpUserAgentStatisticCounter implements StatisticCounter<Map<String, Integer>> {
-    public static final String title = "HttpUserAgentStatisticCounter";
-    public static final String keyName = "HttpUserAgent";
-    public static final String valueName = "Quantity";
+    public static final String TITLE = "HttpUserAgentStatisticCounter";
+    public static final String KEY_NAME = "HttpUserAgent";
+    public static final String VALUE_NAME = "Quantity";
+
     @Override
     public Statistic<Map<String, Integer>> countStatistic(List<LogRecord> logRecords) {
         Map<String, Integer> ans = new HashMap<>();
         for (var log : logRecords) {
             ans.merge(log.httpUserAgent(), 1, Integer::sum);
         }
-        return new Statistic<>(title, keyName, valueName, ans);
+        return new Statistic<>(TITLE, KEY_NAME, VALUE_NAME, ans);
     }
 }
