@@ -85,13 +85,6 @@ public class Main {
                 .toList();
         }
 
-//        System.out.println("------------------------");
-//        System.out.println(logRecords.stream()
-//            .map(LogRecord::date)
-//            .max(Comparator.naturalOrder()).orElse(null)
-//        );
-
-
         var statsCounters = List.of(
         new AvgBodyBytes(),
         new CountRequests(),
@@ -102,8 +95,7 @@ public class Main {
         new HttpUserAgentStatisticCounter(),
         new UserStatCounter()
         );
-//        System.out.println(new LateDate().countStatistic(logRecords).statistic());
-//
+
         Printer printer = new BridgePrinter(format);
         List<LogRecord> finalLogRecords = logRecords;
 

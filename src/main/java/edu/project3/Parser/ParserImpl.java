@@ -44,7 +44,7 @@ public class ParserImpl implements Parser {
         } catch (IllegalArgumentException ignore) { }
 
 
-        //local handler reg
+        //local dir handler
         Path dir = Path.of(regOrURL);
         try (var files = Files.list(dir)) {
             return files.flatMap(ParserImpl::parseFile).toList();

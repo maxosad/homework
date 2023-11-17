@@ -11,17 +11,5 @@ public record LogRecord(String address,
                         Integer bodyBytes,
                         String httpReferer,
                         String httpUserAgent) {
-//    LogRecord(String log) {
-//        this(
-//            null,
-//            null,
-//            null,
-//            null,
-//            null,
-//            null,
-//            null,
-//            null
-//        );
-//    }
 }
 
