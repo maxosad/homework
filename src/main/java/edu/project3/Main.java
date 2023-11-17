@@ -63,6 +63,8 @@ public class Main {
 
         Parser parser = new ParserImpl();
         List<LogRecord> logRecords = parser.parse(path);
+        System.out.println(logRecords);
+
         if (fromDate != null) {
             OffsetDateTime finalFromDate = fromDate;
             logRecords = logRecords.stream()
