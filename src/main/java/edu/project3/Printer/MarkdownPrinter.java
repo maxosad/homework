@@ -3,6 +3,7 @@ package edu.project3.Printer;
 import edu.project3.model.Statistic;
 import edu.project3.util.Util;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.time.OffsetDateTime;
 import java.util.Map;
 
@@ -40,12 +41,17 @@ public class MarkdownPrinter implements Printer {
                     .append("|").append("\n");
             }
         }
+
+
+
         if (statistic.statistic() instanceof Double
             || statistic.statistic() instanceof Integer
             || statistic.statistic() instanceof OffsetDateTime) {
             String statisticString = statistic.statistic().toString();
             if (statistic.statistic() instanceof Double) {
-                DecimalFormat df = new DecimalFormat("0.00");
+                DecimalFormatSymbols decimalFormatSymbols = DecimalFormatSymbols.getInstance();
+                decimalFormatSymbols.setDecimalSeparator('.');
+                DecimalFormat df = new DecimalFormat("0.00", decimalFormatSymbols);
                 statisticString = df.format(statistic.statistic());
             }
             maxValColLength = Math.max(statisticString.length(), maxValColLength);

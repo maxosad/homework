@@ -201,7 +201,7 @@ class MainTest {
                 "#### AvgBodyBytes\n" +
                     "|   Metric   |  Value|\n" +
                     "|:----------:|------:|\n" +
-                    "|AvgBodyBytes|2948,00|\n\n"
+                    "|AvgBodyBytes|2948.00|\n\n"
             ),
             Arguments.of(
                 new Statistic<>(
