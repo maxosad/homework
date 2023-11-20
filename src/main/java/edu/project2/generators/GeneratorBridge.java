@@ -1,4 +1,4 @@
-package edu.project2.Generators;
+package edu.project2.generators;
 
 import edu.project2.model.Cell;
 import edu.project2.model.GeneratorType;
@@ -6,7 +6,7 @@ import edu.project2.model.Maze;
 import static edu.project2.Config.HEIGHT_WIDTH_LIMIT;
 
 public class GeneratorBridge implements Generator {
-    private Generator generator;
+    private final Generator generator;
 
     public GeneratorBridge(GeneratorType type) {
         generator = switch (type) {

@@ -1,4 +1,4 @@
-package edu.project2.Solvers;
+package edu.project2.solvers;
 
 import edu.project2.model.Cell;
 import edu.project2.model.Coordinate;
@@ -7,6 +7,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import static edu.project2.Config.DIRECTIONS_COUNT;
 
@@ -16,31 +17,9 @@ public class BFSSolver implements Solver {
     private int height;
     private int width;
     private Queue<Coordinate> queue;
-    private HashMap<Coordinate, Coordinate> prevs;
+    private Map<Coordinate, Coordinate> prevs;
     private Deque<Coordinate> answer;
     private Cell[][] grid;
-
-    private void restorePath(Coordinate c) {
-        answer = new ArrayDeque<>();
-        Coordinate newC = new Coordinate(c.row(), c.col());
-        do {
-            answer.addFirst(newC);
-            newC = prevs.get(newC);
-        } while (newC != null);
-    }
-
-    private void addCoordinates(Coordinate c) {
-        for (int sdvid = 0; sdvid < DIRECTIONS_COUNT; sdvid++) {
-            Coordinate newC = new Coordinate(c.row() + SDVIG[sdvid][0], c.col() + SDVIG[sdvid][1]);
-            if (0 <= newC.col() && newC.col() < width
-                && 0 <= newC.row() && newC.row() < height
-                && !usedGrid[newC.row()][newC.col()]
-                && grid[newC.row()][newC.col()].getType().equals(Cell.Type.PASSAGE)) {
-                prevs.put(newC, c);
-                queue.add(newC);
-            }
-        }
-    }
 
     @Override
     public List<Coordinate> solve(Maze maze, Coordinate start, Coordinate end) {
@@ -64,5 +43,27 @@ public class BFSSolver implements Solver {
         }
 
         throw new RuntimeException("No path");
+    }
+
+    private void restorePath(Coordinate c) {
+        answer = new ArrayDeque<>();
+        Coordinate newC = new Coordinate(c.row(), c.col());
+        do {
+            answer.addFirst(newC);
+            newC = prevs.get(newC);
+        } while (newC != null);
+    }
+
+    private void addCoordinates(Coordinate c) {
+        for (int sdvid = 0; sdvid < DIRECTIONS_COUNT; sdvid++) {
+            Coordinate newC = new Coordinate(c.row() + SDVIG[sdvid][0], c.col() + SDVIG[sdvid][1]);
+            if (0 <= newC.col() && newC.col() < width
+                && 0 <= newC.row() && newC.row() < height
+                && !usedGrid[newC.row()][newC.col()]
+                && grid[newC.row()][newC.col()].getType().equals(Cell.Type.PASSAGE)) {
+                prevs.put(newC, c);
+                queue.add(newC);
+            }
+        }
     }
 }

@@ -1,4 +1,4 @@
-package edu.project2.Solvers;
+package edu.project2.solvers;
 
 import edu.project2.model.Cell;
 import edu.project2.model.Coordinate;
@@ -17,22 +17,21 @@ public class DFSSolver implements Solver {
     private int width;
     private Deque<Coordinate> path;
 
-    private boolean dfs(Coordinate c) {
-        usedGrid[c.row()][c.col()] = true;
-        if (c.equals(end)) {
-            path.addFirst(c);
+    private boolean dfs(Coordinate coordinate) {
+        usedGrid[coordinate.row()][coordinate.col()] = true;
+        if (coordinate.equals(end)) {
+            path.addFirst(coordinate);
             return true;
         }
-        for (int sdvid = 0; sdvid < DIRECTIONS_COUNT; sdvid++) {
-            Coordinate newC = new Coordinate(c.row() + SDVIG[sdvid][0], c.col() + SDVIG[sdvid][1]);
-            if (0 <= newC.col() && newC.col() < width
-                && 0 <= newC.row() && newC.row() < height
-                && !usedGrid[newC.row()][newC.col()]
-                && grid[newC.row()][newC.col()].getType().equals(Cell.Type.PASSAGE)) {
-                if (dfs(newC)) {
-                    path.addFirst(c);
+        for (int sdvigIndex = 0; sdvigIndex < DIRECTIONS_COUNT; sdvigIndex++) {
+            Coordinate newCoordinate = new Coordinate(coordinate.row() + SDVIG[sdvigIndex][0], coordinate.col() + SDVIG[sdvigIndex][1]);
+            if (0 <= newCoordinate.col() && newCoordinate.col() < width
+                && 0 <= newCoordinate.row() && newCoordinate.row() < height
+                && !usedGrid[newCoordinate.row()][newCoordinate.col()]
+                && grid[newCoordinate.row()][newCoordinate.col()].getType().equals(Cell.Type.PASSAGE)
+                && dfs(newCoordinate)) {
+                    path.addFirst(coordinate);
                     return true;
-                }
             }
         }
         return false;

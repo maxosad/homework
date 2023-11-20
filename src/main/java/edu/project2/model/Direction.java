@@ -9,5 +9,5 @@ public enum Direction {
     DOWN,
     LEFT;
 
-    public static final ArrayList<Direction> DIRECTION_SETUP = new ArrayList<>(List.of(TOP, RIGHT, DOWN, LEFT));
+    public static final List<Direction> DIRECTION_SETUP = List.of(TOP, RIGHT, DOWN, LEFT);
 }

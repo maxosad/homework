@@ -1,4 +1,4 @@
-package edu.project2.Generators;
+package edu.project2.generators;
 
 import edu.project2.model.Cell;
 import edu.project2.model.Coordinate;
@@ -47,9 +47,9 @@ public class PrimsGenerator extends AbstractGenerator implements Generator {
             List<Direction> dirs = Direction.DIRECTION_SETUP;
             Collections.shuffle(dirs, random);
 
-            boolean f = false;
+            boolean isPassageEstablished = false;
             for (var direction : dirs) {
-                if (f) {
+                if (isPassageEstablished) {
                     break;
                 }
                 switch (direction) {
@@ -57,28 +57,28 @@ public class PrimsGenerator extends AbstractGenerator implements Generator {
                         int newRow = row - 2;
                         if (newRow >= 0 && grid[newRow][col].getType().equals(Cell.Type.PASSAGE)) {
                             grid[row - 1][col].setType(Cell.Type.PASSAGE);
-                            f = true;
+                            isPassageEstablished = true;
                         }
                     }
                     case RIGHT -> {
                         int newCol = col + 2;
                         if (newCol < width && grid[row][newCol].getType().equals(Cell.Type.PASSAGE)) {
                             grid[row][col + 1].setType(Cell.Type.PASSAGE);
-                            f = true;
+                            isPassageEstablished = true;
                         }
                     }
                     case DOWN -> {
                         int newRow = row + 2;
                         if (newRow < height && grid[newRow][col].getType().equals(Cell.Type.PASSAGE)) {
                             grid[row + 1][col].setType(Cell.Type.PASSAGE);
-                            f = true;
+                            isPassageEstablished = true;
                         }
                     }
                     case LEFT -> {
                         int newCol = col - 2;
                         if (newCol >= 0 && grid[row][newCol].getType().equals(Cell.Type.PASSAGE)) {
                             grid[row][col - 1].setType(Cell.Type.PASSAGE);
-                            f = true;
+                            isPassageEstablished = true;
                         }
                     }
                     default -> { }

@@ -26,6 +26,6 @@ public final class Maze {
     }
 
     public Cell[][] getGrid() {
-        return grid;
+        return grid.clone();
     }
 }

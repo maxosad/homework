@@ -1,15 +1,13 @@
 package edu.project2;
 
-import edu.project2.Generators.AbstractGenerator;
-import edu.project2.Generators.Generator;
-import edu.project2.Generators.GeneratorBridge;
-import edu.project2.Generators.PrimsGenerator;
-import edu.project2.Renderers.PrettyRenderer;
-import edu.project2.Renderers.Renderer;
-import edu.project2.Renderers.SimpleRenderer;
-import edu.project2.Solvers.BFSSolver;
-import edu.project2.Solvers.DFSSolver;
-import edu.project2.Solvers.Solver;
+import edu.project2.generators.Generator;
+import edu.project2.generators.GeneratorBridge;
+import edu.project2.renderers.PrettyRenderer;
+import edu.project2.renderers.Renderer;
+import edu.project2.renderers.SimpleRenderer;
+import edu.project2.solvers.BFSSolver;
+import edu.project2.solvers.DFSSolver;
+import edu.project2.solvers.Solver;
 import edu.project2.model.Coordinate;
 import edu.project2.model.GeneratorType;
 import edu.project2.model.Maze;
@@ -47,16 +45,15 @@ class MainTest {
     void throwExc() {
         Generator bfsGenerator = new GeneratorBridge(GeneratorType.BFS);
         Maze maze = bfsGenerator.generate(7, 12, 0);
-        Renderer prettyRenderer = new PrettyRenderer();
         Coordinate start = new Coordinate(0,0);
         Coordinate end = new Coordinate(5,9);
         Solver bfsSolver = new BFSSolver();
         Solver dfsSolver = new DFSSolver();
 
-        var thr = assertThrows(RuntimeException.class, () -> bfsSolver.solve(maze, start, end));
-        assertEquals("No path", thr.getMessage());
-        thr = assertThrows(RuntimeException.class, () -> dfsSolver.solve(maze, start, end));
-        assertEquals("No path", thr.getMessage());
+        var throwable = assertThrows(RuntimeException.class, () -> bfsSolver.solve(maze, start, end));
+        assertEquals("No path", throwable.getMessage());
+        throwable = assertThrows(RuntimeException.class, () -> dfsSolver.solve(maze, start, end));
+        assertEquals("No path", throwable.getMessage());
     }
 
     @Test
