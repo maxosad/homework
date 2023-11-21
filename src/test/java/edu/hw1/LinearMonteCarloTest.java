@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class Task4Test {
+class LinearMonteCarloTest {
 //    fixString("123456") ➞ "214365"
 //    fixString("hTsii  s aimex dpus rtni.g") ➞ "This is a mixed up string."
 //    fixString("badce") ➞ "abcde"
