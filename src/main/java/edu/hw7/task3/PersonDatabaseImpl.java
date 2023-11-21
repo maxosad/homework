@@ -1,8 +1,8 @@
 package edu.hw7.task3;
 
-import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
+import org.jetbrains.annotations.Nullable;
 
 public class PersonDatabaseImpl implements PersonDatabase {
     private Map<String, Person> nameCollection;

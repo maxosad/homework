@@ -1,5 +1,6 @@
 package edu.hw7.task4;
 
+@SuppressWarnings("MagicNumber")
 public class Util {
 
     private Util() { }
@@ -13,11 +14,5 @@ public class Util {
         double circleCenterY = 0.5;
         double radius = 0.5;
         return distanceBetweenDots(circleCenterX, circleCenterY, x, y) <= radius;
-    }
-
-    public static void main(String[] args) {
-        long x1 = 14L;
-        long x2 = 29L;
-        System.out.println((1.0 * x1) / x2);
     }
 }

@@ -32,9 +32,4 @@ public class Task1 {
     public int getSharedValue() {
         return sharedValue.intValue();
     }
-
-    public static void main(String[] args) {
-        edu.hw7.Task1 task1 = new Task1();
-        System.out.println(task1.parallelIncrement(500));
-    }
 }

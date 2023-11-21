@@ -1,14 +1,13 @@
 package edu.hw7.task4;
 
-import org.apache.logging.log4j.LogManager;
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
 
+@SuppressWarnings({"MagicNumber"})
 public class Main {
     private Main() { }
-    /**
-     *
-     * @param args
-     */
+
+
     public static void main(String[] args) {
         var logger = LogManager.getLogger();
         List<Integer> experimentsSize = List.of(10000, 100000, 1000000, 10000000);

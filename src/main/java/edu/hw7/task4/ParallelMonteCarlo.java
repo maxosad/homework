@@ -1,13 +1,12 @@
 package edu.hw7.task4;
 
-import org.apache.logging.log4j.LogManager;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
+@SuppressWarnings("MagicNumber")
 public class ParallelMonteCarlo {
     private AtomicInteger totalCount = new AtomicInteger(0);
     private AtomicInteger circleCount = new AtomicInteger(0);

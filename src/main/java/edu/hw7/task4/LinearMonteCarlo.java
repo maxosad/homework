@@ -1,9 +1,8 @@
 package edu.hw7.task4;
 
-import org.apache.logging.log4j.LogManager;
 import java.security.SecureRandom;
-import java.time.LocalTime;
 
+@SuppressWarnings({"MagicNumber"})
 public class LinearMonteCarlo {
     private int totalCount;
     private int circleCount;
@@ -38,24 +37,6 @@ public class LinearMonteCarlo {
         return time;
     }
 
-    /**
-     * 10_000, 100_000, 1_000_000, 10_000_000
-     * @param args
-     */
-    public static void main(String[] args) {
-        LinearMonteCarlo lm10000 = new LinearMonteCarlo(10000);
-        LinearMonteCarlo lm100000 = new LinearMonteCarlo(100000);
-        LinearMonteCarlo lm1000000 = new LinearMonteCarlo(1000000);
-        LinearMonteCarlo lm10000000 = new LinearMonteCarlo(10000000);
-//        142
-//        395
-//        2640
-//        26251
-        System.out.println(lm10000.getTime());
-        System.out.println(lm100000.getTime());
-        System.out.println(lm1000000.getTime());
-        System.out.println(lm10000000.getTime());
-    }
 
 
 
