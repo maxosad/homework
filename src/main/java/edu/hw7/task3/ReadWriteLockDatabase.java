@@ -55,7 +55,7 @@ public class ReadWriteLockDatabase implements PersonDatabase {
 
     @Override
     public @Nullable Person findByName(String name) {
-        lock.readLock().tryLock();
+        lock.readLock().lock();
         try {
             Person person = nameCollection.get(name);
             if (person.address() != null && person.phoneNumber() != null) {
@@ -69,7 +69,7 @@ public class ReadWriteLockDatabase implements PersonDatabase {
 
     @Override
     public @Nullable Person findByAddress(String address) {
-        lock.readLock().tryLock();
+        lock.readLock().lock();
         try {
             Person person = addressCollection.get(address);
             if (person.name() != null && person.phoneNumber() != null) {
@@ -83,7 +83,7 @@ public class ReadWriteLockDatabase implements PersonDatabase {
 
     @Override
     public @Nullable Person findByPhone(String phone) {
-        lock.readLock().tryLock();
+        lock.readLock().lock();
         try {
             Person person = phoneCollection.get(phone);
             if (person.name() != null && person.address() != null) {
