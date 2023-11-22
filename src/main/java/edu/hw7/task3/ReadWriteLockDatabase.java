@@ -24,7 +24,7 @@ public class ReadWriteLockDatabase implements PersonDatabase {
 
     @Override
     public void add(Person person) {
-        lock.writeLock().tryLock();
+        lock.writeLock().lock();
         if (person.name() != null) {
             nameCollection.put(person.name(), person);
         }
@@ -40,7 +40,7 @@ public class ReadWriteLockDatabase implements PersonDatabase {
 
     @Override
     public void delete(int id) {
-        lock.writeLock().tryLock();
+        lock.writeLock().lock();
         Person person = idCollection.remove(id);
         nameCollection.remove(person.name());
         addressCollection.remove(person.address());
