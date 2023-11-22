@@ -44,33 +44,29 @@ public class PersonDatabaseImpl implements PersonDatabase {
         phoneCollection.remove(person.phoneNumber());
     }
 
-    public @Nullable Person findByName(String name) {
+    public synchronized @Nullable Person findByName(String name) {
         Person person = nameCollection.get(name);
-        if (addressCollection.get(person.address()) != null
-            && phoneCollection.get(person.phoneNumber()) != null) {
+        if (person.address() != null && person.phoneNumber() != null) {
             return person;
         }
         return null;
     }
 
     @Override
-    public @Nullable Person findByAddress(String address) {
+    public synchronized @Nullable Person findByAddress(String address) {
         Person person = addressCollection.get(address);
-        if (nameCollection.get(person.name()) != null
-            && phoneCollection.get(person.phoneNumber()) != null) {
+        if (person.name() != null && person.phoneNumber() != null) {
             return person;
         }
         return null;
     }
 
     @Override
-    public @Nullable Person findByPhone(String phone) {
+    public synchronized @Nullable Person findByPhone(String phone) {
         Person person = phoneCollection.get(phone);
-        if (nameCollection.get(person.name()) != null
-            && addressCollection.get(person.address()) != null) {
+        if (person.name() != null && person.address() != null) {
             return person;
         }
         return null;
     }
-
 }
