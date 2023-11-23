@@ -1,6 +1,5 @@
 package edu.project2.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public enum Direction {

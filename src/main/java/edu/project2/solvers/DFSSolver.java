@@ -40,7 +40,8 @@ public class DFSSolver implements Solver {
             return true;
         }
         for (int sdvigIndex = 0; sdvigIndex < DIRECTIONS_COUNT; sdvigIndex++) {
-            Coordinate newCoordinate = new Coordinate(coordinate.row() + SDVIG[sdvigIndex][0], coordinate.col() + SDVIG[sdvigIndex][1]);
+            Coordinate newCoordinate = new Coordinate(
+                coordinate.row() + SDVIG[sdvigIndex][0], coordinate.col() + SDVIG[sdvigIndex][1]);
             if (0 <= newCoordinate.col() && newCoordinate.col() < width
                 && 0 <= newCoordinate.row() && newCoordinate.row() < height
                 && !usedGrid[newCoordinate.row()][newCoordinate.col()]

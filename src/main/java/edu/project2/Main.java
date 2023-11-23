@@ -2,16 +2,16 @@ package edu.project2;
 
 import edu.project2.generators.Generator;
 import edu.project2.generators.GeneratorBridge;
-import edu.project2.renderers.Renderer;
-import edu.project2.renderers.RendererBridge;
-import edu.project2.solvers.Solver;
-import edu.project2.solvers.SolverBridge;
 import edu.project2.model.Cell;
 import edu.project2.model.Coordinate;
 import edu.project2.model.GeneratorType;
 import edu.project2.model.Maze;
 import edu.project2.model.RendererType;
 import edu.project2.model.SolverType;
+import edu.project2.renderers.Renderer;
+import edu.project2.renderers.RendererBridge;
+import edu.project2.solvers.Solver;
+import edu.project2.solvers.SolverBridge;
 import java.util.List;
 import java.util.Scanner;
 import java.util.function.BiPredicate;
@@ -72,7 +72,7 @@ public class Main {
             LOGGER.info("enter {} row and col indexes, the cell should be passage", coordName);
             row = scanner.nextInt();
             col = scanner.nextInt();
-            if (!colRowValidPredicate.test(row, col)){
+            if (!colRowValidPredicate.test(row, col)) {
                 LOGGER.info("row and col indexes should be less then mazeHeight and mazeGrid");
                 continue;
             }
