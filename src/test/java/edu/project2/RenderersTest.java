@@ -53,4 +53,29 @@ public class RenderersTest {
             "▉       ▉.▉▉\n" +
             "▉▉▉▉▉▉▉▉▉▉▉▉\n", mazeWithPath);
     }
+
+    @Test
+    void simpleRendererTest() {
+        Renderer renderer = new RendererBridge(RendererType.SIMPLE);
+
+        String clearMaze = renderer.render(maze);
+        String mazeWithPath = renderer.render(maze, path);
+
+        assertEquals("\n" +
+            "[w, w, w, w, w, w, w, w, w, w, w, w]\n" +
+            "[w, p, p, p, p, p, p, p, p, p, p, w]\n" +
+            "[w, w, w, w, w, w, w, w, w, p, w, w]\n" +
+            "[w, p, p, p, p, p, p, p, p, p, w, w]\n" +
+            "[w, w, w, w, w, w, w, p, w, p, w, w]\n" +
+            "[w, p, p, p, p, p, p, p, w, p, w, w]\n" +
+            "[w, w, w, w, w, w, w, w, w, w, w, w]\n", clearMaze);
+        assertEquals("\n" +
+            "[w, w, w, w, w, w, w, w, w, w, w, w]\n" +
+            "[w, ., ., ., ., ., ., ., ., ., p, w]\n" +
+            "[w, w, w, w, w, w, w, w, w, ., w, w]\n" +
+            "[w, p, p, p, p, p, p, p, p, ., w, w]\n" +
+            "[w, w, w, w, w, w, w, p, w, ., w, w]\n" +
+            "[w, p, p, p, p, p, p, p, w, ., w, w]\n" +
+            "[w, w, w, w, w, w, w, w, w, w, w, w]\n", mazeWithPath);
+    }
 }
