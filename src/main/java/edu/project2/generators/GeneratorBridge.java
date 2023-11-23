@@ -33,9 +33,6 @@ public class GeneratorBridge implements Generator {
         Cell[][] newGrid = new Cell[newHeight][newWidth];
         for (int i = 0; i < newHeight - 1; i++) {
             System.arraycopy(mazeGrid[i], 0, newGrid[i], 0, newWidth - 1);
-//            for (int j = 0; j < newWidth - 1; j++) {
-//                newGrid[i][j] = mazeGrid[i][j];
-//            }
         }
         for (int i = 0; i < newHeight; i++) {
             newGrid[i][newWidth - 1] = new Cell(i, newWidth - 1, Cell.Type.WALL);
