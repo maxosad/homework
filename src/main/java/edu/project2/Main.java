@@ -66,7 +66,7 @@ public class Main {
             if (biPredicate.test(row, col)) {
                 return new Coordinate(row, col);
             }
-            LOGGER.info("{} coordinate {}", coordName, SHOULD_BE_PASSAGE));
+            LOGGER.info("{} coordinate {}", coordName, SHOULD_BE_PASSAGE);
         }
     }
 

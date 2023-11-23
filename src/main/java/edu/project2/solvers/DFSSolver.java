@@ -28,7 +28,7 @@ public class DFSSolver implements Solver {
 
         boolean solutionFound = dfs(start);
         if (!solutionFound) {
-            throw new RuntimeException("No path");
+            throw new RuntimeException("No path between start and end");
         }
         return path.stream().toList();
     }

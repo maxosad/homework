@@ -42,7 +42,7 @@ public class BFSSolver implements Solver {
             addCoordinates(c);
         }
 
-        throw new RuntimeException("No path");
+        throw new RuntimeException("No path between start and end");
     }
 
     private void restorePath(Coordinate c) {
