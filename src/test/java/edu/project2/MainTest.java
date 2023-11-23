@@ -1,6 +1,6 @@
 package edu.project2;
 
-import edu.project2.generators.Generator;
+import  edu.project2.generators.Generator;
 import edu.project2.generators.GeneratorBridge;
 import edu.project2.renderers.PrettyRenderer;
 import edu.project2.renderers.Renderer;
