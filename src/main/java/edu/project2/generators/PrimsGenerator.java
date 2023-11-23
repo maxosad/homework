@@ -27,7 +27,7 @@ public class PrimsGenerator extends AbstractGenerator implements Generator {
             int col = c.col();
             grid[row][col].setType(Cell.Type.PASSAGE);
 
-            List<Direction> dirs = Direction.DIRECTION_SETUP;
+            List<Direction> dirs = new ArrayList<>(Direction.DIRECTION_SETUP);
             Collections.shuffle(dirs, random);
 
             boolean isPassageEstablished = false;

@@ -1,5 +1,7 @@
 package edu.project2.model;
 
+import java.util.Objects;
+
 public class Cell {
     public enum Type { WALL, PASSAGE }
 
@@ -31,5 +33,17 @@ public class Cell {
 
     public String toString() {
         return type.equals(Type.WALL) ? "w" : "p";
+    }
+
+    @Override public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cell cell = (Cell) o;
+        return row == cell.row && col == cell.col && type == cell.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(row, col, type);
     }
 }

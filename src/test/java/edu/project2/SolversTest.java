@@ -21,7 +21,8 @@ public class SolversTest {
     public static Coordinate end;
     public static List<Coordinate> rightPath;
 
-    @BeforeAll static void setUp() {
+    @BeforeAll
+    static void setUp() {
         Generator bfsGenerator = new GeneratorBridge(GeneratorType.BFS);
         maze = bfsGenerator.generate(7, 12, 0);
         start = new Coordinate(1, 1);
@@ -42,6 +43,7 @@ public class SolversTest {
             new Coordinate(4, 9),
             new Coordinate(5, 9));
     }
+
     @Test
     void bfsSolverTest() {
         Solver bfsSolver = new SolverBridge(SolverType.BFS);
