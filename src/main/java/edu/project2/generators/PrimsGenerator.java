@@ -11,23 +11,6 @@ import java.util.List;
 import static edu.project2.Config.DIRECTIONS_COUNT;
 
 public class PrimsGenerator extends AbstractGenerator implements Generator {
-    private void addPretendCoord(List<Coordinate> list, Coordinate c) {
-        for (int i = 0; i < DIRECTIONS_COUNT; i++) {
-            int newCol = c.col() + SDVIG[i][1];
-            int newRow = c.row() + SDVIG[i][0];
-            if (0 <= newCol && newCol < width
-                && 0 <= newRow && newRow < height
-                && grid[newRow][newCol].getType().equals(Cell.Type.WALL)
-            ) {
-                var newCoordinate = new Coordinate(newRow, newCol);
-                if (!usedPretend.getOrDefault(newCoordinate, false)) {
-                    list.add(newCoordinate);
-                    usedPretend.put(newCoordinate, true);
-                }
-            }
-        }
-    }
-
     @Override
     public Maze generate(int height, int width, int seed) {
         usedPretend = new HashMap<>();
@@ -87,5 +70,22 @@ public class PrimsGenerator extends AbstractGenerator implements Generator {
             addPretendCoord(pretendent, c);
         }
         return new Maze(height, width, grid);
+    }
+
+    private void addPretendCoord(List<Coordinate> list, Coordinate c) {
+        for (int i = 0; i < DIRECTIONS_COUNT; i++) {
+            int newCol = c.col() + SDVIG[i][1];
+            int newRow = c.row() + SDVIG[i][0];
+            if (0 <= newCol && newCol < width
+                && 0 <= newRow && newRow < height
+                && grid[newRow][newCol].getType().equals(Cell.Type.WALL)
+            ) {
+                var newCoordinate = new Coordinate(newRow, newCol);
+                if (!usedPretend.getOrDefault(newCoordinate, false)) {
+                    list.add(newCoordinate);
+                    usedPretend.put(newCoordinate, true);
+                }
+            }
+        }
     }
 }

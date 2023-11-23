@@ -60,13 +60,13 @@ public class Main {
         int col;
         int row;
         while (true) {
-            LOGGER.info("enter %s row and col, it should be passage".formatted(coordName));
+            LOGGER.info("enter {} row and col, it should be passage", coordName);
             row = scanner.nextInt();
             col = scanner.nextInt();
             if (biPredicate.test(row, col)) {
                 return new Coordinate(row, col);
             }
-            LOGGER.info("%s coordinate %s".formatted(coordName, SHOULD_BE_PASSAGE));
+            LOGGER.info("{} coordinate {}", coordName, SHOULD_BE_PASSAGE));
         }
     }
 
@@ -74,7 +74,7 @@ public class Main {
         T[] ens = en.getEnumConstants();
         String choosenType;
         while (true) {
-            LOGGER.info("Which %s do you want to choose?".formatted(name));
+            LOGGER.info("Which {} do you want to choose?", name);
             for (var type : ens) {
                 LOGGER.info(type);
             }
@@ -84,19 +84,19 @@ public class Main {
                     return type;
                 }
             }
-            LOGGER.info("you have to choose %s from presented values".formatted(name));
+            LOGGER.info("you have to choose {} from presented values", name);
         }
     }
 
     private static int conditionInputInt(String name, IntPredicate predicate, String message) {
         int input;
         while (true) {
-            LOGGER.info("enter %s".formatted(name));
+            LOGGER.info("enter {}", name);
             input = scanner.nextInt();
             if (predicate.test(input)) {
                 return input;
             }
-            LOGGER.info("%s %s".formatted(name, message));
+            LOGGER.info("{} {}", name, message);
         }
     }
 }

@@ -17,6 +17,22 @@ public class DFSSolver implements Solver {
     private int width;
     private Deque<Coordinate> path;
 
+    @Override
+    public List<Coordinate> solve(Maze maze, Coordinate start, Coordinate end) {
+        this.end = end;
+        grid = maze.getGrid();
+        height = maze.getHeight();
+        width = maze.getWidth();
+        usedGrid = new boolean[height][width];
+        path = new ArrayDeque<>();
+
+        boolean solutionFound = dfs(start);
+        if (!solutionFound) {
+            throw new RuntimeException("No path");
+        }
+        return path.stream().toList();
+    }
+
     private boolean dfs(Coordinate coordinate) {
         usedGrid[coordinate.row()][coordinate.col()] = true;
         if (coordinate.equals(end)) {
@@ -37,19 +53,4 @@ public class DFSSolver implements Solver {
         return false;
     }
 
-    @Override
-    public List<Coordinate> solve(Maze maze, Coordinate start, Coordinate end) {
-        this.end = end;
-        grid = maze.getGrid();
-        height = maze.getHeight();
-        width = maze.getWidth();
-        usedGrid = new boolean[height][width];
-        path = new ArrayDeque<>();
-
-        boolean solutionFound = dfs(start);
-        if (!solutionFound) {
-            throw new RuntimeException("No path");
-        }
-        return path.stream().toList();
-    }
 }
