@@ -33,36 +33,37 @@ public class BFSSolver implements Solver {
         prevs.put(start, null);
 
         while (!queue.isEmpty()) {
-            Coordinate c = queue.poll();
-            usedGrid[c.row()][c.col()] = true;
-            if (c.equals(end)) {
-                restorePath(c);
+            Coordinate coordinate = queue.poll();
+            usedGrid[coordinate.row()][coordinate.col()] = true;
+            if (coordinate.equals(end)) {
+                restorePath(coordinate);
                 return answer.stream().toList();
             }
-            addCoordinates(c);
+            addCoordinates(coordinate);
         }
 
         throw new RuntimeException("No path between start and end");
     }
 
-    private void restorePath(Coordinate c) {
+    private void restorePath(Coordinate coordinate) {
         answer = new ArrayDeque<>();
-        Coordinate newC = new Coordinate(c.row(), c.col());
+        Coordinate newCoordinate = new Coordinate(coordinate.row(), coordinate.col());
         do {
-            answer.addFirst(newC);
-            newC = prevs.get(newC);
-        } while (newC != null);
+            answer.addFirst(newCoordinate);
+            newCoordinate = prevs.get(newCoordinate);
+        } while (newCoordinate != null);
     }
 
-    private void addCoordinates(Coordinate c) {
-        for (int sdvid = 0; sdvid < DIRECTIONS_COUNT; sdvid++) {
-            Coordinate newC = new Coordinate(c.row() + SDVIG[sdvid][0], c.col() + SDVIG[sdvid][1]);
-            if (0 <= newC.col() && newC.col() < width
-                && 0 <= newC.row() && newC.row() < height
-                && !usedGrid[newC.row()][newC.col()]
-                && grid[newC.row()][newC.col()].getType().equals(Cell.Type.PASSAGE)) {
-                prevs.put(newC, c);
-                queue.add(newC);
+    private void addCoordinates(Coordinate coordinate) {
+        for (int sdvidIndex = 0; sdvidIndex < DIRECTIONS_COUNT; sdvidIndex++) {
+            Coordinate newCoordinate = new Coordinate(coordinate.row() + SDVIG[sdvidIndex][0],
+                coordinate.col() + SDVIG[sdvidIndex][1]);
+            if (0 <= newCoordinate.col() && newCoordinate.col() < width
+                && 0 <= newCoordinate.row() && newCoordinate.row() < height
+                && !usedGrid[newCoordinate.row()][newCoordinate.col()]
+                && grid[newCoordinate.row()][newCoordinate.col()].getType().equals(Cell.Type.PASSAGE)) {
+                prevs.put(newCoordinate, coordinate);
+                queue.add(newCoordinate);
             }
         }
     }

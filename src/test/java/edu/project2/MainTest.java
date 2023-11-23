@@ -51,9 +51,9 @@ class MainTest {
         Solver dfsSolver = new DFSSolver();
 
         var throwable = assertThrows(RuntimeException.class, () -> bfsSolver.solve(maze, start, end));
-        assertEquals("No path", throwable.getMessage());
+        assertEquals("No path between start and end", throwable.getMessage());
         throwable = assertThrows(RuntimeException.class, () -> dfsSolver.solve(maze, start, end));
-        assertEquals("No path", throwable.getMessage());
+        assertEquals("No path between start and end", throwable.getMessage());
     }
 
     @Test
