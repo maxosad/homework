@@ -44,26 +44,39 @@ public class Main {
 
         Solver solver = new SolverBridge(chooseFromValues(SolverType.class, "solver"));
 
+        BiPredicate<Integer, Integer> colRowValidPredicate = (row, col) ->
+            row < maze.getHeight() && col < maze.getWidth();
+
         Coordinate start =
             biConditionInputInts("start",
-                (row, col) -> maze.getGrid()[row][col].getType().equals(Cell.Type.PASSAGE)
+                (row, col) -> maze.getGrid()[row][col].getType().equals(Cell.Type.PASSAGE),
+                colRowValidPredicate
             );
         Coordinate end =
             biConditionInputInts("end",
-                (row, col) -> maze.getGrid()[row][col].getType().equals(Cell.Type.PASSAGE));
+                (row, col) -> maze.getGrid()[row][col].getType().equals(Cell.Type.PASSAGE),
+                colRowValidPredicate);
 
         List<Coordinate> answer = solver.solve(maze, start, end);
         LOGGER.info(renderer.render(maze, answer));
     }
 
-    private static Coordinate biConditionInputInts(String coordName, BiPredicate<Integer, Integer> biPredicate) {
+
+
+    private static Coordinate biConditionInputInts(String coordName, BiPredicate<Integer, Integer> passageBiPredicate,
+        BiPredicate<Integer, Integer> colRowValidPredicate) {
+
         int col;
         int row;
         while (true) {
-            LOGGER.info("enter {} row and col, it should be passage", coordName);
+            LOGGER.info("enter {} row and col indexes, the cell should be passage", coordName);
             row = scanner.nextInt();
             col = scanner.nextInt();
-            if (biPredicate.test(row, col)) {
+            if (!colRowValidPredicate.test(row, col)){
+                LOGGER.info("row and col indexes should be less then mazeHeight and mazeGrid");
+                continue;
+            }
+            if (passageBiPredicate.test(row, col)) {
                 return new Coordinate(row, col);
             }
             LOGGER.info("{} coordinate {}", coordName, SHOULD_BE_PASSAGE);

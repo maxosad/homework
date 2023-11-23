@@ -50,10 +50,10 @@ class MainTest {
         Solver bfsSolver = new BFSSolver();
         Solver dfsSolver = new DFSSolver();
 
-        var throwable = assertThrows(RuntimeException.class, () -> bfsSolver.solve(maze, start, end));
-        assertEquals("No path between start and end", throwable.getMessage());
-        throwable = assertThrows(RuntimeException.class, () -> dfsSolver.solve(maze, start, end));
-        assertEquals("No path between start and end", throwable.getMessage());
+        var throwedException = assertThrows(RuntimeException.class, () -> bfsSolver.solve(maze, start, end));
+        assertEquals("No path between start and end", throwedException.getMessage());
+        throwedException = assertThrows(RuntimeException.class, () -> dfsSolver.solve(maze, start, end));
+        assertEquals("No path between start and end", throwedException.getMessage());
     }
 
     @Test
@@ -62,10 +62,10 @@ class MainTest {
         Generator bfsGenerator = new GeneratorBridge(GeneratorType.BFS);
         Generator primeGenerator = new GeneratorBridge(GeneratorType.PRIM);
 
-        var throwable = assertThrows(RuntimeException.class, () -> bfsGenerator.generate(1, 7, 0));
-        assertEquals("height and width should be >= 3", throwable.getMessage());
-        throwable = assertThrows(RuntimeException.class, () -> primeGenerator.generate(7, 1, 0));
-        assertEquals("height and width should be >= 3", throwable.getMessage());
+        var throwedException = assertThrows(RuntimeException.class, () -> bfsGenerator.generate(1, 7, 0));
+        assertEquals("height and width should be >= 3", throwedException.getMessage());
+        throwedException = assertThrows(RuntimeException.class, () -> primeGenerator.generate(7, 1, 0));
+        assertEquals("height and width should be >= 3", throwedException.getMessage());
     }
 
     @Test
@@ -78,9 +78,9 @@ class MainTest {
         List<Coordinate> path = List.of(new Coordinate(0, 0),
             new Coordinate(1, 1));
 
-        var throwable = assertThrows(RuntimeException.class, () -> prettyRenderer.render(maze, path));
-        assertEquals("Path goes through the wall", throwable.getMessage());
-        throwable = assertThrows(RuntimeException.class, () -> simpleRenderer.render(maze, path));
-        assertEquals("Path goes through the wall", throwable.getMessage());
+        var throwedException = assertThrows(RuntimeException.class, () -> prettyRenderer.render(maze, path));
+        assertEquals("Path goes through the wall", throwedException.getMessage());
+        throwedException = assertThrows(RuntimeException.class, () -> simpleRenderer.render(maze, path));
+        assertEquals("Path goes through the wall", throwedException.getMessage());
     }
 }
