@@ -19,14 +19,6 @@ public class DiskMap extends AbstractMap<String, String> implements Map<String, 
         this.clear();
     }
 
-//    public static void main(String[] args) {
-//        DiskMap m = new DiskMap();
-//        m.put("2", "2");
-//        m.put("2", "q");
-//        System.out.println(m.entrySet());
-//        System.out.println(m.size());
-//    }
-
     private void writeSet(Set<Entry<String, String>> entrySet) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(PATH))) {
             for (var entry : entrySet) {
@@ -40,52 +32,23 @@ public class DiskMap extends AbstractMap<String, String> implements Map<String, 
     @Override
     public Set<Entry<String, String>> entrySet() {
         Set<Entry<String, String>> diskSet = new HashSet<>();
-//        Set<Entry<String, String>> diskSet = new EntrySet<>();
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(PATH))) {
-            boolean f = true;
-            while (f) {
+            boolean isFileNotEnded = true;
+            while (isFileNotEnded) {
                 try {
                     var o = ois.readObject();
                     AbstractMap.SimpleEntry<String, String> p =
                         (AbstractMap.SimpleEntry<String, String>) o;
                     diskSet.add(p);
                 } catch (EOFException | ClassNotFoundException e) {
-                    f = false;
+                    isFileNotEnded = false;
                 }
             }
-//            System.out.println(p.toString());
-        } catch (FileNotFoundException ignore) {
-//            throw new RuntimeException(e);
-        } catch (IOException ignore) {
-//            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         return diskSet;
     }
-
-//    @Override
-//    public int size() {
-//        return entrySet().size();
-//    }
-//
-//    @Override
-//    public boolean isEmpty() {
-//        return size() == 0;
-//    }
-//
-//    @Override
-//    public boolean containsKey(Object key) {
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean containsValue(Object value) {
-//        return false;
-//    }
-//
-//    @Override
-//    public String get(Object key) {
-//        return null;
-//    }
 
     @Override
     public String put(String key, String value) {
@@ -121,24 +84,10 @@ public class DiskMap extends AbstractMap<String, String> implements Map<String, 
         return ansString;
     }
 
-//    @Override
-//    public void putAll(Map<? extends String, ? extends String> m) {
-//
-//    }
 
     @Override
     public void clear() {
         writeSet(new HashSet<>());
     }
-
-//    @Override
-//    public Set<String> keySet() {
-//        return null;
-//    }
-
-//    @Override
-//    public Collection<String> values() {
-//        return null;
-//    }
 }
 

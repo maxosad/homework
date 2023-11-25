@@ -4,14 +4,13 @@ import java.nio.file.Path;
 import java.util.function.Supplier;
 
 public class NamesSupplier implements Supplier<Path> {
-    private Integer counter = 0;
-    public static final Integer ONE = 1;
-    private final String initialName;
+    private int counter = 0;
+    public static final int ONE = 1;
     private final String nameStart;
     private final String nameEnd;
 
     public NamesSupplier(Path initialPath) {
-        this.initialName = initialPath.getFileName().toString();
+        String initialName = initialPath.getFileName().toString();
         String[] nameSplited = initialName.split("\\.");
         Path parent = initialPath.getParent();
         nameStart =  parent + (parent.equals(Path.of("")) ? "" : "\\") + nameSplited[0];
@@ -21,6 +20,6 @@ public class NamesSupplier implements Supplier<Path> {
     @Override
     public Path get() {
         counter++;
-        return Path.of(nameStart + " — копия" + (counter.equals(ONE) ? "" : " (" + counter + ")") + nameEnd);
+        return Path.of(nameStart + " — копия" + (counter == ONE ? "" : " (" + counter + ")") + nameEnd);
     }
 }

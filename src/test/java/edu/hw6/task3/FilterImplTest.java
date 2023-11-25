@@ -54,13 +54,6 @@ class FilterImplTest {
         }
     }
 
-//    public static void main(String[] args) {
-//        Pattern pattern = Pattern.compile("[3]");
-//        Matcher matcher = pattern.matcher("src/main/java/edu/hw6/task3/files/1.php");
-//        System.out.println(matcher.find());
-////        System.out.println("src/main/java/edu/hw6/task3/files/1.php".find());
-//    }
-
     @Test
     void regexContains() {
         List<Path> list = new ArrayList<>();

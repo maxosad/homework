@@ -24,11 +24,4 @@ public class Cloner {
         }
         Main.LOGGER.info(path);
     }
-
-//    public static void main(String[] args) {
-//        Cloner.cloneFile(Path.of("src/main/java/edu/hw6/task2/origFile/Tinkoff Bank Biggest Secret.txt"));
-//
-//    }
-
-
 }

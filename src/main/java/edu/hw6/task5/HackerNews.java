@@ -32,7 +32,6 @@ public class HackerNews {
             for (int i = 1; i < splitLength; i++) {
                 ans[i - 1] = Long.parseLong(split[i]);
             }
-//            System.out.println(Arrays.toString(split));
         } catch (IOException | InterruptedException ignore) { }
 
         return ans;
@@ -48,7 +47,6 @@ public class HackerNews {
             HttpResponse<String> response =
                 client.send(request,  HttpResponse.BodyHandlers.ofString());
 
-//            System.out.println(response.body());
             String responseBody = response.body();
             Matcher titleMatcher = Pattern.compile("\"title\":\"[^\"]+\"").matcher(responseBody);
             if (!titleMatcher.find()) {
