@@ -11,16 +11,19 @@ public class Server {
 
     private final ExecutorService executor;
     private int port;
-    private ConcurrentLinkedQueue<Socket> clientsConnections;
+    private final int maxConnections;
 
-    public Server(int port, int nThreads) {
+    public Server(int port, int nThreads, int maxConnections) {
         executor = Executors.newFixedThreadPool(nThreads);
         this.port = port;
+        this.maxConnections = maxConnections;
     }
 
     public void run() {
         try(ServerSocket server = new ServerSocket(port)) {
-            while (!server.isClosed()) {
+            int clientNumber = 0;
+
+            while (!server.isClosed() && clientNumber < maxConnections) {
                 Socket client = server.accept();
                 executor.execute(new MonoThreadClientHandler(client));
             }
@@ -32,7 +35,7 @@ public class Server {
     }
 
     public static void main(String[] args) {
-        Server server = new Server(3345, 1);
+        Server server = new Server(3345, 1, 5);
         server.run();
 
     }
