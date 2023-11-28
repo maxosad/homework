@@ -1,13 +1,16 @@
 package edu.hw6.task2;
 
-import edu.hw6.Main;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.stream.Stream;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class Cloner {
+
+    public static final Logger LOGGER = LogManager.getLogger();
 
     private Cloner() { }
 
@@ -15,13 +18,13 @@ public class Cloner {
         NamesSupplier namesSupplier = new NamesSupplier(path);
         Path newPath = Stream.generate(namesSupplier)
             .filter(Files::notExists)
-            .findFirst().orElse(null);
+            .findFirst().orElseThrow(() -> new NullPointerException("All allowed file names are already used"));
 
         try {
             Files.copy(path, newPath);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Main.LOGGER.info(path);
+        LOGGER.info(path);
     }
 }

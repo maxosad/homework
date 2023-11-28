@@ -72,4 +72,24 @@ class FilterImplTest {
 
         assertEquals(expected, list);
     }
+
+    @Test
+    void largerThenAndGlobeMatches() {
+        List<Path> list = new ArrayList<>();
+        List<Path> expected = List.of(
+            Path.of("src/main/java/edu/hw6/task3/files/qwer.txt")
+        );
+
+        DirectoryStream.Filter<Path> filter = FilterImpl.largerThan(10)
+            .and(FilterImpl.globMatches(".+\\.txt"));
+        try (DirectoryStream<Path> entries = Files.newDirectoryStream(dir, filter)) {
+            for (var entry : entries) {
+                list.add(entry);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        assertEquals(expected, list);
+    }
 }

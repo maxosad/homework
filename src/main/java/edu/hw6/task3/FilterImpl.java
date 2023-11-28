@@ -11,10 +11,6 @@ import java.util.regex.Pattern;
 public class FilterImpl {
     private FilterImpl() { }
 
-    public static final Filter REGULAR_FILE = Files::isRegularFile;
-
-    public static final Filter READABLE = Files::isReadable;
-
     public static Filter largerThan(long expectedSize) {
         return entry -> Files.size(entry) > expectedSize;
     }
