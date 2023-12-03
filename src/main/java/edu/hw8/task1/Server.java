@@ -38,8 +38,7 @@ public class Server {
                     clientNumber.decrementAndGet();
                 }
             }
-//        } catch (SocketException e) {
-//            throw new RuntimeException(e);
+        } catch (SocketException ignore) {
         } catch (IOException | ExecutionException | InterruptedException ex) {
             throw new RuntimeException(ex);
         }
@@ -57,13 +56,5 @@ public class Server {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-
-
-
-    public static void main(String[] args) {
-        Server server = new Server(3345, 1);
-        server.run();
     }
 }

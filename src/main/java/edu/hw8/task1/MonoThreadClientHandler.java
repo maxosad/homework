@@ -40,6 +40,7 @@ public class MonoThreadClientHandler implements Runnable {
                 out.writeUTF(SAYING_DICT.get(key));
                 out.flush();
             }
+        } catch (EOFException ignore) {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
