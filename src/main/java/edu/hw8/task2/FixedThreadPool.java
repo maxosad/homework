@@ -1,9 +1,7 @@
 package edu.hw8.task2;
 
-import org.apache.logging.log4j.util.Supplier;
 import java.util.Arrays;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.function.Consumer;
 
 public class FixedThreadPool implements ThreadPool {
     private final Thread[] threads;

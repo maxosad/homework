@@ -21,11 +21,12 @@ public class MonoThreadClientHandler implements Runnable {
     }
 
     public MonoThreadClientHandler(Socket client) {
+
         this.clientDialog = client;
     }
+
     @Override
     public void run() {
-        System.out.println("after");
         try (DataInputStream in = new DataInputStream(clientDialog.getInputStream());
         DataOutputStream out = new DataOutputStream(clientDialog.getOutputStream());
              clientDialog) {

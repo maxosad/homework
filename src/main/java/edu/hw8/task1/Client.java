@@ -4,7 +4,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.concurrent.ExecutorService;
 
 public class Client {
     private int port;
@@ -27,12 +26,11 @@ public class Client {
         return ans;
     }
 
-    public static void main(String[] args) {
-        int port = 3345;
-        Client client = new Client(port);
-
-        ExecutorService executor;
-        String ans = client.send("интеллект");
-        System.out.println(ans);
-    }
+//    public static void main(String[] args) {
+//        int port = 3345;
+//        Client client = new Client(port);
+//
+//        String ans = client.send("интеллект");
+//        System.out.println(ans);
+//    }
 }
