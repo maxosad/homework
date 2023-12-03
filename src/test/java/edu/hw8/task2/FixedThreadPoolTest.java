@@ -30,7 +30,7 @@ class FixedThreadPoolTest {
                 fixedThreadPool.execute(counter::incrementAndGet);
             }
             Thread.sleep(1000);
-        } catch (Exception e ) {
+        } catch (Exception e) {
             fail(e);
         }
 

@@ -3,6 +3,7 @@ package edu.hw8.task1;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -12,16 +13,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Server {
 
     private final ExecutorService executor;
-    private int port;
     private final int maxConnections;
-    private boolean running;
     private ServerSocket server;
 
-    public Server(int port, int nThreads) throws IOException {
-        executor = Executors.newFixedThreadPool(nThreads);
-        this.port = port;
-        this.maxConnections = nThreads;
-        running = false;
+    public Server(int port, int maxConnections) {
+        executor = Executors.newFixedThreadPool(maxConnections);
+        this.maxConnections = maxConnections;
         try {
             server = new ServerSocket(port);
         } catch (IOException e) {
@@ -30,7 +27,7 @@ public class Server {
 
     }
 
-    public void run() {
+    private void innerRun() {
         try {
             AtomicInteger clientNumber = new AtomicInteger(0);
             while (!server.isClosed()) {
@@ -41,13 +38,20 @@ public class Server {
                     clientNumber.decrementAndGet();
                 }
             }
+//        } catch (SocketException e) {
+//            throw new RuntimeException(e);
         } catch (IOException | ExecutionException | InterruptedException ex) {
             throw new RuntimeException(ex);
         }
         executor.shutdown();
     }
 
-    public void stop()  {
+    public void run() {
+        Thread runThread = new Thread(this::innerRun);
+        runThread.start();
+    }
+
+    public void close()  {
         try {
             server.close();
         } catch (IOException e) {
@@ -58,8 +62,8 @@ public class Server {
 
 
 
-//    public static void main(String[] args) {
-//        Server server = new Server(3345, 1);
-//        server.run();
-//    }
+    public static void main(String[] args) {
+        Server server = new Server(3345, 1);
+        server.run();
+    }
 }
