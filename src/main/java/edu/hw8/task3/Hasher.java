@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import javax.xml.bind.DatatypeConverter;
 
-@SuppressWarnings({"MagicNumber", "UncommentedMain"})
+@SuppressWarnings({"MagicNumber"})
 public class Hasher {
 
     private Hasher() { }
@@ -24,12 +24,8 @@ public class Hasher {
         }
     }
 
-    public static void main(String[] args) {
+    public static void encodePasswordAndWriteInFile(String[] args) {
         String path = "src/main/java/edu/hw8/task3/files/loginAndHashedPasswords.txt";
-//        md.update(pass.getBytes(StandardCharsets.UTF_8));
-//        byte[] digest = md.digest();
-//        String myHash = DatatypeConverter.printHexBinary(digest).toLowerCase();
-//        System.out.println(myHash);
 
         String[] names = new String[]{"gaga", "you", "we"};
         String[] pas = new String[]{"1234", "qwer", "popo"};
