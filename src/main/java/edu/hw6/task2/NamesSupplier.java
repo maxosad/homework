@@ -4,8 +4,8 @@ import java.nio.file.Path;
 import java.util.function.Supplier;
 
 public class NamesSupplier implements Supplier<Path> {
-    private int counter = 0;
     public static final int ONE = 1;
+    private int counter = 0;
     private final String nameStart;
     private final String nameEnd;
 

@@ -14,8 +14,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FilterImplTest {
     public static final Path dir = Path.of("src/main/java/edu/hw6/task3/files");
-    public static final Path ff = Path.of("src/main/java/edu/hw6/task3/files/qwer.txt");
-    public static final Path pp = Path.of("src/main/java/edu/hw6/task3/files/1.php");
 
     @Test
     void largerThan() {
@@ -52,6 +50,8 @@ class FilterImplTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        assertEquals(expected, list);
     }
 
     @Test

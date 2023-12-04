@@ -18,16 +18,6 @@ public class DiskMap extends AbstractMap<String, String> implements Map<String, 
         this.clear();
     }
 
-    private void writeSet(Set<Entry<String, String>> entrySet) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(PATH))) {
-            for (var entry : entrySet) {
-                oos.writeObject(entry);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     @Override
     public Set<Entry<String, String>> entrySet() {
         Set<Entry<String, String>> diskSet = new HashSet<>();
@@ -35,10 +25,10 @@ public class DiskMap extends AbstractMap<String, String> implements Map<String, 
             boolean isFileNotEnded = true;
             while (isFileNotEnded) {
                 try {
-                    var o = ois.readObject();
-                    AbstractMap.SimpleEntry<String, String> p =
-                        (AbstractMap.SimpleEntry<String, String>) o;
-                    diskSet.add(p);
+                    var readedObject = ois.readObject();
+                    AbstractMap.SimpleEntry<String, String> keyValuePair =
+                        (AbstractMap.SimpleEntry<String, String>) readedObject;
+                    diskSet.add(keyValuePair);
                 } catch (EOFException | ClassNotFoundException e) {
                     isFileNotEnded = false;
                 }
@@ -47,6 +37,16 @@ public class DiskMap extends AbstractMap<String, String> implements Map<String, 
             throw new RuntimeException(e);
         }
         return diskSet;
+    }
+
+    private void writeSet(Set<Entry<String, String>> entrySet) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(PATH))) {
+            for (var entry : entrySet) {
+                oos.writeObject(entry);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

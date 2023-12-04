@@ -9,42 +9,42 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DiskMapTest {
-    private Map<String, String> a;
+    private Map<String, String> mapForTest;
 
     @BeforeEach
     void setUp() {
-        a = new DiskMap();
-        a.put("max1", "o");
+        mapForTest = new DiskMap();
+        mapForTest.put("max1", "o");
     }
     @Test
     void size() {
-        assertThat(a.size()).isOne();
+        assertThat(mapForTest.size()).isOne();
 
     }
 
     @Test
     void get() {
-        var result = a.get("max1");
+        var result = mapForTest.get("max1");
 
         assertEquals("o", result);
     }
 
     @Test
-    void reWrite() {
-        a.put("max1", "w");
+    void rewrite() {
+        mapForTest.put("max1", "w");
 
-        var result = a.get("max1");
+        var result = mapForTest.get("max1");
 
         assertEquals("w", result);
-        assertThat(a.size()).isOne();
+        assertThat(mapForTest.size()).isOne();
     }
 
     @Test
     void clear() {
-        a.put("max2", "w");
-        a.clear();
+        mapForTest.put("max2", "w");
+        mapForTest.clear();
 
-        var result = a.size();
+        var result = mapForTest.size();
 
         assertThat(result).isZero();
     }
