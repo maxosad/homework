@@ -1,5 +1,7 @@
 package edu.hw9;
 
+import edu.hw9.task1.Metric;
+import edu.hw9.task1.StatsCollector;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 

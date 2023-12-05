@@ -1,5 +1,6 @@
-package edu.hw9;
+package edu.hw9.task1;
 
+import edu.hw9.task1.Metric;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.DoubleSummaryStatistics;
