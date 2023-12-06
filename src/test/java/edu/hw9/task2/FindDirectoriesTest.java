@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.concurrent.ForkJoinPool;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class FindDirectoriesTest {
 
@@ -26,8 +27,10 @@ class FindDirectoriesTest {
 
         try (ForkJoinPool forkJoinPool = new ForkJoinPool()) {
             var res = forkJoinPool.invoke(recursiveTask).getKey();
-            System.out.println(res);
+            Thread.sleep(1000);
             assertEquals(expected, res);
+        } catch (InterruptedException e) {
+            fail(e);
         }
 
     }

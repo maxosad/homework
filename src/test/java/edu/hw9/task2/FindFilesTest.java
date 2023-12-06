@@ -25,7 +25,10 @@ class FindFilesTest {
         FindFiles findFilesRecursiveTask = new FindFiles(path);
         try (ForkJoinPool forkJoinPool = new ForkJoinPool()) {
             var res = forkJoinPool.invoke(findFilesRecursiveTask);
+            Thread.sleep(1000);
             assertEquals(expected, res);
+        } catch (InterruptedException e) {
+            fail(e);
         }
     }
 }
