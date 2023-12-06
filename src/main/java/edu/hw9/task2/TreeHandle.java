@@ -7,15 +7,15 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 
 public class TreeHandle {
-    public static void main(String[] args) {
-//        RecursiveTask<Integer> recursiveTask = ;
-//        ForkJoinPool forkJoinPool = new ForkJoinPool();
-        String path = "src/main/java/edu/hw9/task2/files";
-        try {
-            Files.list(Path.of(path)).forEach(System.out::println);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    public static void main(String[] args) throws IOException {
+        Path path = Path.of("src/main/java/edu/hw9/task2/files");
+        var recursiveTask = new FindDirectories(path);
+        try (ForkJoinPool forkJoinPool = new ForkJoinPool()) {
+            System.out.println(forkJoinPool.invoke(recursiveTask).getKey());
         }
+//        Files.list(path)
+//            .filter(Files::isRegularFile)
+//            .forEach(System.out::println);
     }
 
 }
