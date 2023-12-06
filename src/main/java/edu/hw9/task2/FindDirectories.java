@@ -16,6 +16,7 @@ public class FindDirectories extends RecursiveTask<AbstractMap.SimpleEntry<List<
         this.path = path;
 
     }
+
     @Override
     protected AbstractMap.SimpleEntry<List<Path>, Long> compute() {
         try (var dirFileStream = Files.list(path)) {
@@ -24,11 +25,11 @@ public class FindDirectories extends RecursiveTask<AbstractMap.SimpleEntry<List<
             List<FindDirectories> dirRecursiveTaskList = new ArrayList<>();
             var dirFilesList = dirFileStream.toList();
 
-            for (Path path : dirFilesList) {
-                if (Files.isRegularFile(path)) {
+            for (Path dirFilepath : dirFilesList) {
+                if (Files.isRegularFile(dirFilepath)) {
                     countFiles++;
-                } else if (Files.isDirectory(path)) {
-                    dirRecursiveTaskList.add(new FindDirectories(path));
+                } else if (Files.isDirectory(dirFilepath)) {
+                    dirRecursiveTaskList.add(new FindDirectories(dirFilepath));
                 }
             }
             for (var task : dirRecursiveTaskList) {

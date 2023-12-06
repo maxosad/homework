@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.RecursiveTask;
 
+
 public class FindFiles extends RecursiveTask<List<Path>> {
+    public static final long FILE_SIZE = 39L;
+    public static final String FILE_TYPE = ".php";
     private final Path path;
 
     public FindFiles(Path path) {
@@ -23,8 +26,8 @@ public class FindFiles extends RecursiveTask<List<Path>> {
 
             for (Path dirFilePath : dirFileList) {
                 if (Files.isRegularFile(dirFilePath)
-                    && Files.size(dirFilePath) > 39L
-                    && dirFilePath.toString().endsWith(".php")) {
+                    && Files.size(dirFilePath) > FILE_SIZE
+                    && dirFilePath.toString().endsWith(FILE_TYPE)) {
                     acceptedFiles.add(dirFilePath);
                 } else if (Files.isDirectory(dirFilePath)) {
                     recursiveTasksList.add(new FindFiles(dirFilePath));
