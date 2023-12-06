@@ -1,5 +1,6 @@
-package edu.hw9;
+package edu.hw9.task1;
 
+import edu.hw9.task1.Data;
 import edu.hw9.task1.Metric;
 import edu.hw9.task1.StatsCollector;
 import org.jetbrains.annotations.NotNull;
