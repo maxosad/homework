@@ -36,7 +36,7 @@ public class Main {
         Renderer linearRenderer = new LinearRenderer();
         fractalImage = linearRenderer.render(fractalImage, world, transformations, 100000, (short) 50, 0);
 
-        String path = "src/main/java/edu/project4/files/image2.png";
+        String path = "src/main/java/edu/project4/files/image3.png";
         ImageUtils.save(fractalImage, Path.of(path), ImageFormat.PNG);
     }
 }
