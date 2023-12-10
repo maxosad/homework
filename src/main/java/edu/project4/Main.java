@@ -3,6 +3,8 @@ package edu.project4;
 import edu.project4.model.FractalImage;
 import edu.project4.model.ImageFormat;
 import edu.project4.model.Rect;
+import edu.project4.processing.GammaCorrection;
+import edu.project4.processing.ImageProcessor;
 import edu.project4.render.LinearRenderer;
 import edu.project4.render.ParallelRenderer;
 import edu.project4.render.Renderer;
@@ -40,18 +42,22 @@ public class Main {
         Renderer linearRenderer = new LinearRenderer();
         Renderer parallelRenderer = new ParallelRenderer();
 
-        String pathLinear = "src/main/java/edu/project4/files/image0.png";
+        ImageProcessor gammaCorrection = new GammaCorrection();
+
+        String pathLinear = "src/main/java/edu/project4/files/image7.png";
         FractalImage fractalImage = FractalImage.create(1920, 1080);
         long startLinear = System.nanoTime();
         fractalImage = linearRenderer.render(fractalImage, world, transformations, 100000, (short) 50, 0);
         long linearTime = System.nanoTime() - startLinear;
+        gammaCorrection.process(fractalImage);
         ImageUtils.save(fractalImage, Path.of(pathLinear), ImageFormat.PNG);
 
-        String pathParallel = "src/main/java/edu/project4/files/image5.png";
+        String pathParallel = "src/main/java/edu/project4/files/image8.png";
         fractalImage = FractalImage.create(1920, 1080);
         long startParallel = System.nanoTime();
         fractalImage = parallelRenderer.render(fractalImage, world, transformations, 100000, (short) 50, 0);
         long parallelTime = System.nanoTime() - startParallel;
+        gammaCorrection.process(fractalImage);
         ImageUtils.save(fractalImage, Path.of(pathParallel), ImageFormat.PNG);
 
         LOGGER.info("linear is {}, parallel is {}", linearTime, parallelTime);
