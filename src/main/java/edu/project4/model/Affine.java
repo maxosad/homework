@@ -1,6 +1,6 @@
 package edu.project4.model;
 
-public record Affine (double a,
+public record Affine(double a,
                      double b,
                      double c,
                      double d,
@@ -8,4 +8,4 @@ public record Affine (double a,
                      double f,
                     int red,
                     int green,
-                    int blue){ }
+                    int blue) { }
