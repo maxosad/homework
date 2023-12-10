@@ -7,12 +7,13 @@ import edu.project4.model.Rect;
 import edu.project4.transformation.Transformation;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class LinearRenderer extends AffineCoeff implements Renderer {
-    public static final double X_MIN = -1.777;
-    public static final double X_MAX = 1.777;
-    public static final double Y_MIN = -1;
-    public static final double Y_MAX = 1;
+//    public static final double X_MIN = -1.777;
+//    public static final double X_MAX = 1.777;
+//    public static final double Y_MIN = -1;
+//    public static final double Y_MAX = 1;
 
     @Override
     public FractalImage render(
@@ -25,25 +26,25 @@ public class LinearRenderer extends AffineCoeff implements Renderer {
     ) {
         Random random = new Random(seed);
         for (int sample = 0; sample < samples; sample++) {
-            double newX = random.nextDouble(X_MIN, X_MAX);
-            double newY = random.nextDouble(Y_MIN, Y_MAX);
+            double newX = random.nextDouble(world.xMin(), world.xMax());
+            double newY = random.nextDouble(world.yMin(), world.yMax());
 
             for (int step = CHOOSE_BLOCK; step < iterPerSample; step++) {
                 int i = random.nextInt(COEFF.size());
 
-                double x = COEFF.get(i).a() * newX + COEFF.get(i).b() * newY + COEFF.get(i).c();
                 double y = COEFF.get(i).d() * newX + COEFF.get(i).e() * newY + COEFF.get(i).f();
+                double x = COEFF.get(i).a() * newX + COEFF.get(i).b() * newY + COEFF.get(i).c();
 
-                Transformation transformation  = variations.get(random.nextInt(variations.size()));
-
+                Transformation transformation  = variations.get(ThreadLocalRandom.current().nextInt(variations.size()));
                 var newPoint = transformation.apply(new Point(x, y));
 
                 x = newPoint.x();
                 y = newPoint.y();
-
-                if (step >= 0 && X_MIN <= x && x <= X_MAX && Y_MIN <= y && y <= Y_MAX) {
-                    int x1 = canvas.width() - (int) (((X_MAX - x) / (X_MAX - X_MIN)) * canvas.width());
-                    int y1 = canvas.height() - (int) (((Y_MAX - y) / (Y_MAX - Y_MIN)) * canvas.height());
+                if (step >= 0 && world.contains(newPoint)) {
+                    int x1 = canvas.width() - (int) (((world.xMax() - x) / (world.xMax() - world.xMin()))
+                        * canvas.width());
+                    int y1 = canvas.height() - (int) (((world.yMax() - y) / (world.yMax() - world.yMin()))
+                        * canvas.height());
 
                     if (canvas.contains(x1, y1)) {
                         Pixel pixel = canvas.pixel(x1, y1);
