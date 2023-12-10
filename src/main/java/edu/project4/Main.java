@@ -34,7 +34,7 @@ public class Main {
         transformations.add(new SphericalTransformation());
 
         Renderer linearRenderer = new LinearRenderer();
-        fractalImage = linearRenderer.render(fractalImage, world, transformations, 1000000, (short) 50, 0);
+        fractalImage = linearRenderer.render(fractalImage, world, transformations, 100000, (short) 50, 0);
 
         String path = "src/main/java/edu/project4/files/image2.png";
         ImageUtils.save(fractalImage, Path.of(path), ImageFormat.PNG);
