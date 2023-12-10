@@ -8,7 +8,9 @@ import edu.project4.processing.ImageProcessor;
 import edu.project4.render.LinearRenderer;
 import edu.project4.render.ParallelRenderer;
 import edu.project4.render.Renderer;
+import edu.project4.transformation.DiskTransformation;
 import edu.project4.transformation.LinearTransformation;
+import edu.project4.transformation.PolarTransformation;
 import edu.project4.transformation.SinTransformation;
 import edu.project4.transformation.SphericalTransformation;
 import edu.project4.transformation.Transformation;
@@ -38,13 +40,15 @@ public class Main {
         transformations.add(new LinearTransformation());
         transformations.add(new SinTransformation());
         transformations.add(new SphericalTransformation());
+        transformations.add(new PolarTransformation());
+        transformations.add(new DiskTransformation());
 
         Renderer linearRenderer = new LinearRenderer();
         Renderer parallelRenderer = new ParallelRenderer();
 
         ImageProcessor gammaCorrection = new GammaCorrection();
 
-        String pathLinear = "src/main/java/edu/project4/files/image7.png";
+        String pathLinear = "src/main/java/edu/project4/files/image11.png";
         FractalImage fractalImage = FractalImage.create(1920, 1080);
         long startLinear = System.nanoTime();
         fractalImage = linearRenderer.render(fractalImage, world, transformations, 100000, (short) 50, 0);
@@ -52,7 +56,7 @@ public class Main {
         gammaCorrection.process(fractalImage);
         ImageUtils.save(fractalImage, Path.of(pathLinear), ImageFormat.PNG);
 
-        String pathParallel = "src/main/java/edu/project4/files/image8.png";
+        String pathParallel = "src/main/java/edu/project4/files/image10.png";
         fractalImage = FractalImage.create(1920, 1080);
         long startParallel = System.nanoTime();
         fractalImage = parallelRenderer.render(fractalImage, world, transformations, 100000, (short) 50, 0);

@@ -14,7 +14,7 @@ public class AffineCoeff {
     static {
         SecureRandom random = new SecureRandom();
         int count = 0;
-        while (count < 3) {
+        while (count < 10) {
             double a = random.nextDouble(-1, 1);
             double b = random.nextDouble(-1, 1);
             double c = random.nextDouble(-1, 1);

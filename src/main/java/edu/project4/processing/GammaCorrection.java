@@ -6,7 +6,7 @@ import static java.lang.Math.log10;
 import static java.lang.Math.pow;
 
 public class GammaCorrection implements ImageProcessor {
-    public static final double GAMMA = 0.9;
+    public static final double GAMMA = 5;
 
     @Override
     public void process(FractalImage image) {
