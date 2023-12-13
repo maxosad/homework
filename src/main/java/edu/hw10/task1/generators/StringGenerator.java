@@ -1,5 +1,8 @@
 package edu.hw10.task1.generators;
 
+import jdk.jshell.spi.ExecutionControl;
+import java.lang.annotation.Annotation;
+
 public class StringGenerator extends AbstractGenerator<String>{
 
     public static final int TARGET_STRING_LENGTH = 10;
@@ -17,6 +20,12 @@ public class StringGenerator extends AbstractGenerator<String>{
             .toString();
 
         return generatedString;
+    }
+
+    @Override
+    public String generate(Annotation[] annotations) {
+        throw new RuntimeException(
+            new ExecutionControl.NotImplementedException("we don't handle String annotations"));
     }
 
 }

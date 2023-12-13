@@ -2,6 +2,7 @@ package edu.hw10;
 
 import edu.hw10.task1.model.MyClass;
 import edu.hw10.task1.RandomObjectGenerator;
+import edu.hw10.task1.model.MyClassWithAnnotations;
 
 public class Main {
     public static void main(String[] args) {
@@ -9,13 +10,8 @@ public class Main {
 
         RandomObjectGenerator rog = new RandomObjectGenerator();
 
-//        var myClass = rog.nextObject(MyClass.class, "create");
-        MyClass myClassObject = rog.nextObject(MyClass.class);
-        System.out.println(myClassObject.getNumber());
-        System.out.println(myClassObject.getName());
+//        var myClass = rog.nextObject(MyClass.class);
+        MyClassWithAnnotations myClassObject = rog.nextObject(MyClassWithAnnotations.class);
 
-//        MyClassRecord myClassRecordObject = rog.nextObject(MyClassRecord.class);
-//        System.out.println(myClassRecordObject.number());
-//        System.out.println(myClassRecordObject.name());
     }
 }

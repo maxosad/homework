@@ -24,7 +24,4 @@ public class MyClass {
     public void setName(String name) {
         this.name = name;
     }
-    private void printData(){
-        System.out.println(number + name);
-    }
 }
