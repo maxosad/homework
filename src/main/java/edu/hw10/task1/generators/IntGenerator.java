@@ -20,7 +20,7 @@ public class IntGenerator extends AbstractGenerator<Integer> {
                 minVal = (int) ((Min) annotation).value();
             }
             if (annotation.annotationType().equals(Max.class)) {
-                maxVal = (int) ((Max) annotation).value();
+                maxVal = (int) ((Max) annotation).value() + 1;
             }
         }
         return random.nextInt(minVal, maxVal);
