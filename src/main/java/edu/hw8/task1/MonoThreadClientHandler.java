@@ -9,17 +9,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MonoThreadClientHandler implements Runnable {
-    private final Socket clientDialog;
-    private static final Map<String, String> SAYING_DICT = new HashMap<>();
+    private static final Map<String, String> SAYING_DICT = Map.of(
+        "личности", "Не переходи на личности там, где их нет",
+        "оскорбления", "Если твои противники перешли на личные оскорбления, будь уверена — твоя победа не за горами",
+        "глупый", "А я тебе говорил, что ты глупый? Так вот, я забираю свои слова обратно... Ты просто бог идиотизма.",
+        "интеллект", "Чем ниже интеллект, тем громче оскорбления"
+    );
 
-    static {
-        SAYING_DICT.put("личности", "Не переходи на личности там, где их нет");
-        SAYING_DICT.put("оскорбления",
-            "Если твои противники перешли на личные оскорбления, будь уверена — твоя победа не за горами");
-        SAYING_DICT.put("глупый",
-            "А я тебе говорил, что ты глупый? Так вот, я забираю свои слова обратно... Ты просто бог идиотизма.");
-        SAYING_DICT.put("интеллект", "Чем ниже интеллект, тем громче оскорбления");
-    }
+    private final Socket clientDialog;
 
     public MonoThreadClientHandler(Socket client) {
 
