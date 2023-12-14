@@ -6,7 +6,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class FixedThreadPool implements ThreadPool {
-    private static final Lock CLOSE_LOCK = new ReentrantLock();
     private final Thread[] threads;
     private final LinkedBlockingQueue<Runnable> taskQueue = new LinkedBlockingQueue<>(10);
     private final int nThreads;
@@ -53,18 +52,15 @@ public class FixedThreadPool implements ThreadPool {
     }
 
     @Override
-    public void close() throws Exception {
+    public synchronized void close() throws Exception {
         isClosed = true;
-        if (CLOSE_LOCK.tryLock()) {
-            Arrays.stream(threads).forEach(Thread::interrupt);
-            Arrays.stream(threads).forEach(t -> {
-                try {
-                    t.join();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-            CLOSE_LOCK.unlock();
-        }
+        Arrays.stream(threads).forEach(Thread::interrupt);
+        Arrays.stream(threads).forEach(t -> {
+            try {
+                t.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 }
