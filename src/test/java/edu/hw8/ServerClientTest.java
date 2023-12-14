@@ -25,7 +25,6 @@ public class ServerClientTest {
             Thread.sleep(1000);
             server.close();
         } catch (Exception e) {
-            System.out.println("erftyjk");
             fail(e);
         }
 

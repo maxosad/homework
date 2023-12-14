@@ -26,7 +26,6 @@ public class MonoThreadClientHandler implements Runnable {
         try (DataInputStream in = new DataInputStream(clientDialog.getInputStream());
         DataOutputStream out = new DataOutputStream(clientDialog.getOutputStream());
              clientDialog) {
-
             while (!clientDialog.isClosed()) {
                 String key = in.readUTF();
                 if (key.equalsIgnoreCase("quit")) {
