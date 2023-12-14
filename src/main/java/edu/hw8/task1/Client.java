@@ -13,16 +13,15 @@ public class Client {
     }
 
     public String send(String messageToSend) {
-        String ans = "";
         try (Socket client = new Socket("localhost", port)) {
             try (DataOutputStream out = new DataOutputStream(client.getOutputStream());
                  DataInputStream in = new DataInputStream(client.getInputStream())) {
                 out.writeUTF(messageToSend);
-                ans = in.readUTF();
+                return in.readUTF();
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return ans;
+
     }
 }
