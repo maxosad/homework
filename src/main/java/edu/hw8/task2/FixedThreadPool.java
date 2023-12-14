@@ -2,8 +2,11 @@ package edu.hw8.task2;
 
 import java.util.Arrays;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class FixedThreadPool implements ThreadPool {
+    private static final Lock closeLock = new ReentrantLock();
     private final Thread[] threads;
     private final LinkedBlockingQueue<Runnable> taskQueue = new LinkedBlockingQueue<>(10);
     private final int nThreads;
@@ -52,13 +55,16 @@ public class FixedThreadPool implements ThreadPool {
     @Override
     public void close() throws Exception {
         isClosed = true;
-        Arrays.stream(threads).forEach(Thread::interrupt);
-        Arrays.stream(threads).forEach(t -> {
-            try {
-                t.join();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        });
+        if (closeLock.tryLock()) {
+            Arrays.stream(threads).forEach(Thread::interrupt);
+            Arrays.stream(threads).forEach(t -> {
+                try {
+                    t.join();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            closeLock.unlock();
+        }
     }
 }
