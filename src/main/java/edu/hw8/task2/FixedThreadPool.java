@@ -17,8 +17,10 @@ public class FixedThreadPool implements ThreadPool {
             }
         }
     };
+    private boolean isClosed;
 
     private FixedThreadPool(int nThreads) {
+        isClosed = false;
         this.nThreads = nThreads;
         this.threads = new Thread[nThreads];
         for (int threadIndex = 0; threadIndex < nThreads; threadIndex++) {
@@ -37,6 +39,9 @@ public class FixedThreadPool implements ThreadPool {
 
     @Override
     public void execute(Runnable runnable) {
+        if (isClosed) {
+            throw new RuntimeException("Pool already closed");
+        }
         try {
             taskQueue.put(runnable);
         } catch (InterruptedException e) {
@@ -46,6 +51,7 @@ public class FixedThreadPool implements ThreadPool {
 
     @Override
     public void close() throws Exception {
+        isClosed = true;
         Arrays.stream(threads).forEach(Thread::interrupt);
     }
 }
