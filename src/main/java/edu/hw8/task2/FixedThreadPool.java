@@ -53,5 +53,12 @@ public class FixedThreadPool implements ThreadPool {
     public void close() throws Exception {
         isClosed = true;
         Arrays.stream(threads).forEach(Thread::interrupt);
+        Arrays.stream(threads).forEach(t -> {
+            try {
+                t.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 }
