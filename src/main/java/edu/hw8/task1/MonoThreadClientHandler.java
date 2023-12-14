@@ -19,7 +19,6 @@ public class MonoThreadClientHandler implements Runnable {
     private final Socket clientDialog;
 
     public MonoThreadClientHandler(Socket client) {
-
         this.clientDialog = client;
     }
 
