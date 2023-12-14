@@ -5,11 +5,22 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
 public class ExampleAspect {
+    @Pointcut("@annotation(LogExecutionTime)")
+    public void callAtMyServiceAnnotation() {
+    }
+
+    @Before("callAtMyServiceAnnotation()")
+    public void beforeCallAt() {
+        System.out.println("dibjfjbvljdnvlfdsjvldjbvfhoej");
+    }
+
     @Around("@annotation(LogExecutionTime)")
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
         long start = System.currentTimeMillis();
@@ -24,14 +35,16 @@ public class ExampleAspect {
     }
 
     @LogExecutionTime
-    public void serve() throws InterruptedException {
-        Thread.sleep(2000);
+    public void serve() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException ignore) {}
     }
 
     public static void main(String[] args) {
         ExampleAspect m = new ExampleAspect();
-        try {
-            m.serve();
-        } catch (Exception ignore) { }
+
+        m.serve();
+
     }
 }
