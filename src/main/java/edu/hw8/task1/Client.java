@@ -2,8 +2,8 @@ package edu.hw8.task1;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.IOException;
 import java.net.Socket;
+import lombok.SneakyThrows;
 
 public class Client {
     private int port;
@@ -12,16 +12,13 @@ public class Client {
         this.port = port;
     }
 
+    @SneakyThrows
     public String send(String messageToSend) {
-        try (Socket client = new Socket("localhost", port)) {
-            try (DataOutputStream out = new DataOutputStream(client.getOutputStream());
-                 DataInputStream in = new DataInputStream(client.getInputStream())) {
-                out.writeUTF(messageToSend);
-                return in.readUTF();
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        try (Socket client = new Socket("localhost", port);
+             DataOutputStream out = new DataOutputStream(client.getOutputStream());
+             DataInputStream in = new DataInputStream(client.getInputStream())) {
+            out.writeUTF(messageToSend);
+            return in.readUTF();
         }
-
     }
 }
