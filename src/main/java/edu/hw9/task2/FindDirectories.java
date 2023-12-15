@@ -9,12 +9,11 @@ import java.util.List;
 import java.util.concurrent.RecursiveTask;
 
 public class FindDirectories extends RecursiveTask<AbstractMap.SimpleEntry<List<Path>, Long>> {
-    private final Path path;
     public static final long COUNT_FILE_ALLOWED = 10L;
+    private final Path path;
 
     public FindDirectories(Path path) {
         this.path = path;
-
     }
 
     @Override

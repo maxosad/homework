@@ -12,13 +12,13 @@ class FindDirectoriesTest {
 
     @Test
     void compute() {
-        Path path = Path.of("src/main/java/edu/hw9/task2/files");
+        Path path = Path.of("src/test/java/edu/hw9/files");
         String systemSeparator = FileSystems.getDefault().getSeparator();
         List<String[]> expectedString = List.of(
-            new String[]{"src", "main", "java", "edu", "hw9", "task2", "files", "tenFilesDir0"},
-            new String[]{"src", "main", "java", "edu", "hw9", "task2", "files", "tenFilesDir1"},
-            new String[]{"src", "main", "java", "edu", "hw9", "task2", "files", "tenFilesDir2"},
-            new String[]{"src", "main", "java", "edu", "hw9", "task2", "files"}
+            new String[]{"src", "test", "java", "edu", "hw9", "files", "tenFilesDir0"},
+            new String[]{"src", "test", "java", "edu", "hw9", "files", "tenFilesDir1"},
+            new String[]{"src", "test", "java", "edu", "hw9", "files", "tenFilesDir2"},
+            new String[]{"src", "test", "java", "edu", "hw9", "files"}
         );
         List<Path> expected = expectedString.stream()
             .map(pathNames -> Path.of(String.join(systemSeparator, pathNames)))
