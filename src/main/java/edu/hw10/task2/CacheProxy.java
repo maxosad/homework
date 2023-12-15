@@ -7,7 +7,6 @@ import java.util.Arrays;
 public final class CacheProxy {
 
     private CacheProxy() {
-
     }
 
     public static <T> T create(T object, Class<T> className, Path persistPath) {
