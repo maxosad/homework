@@ -1,18 +1,23 @@
 package edu.hw10.task2;
 
+import java.lang.reflect.Proxy;
+import java.nio.file.Path;
 import java.util.Arrays;
 
-public class CacheProxy {
-    public static <T> T create(T t, Class<? extends T> c) {
-        var methods = c.getDeclaredMethods();
-        int methodsSize = methods.length;
-        for (int methodIndex = 0; methodIndex < methodsSize; methodIndex++) {
-            if (methods[methodIndex].isAnnotationPresent(Cache.class)) {
+public final class CacheProxy {
 
-                System.out.println("sdfads");
-            }
-        }
-        System.out.println(Arrays.toString(c.getDeclaredMethods()[0].getDeclaredAnnotations()));
-        return null;
+    private CacheProxy() {
+
+    }
+
+    public static <T> T create(T object, Class<T> className, Path persistPath) {
+        return (T) Proxy.newProxyInstance(
+            className.getClassLoader(),
+            className.getInterfaces(),
+            new CacheInvocationHandler(
+                object,
+                persistPath
+            )
+        );
     }
 }
