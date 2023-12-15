@@ -14,14 +14,14 @@ class FindFilesTest {
     void compute() {
         String systemSeparator = FileSystems.getDefault().getSeparator();
         List<String[]> expectedString = List.of(
-            new String[]{"src", "main", "java", "edu", "hw9", "task2", "files", "bigPhp.php"},
-            new String[]{"src", "main", "java", "edu", "hw9", "task2", "files", "dir2", "php1.php"},
-            new String[]{"src", "main", "java", "edu", "hw9", "task2", "files", "dir2", "php0.php"}
+            new String[]{"src", "test", "java", "edu", "hw9", "files", "bigPhp.php"},
+            new String[]{"src", "test", "java", "edu", "hw9", "files", "dir2", "php0.php"},
+            new String[]{"src", "test", "java", "edu", "hw9", "files", "dir2", "php1.php"}
         );
         List<Path> expected = expectedString.stream()
             .map(pathNames -> Path.of(String.join(systemSeparator, pathNames)))
             .toList();
-        Path path = Path.of("src/main/java/edu/hw9/task2/files");
+        Path path = Path.of("src/test/java/edu/hw9/files");
         FindFiles findFilesRecursiveTask = new FindFiles(path);
         try (ForkJoinPool forkJoinPool = new ForkJoinPool()) {
             var res = forkJoinPool.invoke(findFilesRecursiveTask);
