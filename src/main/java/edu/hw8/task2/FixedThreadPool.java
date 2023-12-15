@@ -51,6 +51,9 @@ public class FixedThreadPool implements ThreadPool {
 
     @Override
     public synchronized void close() throws Exception {
+        if (isClosed) {
+            return;
+        }
         isClosed = true;
         Arrays.stream(threads).forEach(Thread::interrupt);
         Arrays.stream(threads).forEach(t -> {
