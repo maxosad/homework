@@ -22,7 +22,7 @@ public class CacheInvocationHandler implements InvocationHandler {
             }
             return saveInMemory(method, args);
         }
-        return method.invoke(proxiedObject, args);
+        return method.invoke(target, args);
     }
 
     private Object saveInMemory(Method method, Object[] args) {
