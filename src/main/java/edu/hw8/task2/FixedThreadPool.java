@@ -50,7 +50,7 @@ public class FixedThreadPool implements ThreadPool {
     }
 
     @Override
-    public synchronized void close() throws Exception {
+    public synchronized void close() {
         if (isClosed) {
             return;
         }

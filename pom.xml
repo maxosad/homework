@@ -36,7 +36,6 @@
         <assertj.version>3.24.2</assertj.version>
 
 
-<!--        <xxx.version>3.24.2</xxx.version>-->
         <xml.version>2.3.1</xml.version>
 
         <maven-checkstyle-plugin.version>3.3.0</maven-checkstyle-plugin.version>

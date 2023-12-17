@@ -50,7 +50,7 @@ public class Server {
         runThread.start();
     }
 
-    public void close()  {
+    public  void close()  {
         try {
             server.close();
         } catch (IOException e) {
