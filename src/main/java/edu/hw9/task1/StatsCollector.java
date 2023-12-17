@@ -6,7 +6,6 @@ import java.util.DoubleSummaryStatistics;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -21,16 +20,16 @@ public class StatsCollector {
 
     public void push(String name, double[] data) {
         Runnable countStatisticTask = () -> {
-            if (data.length ==0) {
+            if (data.length == 0) {
                 return;
             }
             metricMap.putIfAbsent(name, new Metric(name, 0.0, 0, Double.MIN_VALUE, Double.MAX_VALUE));
-            Metric CurrentMetric = metricMap.get(name);
+            Metric currentMetric = metricMap.get(name);
             DoubleSummaryStatistics stat = Arrays.stream(data).summaryStatistics();
-            CurrentMetric.addSum(stat.getSum());
-            CurrentMetric.addMin(stat.getMin());
-            CurrentMetric.addMax(stat.getMax());
-            CurrentMetric.addCount(stat.getCount());
+            currentMetric.addSum(stat.getSum());
+            currentMetric.addMin(stat.getMin());
+            currentMetric.addMax(stat.getMax());
+            currentMetric.addCount(stat.getCount());
         };
         executor.execute(countStatisticTask);
     }

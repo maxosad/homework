@@ -23,7 +23,7 @@ public class Metric {
     }
 
     public void addSum(double sum) {
-        if (sumLock.tryLock()){
+        if (sumLock.tryLock()) {
             try {
                 this.sum += sum;
             } finally {
@@ -33,7 +33,7 @@ public class Metric {
     }
 
     public void addMin(double min) {
-        if (minLock.tryLock()){
+        if (minLock.tryLock()) {
             try {
                 if (this.min > min) {
                     this.min = min;
@@ -45,7 +45,7 @@ public class Metric {
     }
 
     public void addMax(double max) {
-        if (maxLock.tryLock()){
+        if (maxLock.tryLock()) {
             try {
                 if (this.max < max) {
                     this.max = max;
@@ -57,7 +57,7 @@ public class Metric {
     }
 
     public void addCount(double count) {
-        if (countLock.tryLock()){
+        if (countLock.tryLock()) {
             try {
                 this.count += count;
             } finally {
