@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ChangeBehaviorOfExistingClass {
     @Test
     @SneakyThrows
-    void shouldCallOurFunction(){
+    public void shouldCallOurFunction(){
         int r = new ByteBuddy()
             .subclass(ArithmeticUtils.class)
             .method(named("sum")
