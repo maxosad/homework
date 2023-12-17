@@ -6,7 +6,6 @@ import net.bytebuddy.implementation.FixedValue;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static net.bytebuddy.matcher.ElementMatchers.named;
-import static org.assertj.core.api.FactoryBasedNavigableListAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SayHello {
@@ -17,7 +16,8 @@ public class SayHello {
         String helloString = "Hello, ByteBuddy!";
         Class<?> dynamicType = new ByteBuddy()
             .subclass(Object.class)
-            .method(named("toString")).intercept(FixedValue.value(helloString))
+            .method(named("toString"))
+            .intercept(FixedValue.value(helloString))
             .make()
             .load(getClass().getClassLoader(), ClassLoadingStrategy.Default.WRAPPER)
             .getLoaded();
