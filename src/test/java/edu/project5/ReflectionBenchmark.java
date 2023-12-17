@@ -44,7 +44,7 @@ public class ReflectionBenchmark {
     @Setup
     public void setup() throws NoSuchMethodException {
         student = new Student("Alexander", "Biryukov");
-        method = ...;
+//        method = ...;
     }
 
     @Benchmark
