@@ -3,7 +3,6 @@ package edu.hw10.task1.generators;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import java.lang.annotation.Annotation;
-import java.security.SecureRandom;
 
 public class IntGenerator extends AbstractGenerator<Integer> {
     @Override

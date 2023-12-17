@@ -1,9 +1,10 @@
 package edu.hw10.task1.generators;
 
-import jdk.jshell.spi.ExecutionControl;
 import java.lang.annotation.Annotation;
+import jdk.jshell.spi.ExecutionControl;
 
-public class StringGenerator extends AbstractGenerator<String>{
+@SuppressWarnings("MagicNumber")
+public class StringGenerator extends AbstractGenerator<String> {
 
     public static final int TARGET_STRING_LENGTH = 10;
 

@@ -7,20 +7,16 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 public class RandomObjectGenerator {
 
 
-    private static final Map<Class, Generator> generatorMap;
-
-    static {
-        generatorMap = new HashMap<>();
-        generatorMap.put(String.class, new StringGenerator());
-        generatorMap.put(int.class, new IntGenerator());
-        generatorMap.put(Integer.class, new IntGenerator());
-    }
+    private static final Map<Class, Generator> GENERATOR_MAP = Map.of(
+        String.class, new StringGenerator(),
+        int.class, new IntGenerator(),
+        Integer.class, new IntGenerator()
+    );
 
     public <T> T nextObject(Class<T> clazz) {
         try {
@@ -33,13 +29,14 @@ public class RandomObjectGenerator {
 
             for (int paramIndex = 0; paramIndex < paramSize; paramIndex++) {
                 if (parameterAnnotations[paramIndex].length != 0) {
-                    params.add(generatorMap.get(paramTypes[paramIndex]).generate(parameterAnnotations[paramIndex]));
+                    params.add(GENERATOR_MAP.get(paramTypes[paramIndex]).generate(parameterAnnotations[paramIndex]));
                 } else {
-                    params.add(generatorMap.get(paramTypes[paramIndex]).generate());
+                    params.add(GENERATOR_MAP.get(paramTypes[paramIndex]).generate());
                 }
             }
             return clazz.getConstructor(paramTypes).newInstance(params.toArray());
-        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+        } catch (InstantiationException | IllegalAccessException
+                 | NoSuchMethodException | InvocationTargetException e) {
             throw new RuntimeException(e);
 
         }
@@ -49,8 +46,7 @@ public class RandomObjectGenerator {
         try {
             Method[] mm = clazz.getDeclaredMethods();
             Method method = null;
-            for (Method m:
-                 mm) {
+            for (Method m : mm) {
                 if (m.getName().equals(initMethodName)) {
                     method = m;
                 }
@@ -63,9 +59,9 @@ public class RandomObjectGenerator {
 
             for (int paramIndex = 0; paramIndex < paramSize; paramIndex++) {
                 if (parameterAnnotations[paramIndex].length != 0) {
-                    params.add(generatorMap.get(paramTypes[paramIndex]).generate(parameterAnnotations[paramIndex]));
+                    params.add(GENERATOR_MAP.get(paramTypes[paramIndex]).generate(parameterAnnotations[paramIndex]));
                 } else {
-                    params.add(generatorMap.get(paramTypes[paramIndex]).generate());
+                    params.add(GENERATOR_MAP.get(paramTypes[paramIndex]).generate());
                 }
             }
             return (T) method.invoke(null, params.toArray());

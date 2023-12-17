@@ -6,6 +6,7 @@ import java.security.SecureRandom;
 public class AbstractGenerator<T> implements Generator<T> {
 
     protected final SecureRandom random;
+
     public AbstractGenerator() {
         random = new SecureRandom();
     }

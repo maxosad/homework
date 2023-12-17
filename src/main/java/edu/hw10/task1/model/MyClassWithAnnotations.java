@@ -5,15 +5,15 @@ import jakarta.validation.constraints.Min;
 
 public class MyClassWithAnnotations {
     private int minNumber;
+
     private int maxNumber;
-    ;
 
     public MyClassWithAnnotations(@Max(11) @Min(10) int minNumber,  @Max(20) @Min(20) int maxNumber) {
         this.minNumber = minNumber;
         this.maxNumber = maxNumber;
     }
 
-    public static MyClassWithAnnotations getInstance(@Max(11) @Min(10) int minNumber,@Max(20) @Min(20) int maxNumber) {
+    public static MyClassWithAnnotations getInstance(@Max(11) @Min(10) int minNumber, @Max(20) @Min(20) int maxNumber) {
         return new MyClassWithAnnotations(minNumber, maxNumber);
     }
 
