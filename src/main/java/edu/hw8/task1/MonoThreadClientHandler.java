@@ -2,7 +2,6 @@ package edu.hw8.task1;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.EOFException;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Map;
@@ -34,7 +33,6 @@ public class MonoThreadClientHandler implements Runnable {
                 out.writeUTF(SAYING_DICT.get(key));
                 out.flush();
             }
-        } catch (EOFException ignore) {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
