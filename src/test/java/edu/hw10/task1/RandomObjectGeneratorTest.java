@@ -3,15 +3,18 @@ package edu.hw10.task1;
 import edu.hw10.task1.model.MyClass;
 import edu.hw10.task1.model.MyClassRecord;
 import edu.hw10.task1.model.MyClassWithAnnotations;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class RandomObjectGeneratorTest {
     private RandomObjectGenerator rog;
+
     @BeforeEach
     void setUp() {
         rog = new RandomObjectGenerator();
@@ -46,7 +49,7 @@ class RandomObjectGeneratorTest {
         assertNotNull(myClassObject);
         assertNotNull(myClassRecordObject);
         assertNotNull(myClassWithAnnotations);
-        assertNotNull( myClassObject.getNumber());
+        assertNotNull(myClassObject.getNumber());
         assertNotNull(myClassObject.getName());
         assertNotNull(myClassRecordObject.number());
         assertNotNull(myClassRecordObject.name());
@@ -77,7 +80,7 @@ class RandomObjectGeneratorTest {
 
         assertNotNull(myClassObject);
         assertNotNull(myClassWithAnnotations);
-        assertNotNull( myClassObject.getNumber());
+        assertNotNull(myClassObject.getNumber());
         assertNotNull(myClassObject.getName());
         assertTrue(10 <= myClassWithAnnotations.getMinNumber() && myClassWithAnnotations.getMinNumber() <= 11);
         assertEquals(20, myClassWithAnnotations.getMaxNumber());
