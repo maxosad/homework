@@ -5,11 +5,11 @@ import edu.hw10.task1.generators.IntGenerator;
 import edu.hw10.task1.generators.StringGenerator;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Executable;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import lombok.SneakyThrows;
 
 public class RandomObjectGenerator {
 
@@ -25,33 +25,26 @@ public class RandomObjectGenerator {
         Integer.class
     );
 
+    @SneakyThrows
     public <T> T nextObject(Class<T> clazz) {
-        try {
-            Constructor constructor = clazz.getConstructors()[0];
+        Constructor constructor = clazz.getConstructors()[0];
 
-            Class[] paramTypes = constructor.getParameterTypes();
-            ArrayList<Object> params = createParams(constructor);
-            return clazz.getConstructor(paramTypes).newInstance(params.toArray());
-        } catch (InstantiationException | IllegalAccessException
-                 | NoSuchMethodException | InvocationTargetException e) {
-            throw new RuntimeException(e);
-        }
+        Class[] paramTypes = constructor.getParameterTypes();
+        ArrayList<Object> params = createParams(constructor);
+        return clazz.getConstructor(paramTypes).newInstance(params.toArray());
     }
 
+    @SneakyThrows
     public <T> T nextObject(Class<T> clazz, String initMethodName) {
-        try {
-            Method[] mm = clazz.getDeclaredMethods();
-            Method method = null;
-            for (Method m : mm) {
-                if (m.getName().equals(initMethodName)) {
-                    method = m;
-                }
+        Method[] mm = clazz.getDeclaredMethods();
+        Method method = null;
+        for (Method m : mm) {
+            if (m.getName().equals(initMethodName)) {
+                method = m;
             }
-            ArrayList<Object> params = createParams(method);
-            return (T) method.invoke(null, params.toArray());
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            throw new RuntimeException(e);
         }
+        ArrayList<Object> params = createParams(method);
+        return (T) method.invoke(null, params.toArray());
     }
 
     private ArrayList<Object> createParams(Executable constructorOrMethod) {
