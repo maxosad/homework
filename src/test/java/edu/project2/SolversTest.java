@@ -63,4 +63,14 @@ public class SolversTest {
         assertEquals(rightPath, path);
 
     }
+
+    @Test
+    void parallelDfsSolverTest() {
+        Solver parallelDfsSolver = new SolverBridge(SolverType.PARALLEL_DFS);
+
+        List<Coordinate> path = parallelDfsSolver.solve(maze, start, end);
+
+        assertEquals(rightPath, path);
+
+    }
 }
