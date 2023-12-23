@@ -9,11 +9,12 @@ import java.util.List;
 public class AffineCoeff {
 
     public static final int CHOOSE_BLOCK = -20;
-    public static final List<AffineCoefficients> COEFF = new ArrayList<>();
+    public static final List<AffineCoefficients> COEFF;
 
     public static final int MAX_RGB_VALUE = 256;
 
     static {
+        ArrayList<AffineCoefficients> tmp_coeff = new ArrayList<>();
         SecureRandom random = new SecureRandom();
         int count = 0;
         while (count < 10) {
@@ -27,11 +28,12 @@ public class AffineCoeff {
                 && b * b + e * e < 1
                 && a * a + d * d + b * b + e * e < 1 + Math.pow(a * e - b * d, 2)) {
                 count++;
-                COEFF.add(new AffineCoefficients(a, b, c, d, e, f,
+                tmp_coeff.add(new AffineCoefficients(a, b, c, d, e, f,
                     random.nextInt(MAX_RGB_VALUE), random.nextInt(MAX_RGB_VALUE), random.nextInt(MAX_RGB_VALUE)
                 ));
             }
         }
+        COEFF = List.copyOf(tmp_coeff);
     }
 
     protected AffineCoeff() { }
