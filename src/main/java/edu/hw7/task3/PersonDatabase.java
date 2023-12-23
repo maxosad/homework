@@ -10,10 +10,14 @@ public interface PersonDatabase {
 
     int size();
 
-    @Nullable Person findByName(String name);
+    @Nullable
+    Person findByName(String name);
 
-    @Nullable Person findByAddress(String address);
 
-    @Nullable Person findByPhone(String phone);
+    @Nullable
+    Person findByAddress(String address);
+
+    @Nullable
+    Person findByPhone(String phone);
 
 }

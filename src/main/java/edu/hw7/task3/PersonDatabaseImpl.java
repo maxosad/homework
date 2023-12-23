@@ -5,47 +5,48 @@ import java.util.Map;
 import org.jetbrains.annotations.Nullable;
 
 public class PersonDatabaseImpl implements PersonDatabase {
-    private Map<String, Person> nameCollection;
-    private Map<String, Person> addressCollection;
-    private Map<String, Person> phoneCollection;
-    private Map<Integer, Person> idCollection;
+    private Map<String, Person> personsByName;
+    private Map<String, Person> personByAddress;
+    private Map<String, Person> personByPhone;
+    private Map<Integer, Person> personById;
 
     public PersonDatabaseImpl() {
-        this.nameCollection = new HashMap<>();
-        this.addressCollection = new HashMap<>();
-        this.phoneCollection = new HashMap<>();
-        this.idCollection = new HashMap<>();
+        this.personsByName = new HashMap<>();
+        this.personByAddress = new HashMap<>();
+        this.personByPhone = new HashMap<>();
+        this.personById = new HashMap<>();
     }
 
     public int size() {
-        return idCollection.size();
+        return personById.size();
     }
 
     @Override
     public synchronized void add(Person person) {
         if (person.name() != null) {
-            nameCollection.put(person.name(), person);
+            personsByName.put(person.name(), person);
         }
         if (person.address() != null) {
-            addressCollection.put(person.address(), person);
+            personByAddress.put(person.address(), person);
         }
         if (person.phoneNumber() != null) {
-            phoneCollection.put(person.phoneNumber(), person);
+            personByPhone.put(person.phoneNumber(), person);
         }
-        idCollection.put(person.id(), person);
-
+        personById.put(person.id(), person);
     }
 
     @Override
     public synchronized void delete(int id) {
-        Person person = idCollection.remove(id);
-        nameCollection.remove(person.name());
-        addressCollection.remove(person.address());
-        phoneCollection.remove(person.phoneNumber());
+        Person person = personById.remove(id);
+        personsByName.remove(person.name());
+        personByAddress.remove(person.address());
+        personByPhone.remove(person.phoneNumber());
     }
 
-    public synchronized @Nullable Person findByName(String name) {
-        Person person = nameCollection.get(name);
+    @Override
+    @Nullable
+    public synchronized  Person findByName(String name) {
+        Person person = personsByName.get(name);
         if (person.address() != null && person.phoneNumber() != null) {
             return person;
         }
@@ -53,8 +54,9 @@ public class PersonDatabaseImpl implements PersonDatabase {
     }
 
     @Override
-    public synchronized @Nullable Person findByAddress(String address) {
-        Person person = addressCollection.get(address);
+    @Nullable
+    public synchronized  Person findByAddress(String address) {
+        Person person = personByAddress.get(address);
         if (person.name() != null && person.phoneNumber() != null) {
             return person;
         }
@@ -62,8 +64,9 @@ public class PersonDatabaseImpl implements PersonDatabase {
     }
 
     @Override
-    public synchronized @Nullable Person findByPhone(String phone) {
-        Person person = phoneCollection.get(phone);
+    @Nullable
+    public synchronized  Person findByPhone(String phone) {
+        Person person = personByPhone.get(phone);
         if (person.name() != null && person.address() != null) {
             return person;
         }
