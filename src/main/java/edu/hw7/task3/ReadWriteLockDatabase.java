@@ -25,17 +25,21 @@ public class ReadWriteLockDatabase implements PersonDatabase {
     @Override
     public void add(Person person) {
         lock.writeLock().lock();
-        if (person.name() != null) {
-            nameCollection.put(person.name(), person);
+        try {
+            if (person.name() != null) {
+                nameCollection.put(person.name(), person);
+            }
+            if (person.address() != null) {
+                addressCollection.put(person.address(), person);
+            }
+            if (person.phoneNumber() != null) {
+                phoneCollection.put(person.phoneNumber(), person);
+            }
+            idCollection.put(person.id(), person);
+        } finally {
+            lock.writeLock().unlock();
         }
-        if (person.address() != null) {
-            addressCollection.put(person.address(), person);
-        }
-        if (person.phoneNumber() != null) {
-            phoneCollection.put(person.phoneNumber(), person);
-        }
-        idCollection.put(person.id(), person);
-        lock.writeLock().unlock();
+
     }
 
     @Override

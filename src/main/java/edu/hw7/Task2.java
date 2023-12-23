@@ -11,6 +11,5 @@ public class Task2 {
             .limit(n)
             .parallel()
             .reduce((left, right) -> left  * right).orElse(0);
-
     }
 }

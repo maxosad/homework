@@ -36,10 +36,4 @@ public class LinearMonteCarlo {
     public long getTime() {
         return time;
     }
-
-
-
-
-
-
 }

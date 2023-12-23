@@ -19,9 +19,10 @@ public class Task1 {
                 sharedValue.incrementAndGet();
             }
         });
+
         thread1.start();
         thread2.start();
-        
+
         thread1.join();
         thread2.join();
 
