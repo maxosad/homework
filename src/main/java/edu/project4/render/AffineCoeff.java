@@ -15,7 +15,7 @@ public class AffineCoeff {
     public static final int MAX_RGB_VALUE = 256;
 
     static {
-        ArrayList<AffineCoefficients> tmp_coeff = new ArrayList<>();
+        ArrayList<AffineCoefficients> tmpCoeff = new ArrayList<>();
         SecureRandom random = new SecureRandom();
         int count = 0;
         while (count < 10) {
@@ -29,12 +29,12 @@ public class AffineCoeff {
                 && b * b + e * e < 1
                 && a * a + d * d + b * b + e * e < 1 + Math.pow(a * e - b * d, 2)) {
                 count++;
-                tmp_coeff.add(new AffineCoefficients(a, b, c, d, e, f,
+                tmpCoeff.add(new AffineCoefficients(a, b, c, d, e, f,
                     new Rgb(random.nextInt(MAX_RGB_VALUE), random.nextInt(MAX_RGB_VALUE), random.nextInt(MAX_RGB_VALUE))
                 ));
             }
         }
-        COEFF = List.copyOf(tmp_coeff);
+        COEFF = List.copyOf(tmpCoeff);
     }
 
     protected AffineCoeff() { }
