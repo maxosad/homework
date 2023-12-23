@@ -9,7 +9,12 @@ public class SolverBridge implements Solver {
     private final Solver solver;
 
     public SolverBridge(SolverType solverType) {
-        solver = solverType.equals(SolverType.BFS) ? new BFSSolver() : new DFSSolver();
+        solver = switch (solverType) {
+            case BFS -> new BFSSolver();
+            case DFS -> new DFSSolver();
+            case PARALLEL_DFS -> new ParallelDFSSolver();
+        };
+//        solver = solverType.equals(SolverType.BFS) ?  : ;
     }
 
     @Override
