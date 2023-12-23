@@ -1,6 +1,6 @@
 package edu.project4.render;
 
-import edu.project4.model.Affine;
+import edu.project4.model.AffineCoefficients;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,9 @@ import java.util.List;
 public class AffineCoeff {
 
     public static final int CHOOSE_BLOCK = -20;
-    public static final List<Affine> COEFF = new ArrayList<>();
+    public static final List<AffineCoefficients> COEFF = new ArrayList<>();
+
+    public static final int MAX_RGB_VALUE = 256;
 
     static {
         SecureRandom random = new SecureRandom();
@@ -25,8 +27,8 @@ public class AffineCoeff {
                 && b * b + e * e < 1
                 && a * a + d * d + b * b + e * e < 1 + Math.pow(a * e - b * d, 2)) {
                 count++;
-                COEFF.add(new Affine(a, b, c, d, e, f,
-                    random.nextInt(256), random.nextInt(256), random.nextInt(256)
+                COEFF.add(new AffineCoefficients(a, b, c, d, e, f,
+                    random.nextInt(MAX_RGB_VALUE), random.nextInt(MAX_RGB_VALUE), random.nextInt(MAX_RGB_VALUE)
                 ));
             }
         }

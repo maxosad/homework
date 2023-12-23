@@ -10,10 +10,6 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class LinearRenderer extends AffineCoeff implements Renderer {
-//    public static final double X_MIN = -1.777;
-//    public static final double X_MAX = 1.777;
-//    public static final double Y_MIN = -1;
-//    public static final double Y_MAX = 1;
 
     @Override
     public FractalImage render(

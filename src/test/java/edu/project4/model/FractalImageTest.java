@@ -16,14 +16,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FractalImageTest {
 
+    public static final int WIDTH = 1920;
+    public static final int HEIGHT = 1080;
     private int width;
     private int height;
 
 
     @BeforeEach
     void setUp() {
-        width = 1920;
-        height = 1080;
+        width = WIDTH;
+        height = HEIGHT;
     }
 
     @Test
