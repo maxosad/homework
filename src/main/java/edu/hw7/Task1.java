@@ -1,7 +1,7 @@
 package edu.hw7;
 
-import lombok.SneakyThrows;
 import java.util.concurrent.atomic.AtomicInteger;
+import lombok.SneakyThrows;
 
 public class Task1 {
     private AtomicInteger sharedValue = new AtomicInteger(0);
