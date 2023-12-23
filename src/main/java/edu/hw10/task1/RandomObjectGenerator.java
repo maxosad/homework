@@ -12,7 +12,6 @@ import java.util.Map;
 import lombok.SneakyThrows;
 
 public class RandomObjectGenerator {
-
     private static final Map<Class, Generator> GENERATOR_MAP = Map.of(
         String.class, new StringGenerator(),
         int.class, new IntGenerator(),
