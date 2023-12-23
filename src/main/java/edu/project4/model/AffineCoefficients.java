@@ -6,6 +6,4 @@ public record AffineCoefficients(double a,
                                  double d,
                                  double e,
                                  double f,
-                                 int red,
-                                 int green,
-                                 int blue) { }
+                                 Rgb rgb) { }

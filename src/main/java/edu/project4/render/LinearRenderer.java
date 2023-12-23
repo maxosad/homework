@@ -4,6 +4,7 @@ import edu.project4.model.FractalImage;
 import edu.project4.model.Pixel;
 import edu.project4.model.Point;
 import edu.project4.model.Rect;
+import edu.project4.model.Rgb;
 import edu.project4.transformation.Transformation;
 import java.util.List;
 import java.util.Random;
@@ -44,16 +45,17 @@ public class LinearRenderer extends AffineCoeff implements Renderer {
 
                     if (canvas.contains(x1, y1)) {
                         Pixel pixel = canvas.pixel(x1, y1);
+                        Rgb coeffRgb = COEFF.get(i).rgb();
                         if (pixel.hitCount() == 0) {
-                            canvas.data()[y1][x1] = new Pixel(COEFF.get(i).red(),
-                                COEFF.get(i).green(),
-                                COEFF.get(i).blue(), 1
+                            canvas.data()[y1][x1] = new Pixel(coeffRgb.red(),
+                                coeffRgb.green(),
+                                coeffRgb.blue(), 1
                             );
                         } else {
                             canvas.data()[y1][x1] = new Pixel(
-                                (pixel.r() + COEFF.get(i).red()) / 2,
-                                (pixel.g() + COEFF.get(i).green()) / 2,
-                                (pixel.b() + COEFF.get(i).blue()) / 2,
+                                (pixel.r() + coeffRgb.red()) / 2,
+                                (pixel.g() + coeffRgb.green()) / 2,
+                                (pixel.b() + coeffRgb.blue()) / 2,
                                 pixel.hitCount() + 1
                             );
                         }

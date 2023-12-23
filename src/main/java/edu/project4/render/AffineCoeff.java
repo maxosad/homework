@@ -1,6 +1,7 @@
 package edu.project4.render;
 
 import edu.project4.model.AffineCoefficients;
+import edu.project4.model.Rgb;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class AffineCoeff {
                 && a * a + d * d + b * b + e * e < 1 + Math.pow(a * e - b * d, 2)) {
                 count++;
                 tmp_coeff.add(new AffineCoefficients(a, b, c, d, e, f,
-                    random.nextInt(MAX_RGB_VALUE), random.nextInt(MAX_RGB_VALUE), random.nextInt(MAX_RGB_VALUE)
+                    new Rgb(random.nextInt(MAX_RGB_VALUE), random.nextInt(MAX_RGB_VALUE), random.nextInt(MAX_RGB_VALUE))
                 ));
             }
         }
