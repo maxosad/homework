@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 
-class Task4Test {
+class LinearMonteCarloTest {
 
     private static Stream<Arguments> providePassword() {
         return Stream.of(

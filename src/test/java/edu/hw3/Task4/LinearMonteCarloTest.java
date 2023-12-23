@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 
-class Task4Test {
+class LinearMonteCarloTest {
 
 //    convertToRoman(2) ➞ "II"
 //    convertToRoman(12) ➞ "XII"
